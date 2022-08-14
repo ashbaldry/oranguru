@@ -1,8 +1,8 @@
-calculate_hp <- function(base_hp, level = 50, iv = 0, nature = NULL, generation = 8) {
+calculate_hp <- function(base_hp, level = 50, iv = 0, ev = 0, generation = 8) {
   if (generation < 3) {
-    calculate_hp_v1(base_hp, level, dv = iv)
+    calculate_hp_v1(base_hp, level, dv = iv, ev = ev)
   } else {
-    calculate_hp_v2(base_hp, level, nature)
+    calculate_hp_v2(base_hp, level, iv = iv, ev = ev)
   }
 }
 

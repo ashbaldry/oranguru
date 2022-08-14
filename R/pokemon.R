@@ -55,7 +55,7 @@ new_pokemon <- function(api_data = NULL, level = 50L, generation = 8, language =
     name = name,
     type = types,
     level = level,
-
+    hp = hp,
 
     sprite_front_url = api_data$sprites$front_default,
     sprite_back_url = api_data$sprites$back_default
