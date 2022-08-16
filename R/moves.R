@@ -15,6 +15,19 @@
 #' @encoding UTF-8
 #' @export
 learn_moves <- function(moves, level = 50, generation = 8, n = 4) {
+  learnable_moves <- find_valid_moves(moves, level, generation)
+  sample(learnable_moves, min(n, length(learnable_moves)))
+}
+
+#' @rdname learn_moves
+#' @export
+choose_moves <- function(moves, level = 50, generation = 8, n = 4) {
+  learnable_moves <- find_valid_moves(moves, level, generation)
+  # TODO: Enable user to add own moves to pokemon
+  sample(learnable_moves, min(n, length(learnable_moves)))
+}
+
+find_valid_moves <- function(moves, level = 50, generation = 8) {
   check_level(level)
   check_generation(generation)
   if (n < 1 || n > 4 || as.integer(n) != n) {
@@ -29,8 +42,7 @@ learn_moves <- function(moves, level = 50, generation = 8, n = 4) {
   moves_df$generation_id <- GAME_GENERATIONS[moves_df$version]
   moves_df <- subset(moves_df, generation_id == generation, level_learned <= level)
 
-  learnable_moves <- unique(moves_df$move)
-  sample(learnable_moves, min(n, length(learnable_moves)))
+  unique(moves_df$move)
 }
 
 get_move_info <- function(move) {
