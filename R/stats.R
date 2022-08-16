@@ -42,16 +42,16 @@ calculate_stat <- function(base_stat, stat_name, nature, level = 50, iv = 0, ev 
 #'
 #' @rdname calculate_stat
 #' @export
-calculate_stat_range <- function(base_hp, stat_name, nature, level = 50, generation = 8) {
+calculate_stat_range <- function(base_stat, stat_name, nature, level = 50, generation = 8) {
   if (generation < 3) {
-    min_hp <- calculate_stat_v1(base_hp, level, dv = 0)
-    max_hp <- calculate_stat_v1(base_hp, level, dv = 15)
+    min_hp <- calculate_stat_v1(base_stat, level, dv = 0)
+    max_hp <- calculate_stat_v1(base_stat, level, dv = 15)
   } else {
     stat_name <- check_stat_name(stat_name)
     nature <- check_nature(nature)
 
-    min_hp <- calculate_stat_v2(base_hp, stat_name, nature, level, iv = 0)
-    max_hp <- calculate_stat_v2(base_hp, stat_name, nature, level, iv = 31)
+    min_hp <- calculate_stat_v2(base_stat, stat_name, nature, level, iv = 0)
+    max_hp <- calculate_stat_v2(base_stat, stat_name, nature, level, iv = 31)
   }
 
   if (missing(stat_name)) {
@@ -63,14 +63,14 @@ calculate_stat_range <- function(base_hp, stat_name, nature, level = 50, generat
   invisible(c(min_hp, max_hp))
 }
 
-calculate_stat_v1 <- function(base_hp, level = 50, dv = 0, ev = 0) {
-  float_hp <- (((base_hp + dv) * 2 + sqrt(ev) / 4) * level) / 100 + 5
+calculate_stat_v1 <- function(base_stat, level = 50, dv = 0, ev = 0) {
+  float_hp <- (((base_stat + dv) * 2 + floor(ceiling(sqrt(ev)) / 4)) * level) / 100 + 5
   as.integer(float_hp)
 }
 
-calculate_stat_v2 <- function(base_hp, stat_name, nature, level = 50, iv = 0, ev = 0) {
+calculate_stat_v2 <- function(base_stat, stat_name, nature, level = 50, iv = 0, ev = 0) {
   nature_stat <- get_nature_factor(nature, stat_name)
-  float_hp <- (((2 * base_hp + iv + ev / 4) * level) / 100 + 5) * nature_stat
+  float_hp <- (floor(((2 * base_stat + iv + floor(ev / 4)) * level) / 100) + 5) * nature_stat
   as.integer(float_hp)
 }
 

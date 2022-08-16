@@ -50,7 +50,7 @@ calculate_hp_range <- function(base_hp, level = 50, generation = 8) {
 }
 
 calculate_hp_v1 <- function(base_hp, level = 50, dv = 0, ev = 0) {
-  float_hp <- (((base_hp + dv) * 2 + sqrt(ev) / 4) * level) / 100 + level + 10
+  float_hp <- (((base_hp + dv) * 2 + floor(ceiling(sqrt(ev)) / 4)) * level) / 100 + level + 10
   as.integer(float_hp)
 }
 
