@@ -16,7 +16,7 @@ calculate_stat(
   generation = 8
 )
 
-calculate_stat_range(base_hp, stat_name, nature, level = 50, generation = 8)
+calculate_stat_range(base_stat, stat_name, nature, level = 50, generation = 8)
 }
 \arguments{
 \item{base_stat}{The stat a Pokémon has}

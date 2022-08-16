@@ -5,7 +5,13 @@
 \alias{new_pokemon}
 \title{Create a New Pokémon}
 \usage{
-new_pokemon(api_data = NULL, level = 50L, generation = 8, language = "en")
+new_pokemon(
+  api_data = NULL,
+  level = 50L,
+  generation = 8,
+  nature = NULL,
+  language = "en"
+)
 }
 \description{
 Create a New Pokémon
