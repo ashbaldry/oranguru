@@ -6,6 +6,13 @@ check_level <- function(level) {
 }
 
 #' @noRd
+check_generation <- function(generation) {
+  if (!is.numeric(generation) || generation < 1 || generation > 100 || as.integer(generation) != generation) {
+    stop("Generation is invalid. Must be an integer between 1 and 8")
+  }
+}
+
+#' @noRd
 check_iv <- function(iv, generation = 8) {
   if (generation >=  3) {
     max_iv <- 31
@@ -35,7 +42,11 @@ STAT_NAMES <- c("attack", "defense", "special-attack", "special-defense", "speed
 
 #' @noRd
 check_nature <- function(nature) {
-  clean_nature <- tolower(nature)
+  if (is.null(nature)) {
+    clean_nature <- sample(NATURES, 1)
+  } else {
+    clean_nature <- tolower(nature)
+  }
 
   if (clean_nature %in% NATURES) {
     clean_nature
