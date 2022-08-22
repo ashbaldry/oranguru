@@ -14,25 +14,29 @@
 #'
 #' @encoding UTF-8
 #' @export
-learn_moves <- function(moves, level = 50, generation = 8, n = 4) {
+learn_moves <- function(moves, level = 50L, generation = 8L, n = 4L) {
+  if (!is.numeric(n) || n < 1L || n > 4L || as.integer(n) != n) {
+    stop("Maximum number of moves learnt must be between one and four")
+  }
   learnable_moves <- find_valid_moves(moves, level, generation)
   sample(learnable_moves, min(n, length(learnable_moves)))
 }
 
 #' @rdname learn_moves
 #' @export
-choose_moves <- function(moves, level = 50, generation = 8, n = 4) {
+choose_moves <- function(moves, level = 50L, generation = 8L, n = 4L) {
+  if (!is.numeric(n) || n < 1L || n > 4L || as.integer(n) != n) {
+    stop("Maximum number of moves learnt must be between one and four")
+  }
+
   learnable_moves <- find_valid_moves(moves, level, generation)
   # TODO: Enable user to add own moves to pokemon
   sample(learnable_moves, min(n, length(learnable_moves)))
 }
 
-find_valid_moves <- function(moves, level = 50, generation = 8) {
+find_valid_moves <- function(moves, level = 50L, generation = 8L) {
   check_level(level)
   check_generation(generation)
-  if (n < 1 || n > 4 || as.integer(n) != n) {
-    stop("Maximum number of moves learnt must be between one and four")
-  }
   # Handling if someone sends the whole result of pokeapi::get_pokemon
   if ("moves" %in% names(moves)) {
     moves <- moves$moves
@@ -54,22 +58,22 @@ get_move_info <- function(move) {
 }
 
 GAME_GENERATIONS <- c(
-  "red-blue" = 1,
-  "yellow" = 1,
-  "gold-silver" = 2,
-  "crystal" = 2,
-  "ruby-sapphire" = 3,
-  "emerald" = 3,
-  "fire-red-leaf-green" = 3,
-  "diamond-pearl" = 4,
-  "platium" = 4,
-  "heart-gold-soul-silver" = 4,
-  "black-white" = 5,
-  "black-2-white-2" = 5,
-  "x-y" = 6,
-  "omega-ruby-alpha-sapphire" = 6,
-  "sun-moon" = 7,
-  "ultra-sun-ultra-moon" = 7,
-  "sword-shield" = 8,
-  "brilliant-diamond-shining-pearl" = 8
+  "red-blue" = 1L,
+  "yellow" = 1L,
+  "gold-silver" = 2L,
+  "crystal" = 2L,
+  "ruby-sapphire" = 3L,
+  "emerald" = 3L,
+  "fire-red-leaf-green" = 3L,
+  "diamond-pearl" = 4L,
+  "platium" = 4L,
+  "heart-gold-soul-silver" = 4L,
+  "black-white" = 5L,
+  "black-2-white-2" = 5L,
+  "x-y" = 6L,
+  "omega-ruby-alpha-sapphire" = 6L,
+  "sun-moon" = 7L,
+  "ultra-sun-ultra-moon" = 7L,
+  "sword-shield" = 8L,
+  "brilliant-diamond-shining-pearl" = 8L
 )

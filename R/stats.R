@@ -30,8 +30,8 @@ calculate_stat <- function(base_stat, stat_name, nature, level = 50, iv = 0, ev 
   if (generation < 3) {
     calculate_stat_v1(base_stat, level, dv = iv, ev = ev)
   } else {
-    stat_name <- check_stat_name(stat_name)
-    nature <- check_nature(nature)
+    stat_name <- find_stat_name(stat_name)
+    nature <- find_nature(nature)
     calculate_stat_v2(base_stat, stat_name, nature, level, iv = iv, ev = ev)
   }
 }
@@ -47,8 +47,8 @@ calculate_stat_range <- function(base_stat, stat_name, nature, level = 50, gener
     min_hp <- calculate_stat_v1(base_stat, level, dv = 0)
     max_hp <- calculate_stat_v1(base_stat, level, dv = 15)
   } else {
-    stat_name <- check_stat_name(stat_name)
-    nature <- check_nature(nature)
+    stat_name <- find_stat_name(stat_name)
+    nature <- find_nature(nature)
 
     min_hp <- calculate_stat_v2(base_stat, stat_name, nature, level, iv = 0)
     max_hp <- calculate_stat_v2(base_stat, stat_name, nature, level, iv = 31)

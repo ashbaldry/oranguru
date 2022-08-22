@@ -1,32 +1,38 @@
 #' @noRd
-check_level <- function(level) {
-  if (!is.numeric(level) || level < 1 || level > 100 || as.integer(level) != level) {
+check_level <- function(level, error_on_fail = TRUE) {
+  valid_level <- is.numeric(level) && level >= 1L && level <= 100L && as.integer(level) == level
+  if (error_on_fail && !valid_level) {
     stop("Level is invalid. Must be an integer between 1 and 100")
   }
+  valid_level
 }
 
 #' @noRd
-check_generation <- function(generation) {
-  if (!is.numeric(generation) || generation < 1 || generation > 100 || as.integer(generation) != generation) {
+check_generation <- function(gen, error_on_fail = TRUE) {
+  valid_gen <- is.numeric(gen) && gen >= 1L && gen <= 8L && as.integer(gen) == gen
+  if (error_on_fail && !valid_gen) {
     stop("Generation is invalid. Must be an integer between 1 and 8")
   }
+  valid_gen
 }
 
 #' @noRd
-check_iv <- function(iv, generation = 8) {
-  if (generation >=  3) {
-    max_iv <- 31
+check_iv <- function(iv, gen = 8L, error_on_fail = TRUE) {
+  if (gen >=  3L) {
+    max_iv <- 31L
   } else {
-    max_iv <- 15
+    max_iv <- 15L
   }
 
-  if (!is.numeric(iv) || iv < 0 || iv > max_iv || as.integer(iv) != iv) {
+  valid_iv <- is.numeric(iv) && iv >= 0L && iv <= max_iv && as.integer(iv) == iv
+  if (error_on_fail && !valid_iv) {
     stop("IV value is invalid. Must be an integer between 0 and ", max_iv)
   }
+  valid_iv
 }
 
 #' @noRd
-check_stat_name <- function(name) {
+find_stat_name <- function(name) {
   clean_name <- tolower(name) |>
     sub(pattern = "( |\\.)+", replacement = "-") |>
     sub(pattern = "^sp-", replacement = "special-")
@@ -41,9 +47,9 @@ check_stat_name <- function(name) {
 STAT_NAMES <- c("attack", "defense", "special-attack", "special-defense", "speed")
 
 #' @noRd
-check_nature <- function(nature) {
+find_nature <- function(nature) {
   if (is.null(nature)) {
-    clean_nature <- sample(NATURES, 1)
+    clean_nature <- sample(NATURES, 1L)
   } else {
     clean_nature <- tolower(nature)
   }
