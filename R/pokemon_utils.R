@@ -16,3 +16,10 @@ get_pokemon_name <- function(id, language = "en") {
 
   pokemon_names[language_name][[1]]$name
 }
+
+#' @noRd
+get_random_pokemon_id <- function(generation = 8L) {
+  subset(pokemon_generation, generation_id == generation) |>
+    get_column("pokemon_id") |>
+    sample(1)
+}

@@ -14,3 +14,13 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Remotes: rconsortium/OOP-WG, ashbaldry/pokeapi
 Config/testthat/edition: 3
+Collate: 
+    'hp.R'
+    'moves.R'
+    'pokemon.R'
+    'team.R'
+    'pokemon_print.R'
+    'pokemon_utils.R'
+    'stats.R'
+    'utils.R'
+    'validation.R'

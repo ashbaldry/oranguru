@@ -57,6 +57,17 @@ get_move_info <- function(move) {
   )
 }
 
+#' @noRd
+get_move_pp <- function(move) {
+  if (is.na(move)) {
+    NA_integer_
+  } else {
+    subset(moves, identifier == move) |>
+      get_column("pp") |>
+      as.integer()
+  }
+}
+
 GAME_GENERATIONS <- c(
   "red-blue" = 1L,
   "yellow" = 1L,

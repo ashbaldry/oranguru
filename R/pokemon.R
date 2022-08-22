@@ -5,6 +5,7 @@
 #'
 #' @param api_data Either data pulled from `pokeapi::get_pokemon`, or
 #' `NULL` to select the data of a random Pokémon
+#' @param pokemon Name of the Pokémon to create
 #' @param level The level the Pokémon should be
 #' @param generation The generation that the Pokémon comes from
 #' @param nature Either a specified nature, or `NULL` for a random nature.
@@ -63,21 +64,27 @@ pokemon <- R7::new_class(
     sprite_front_url = R7::class_character,
     sprite_back_url = R7::class_character
   ),
-  constructor = function(api_data = NULL, level = 50L, generation = 8L,
-                         nature = NULL, language = "en") {
+  constructor = function(api_data = NULL, pokemon = NULL, level = 50L,
+                         generation = 8L, nature = NULL, language = "en") {
     check_level(level)
     check_generation(generation)
 
     if (is.null(api_data)) {
-      pokemon_id <- pokeapi::random_pk_id("pokemon")
-      api_data <- pokeapi::get_pokemon(pokemon_id)
+      if (is.null(pokemon)) {
+        pokemon <- get_random_pokemon_id(generation)
+      }
+      api_data <- pokeapi::get_pokemon(pokemon)
     }
 
     id <- api_data$id
 
     name <- get_pokemon_name(id, language = language)
     types <- vapply(api_data$types, \(x) x$type$name, character(1))
-    if (generation > 2) nature <- find_nature(nature)
+    if (generation > 2) {
+      nature <- find_nature(nature)
+    } else {
+      nature <- character(0)
+    }
 
     base_stats <- setNames(
       vapply(api_data$stats, \(x) x$base_stat, integer(1)),
@@ -86,11 +93,12 @@ pokemon <- R7::new_class(
     hp <- calculate_hp(base_stats[["hp"]], level = level, generation = generation)
     other_stats <- vapply(
       setNames(nm = names(base_stats)[-1]),
-      \(x) calculate_stat(base_stats[[x]], x, nature = nature),
+      \(x) calculate_stat(base_stats[[x]], x, nature = nature, generation = generation),
       integer(1)
     )
 
     moves <- learn_moves(api_data$moves, level = level, generation = generation)
+    moves_pp <- vapply(moves, get_move_pp, integer(1), USE.NAMES = FALSE)
 
     R7::new_object(
       R7::R7_object(),
@@ -120,14 +128,14 @@ pokemon <- R7::new_class(
       move_3 = moves[3],
       move_4 = moves[4],
 
-      move_1_pp = 10L,
-      move_1_current_pp = 10L,
-      move_2_pp = 10L,
-      move_2_current_pp = 10L,
-      move_3_pp = 10L,
-      move_3_current_pp = 10L,
-      move_4_pp = 10L,
-      move_4_current_pp = 10L,
+      move_1_pp = moves_pp[1],
+      move_1_current_pp = moves_pp[1],
+      move_2_pp = moves_pp[2],
+      move_2_current_pp = moves_pp[2],
+      move_3_pp = moves_pp[3],
+      move_3_current_pp = moves_pp[3],
+      move_4_pp = moves_pp[4],
+      move_4_current_pp = moves_pp[4],
 
       nature = nature,
       ability = character(),

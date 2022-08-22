@@ -7,6 +7,7 @@
 \usage{
 pokemon(
   api_data = NULL,
+  pokemon = NULL,
   level = 50L,
   generation = 8L,
   nature = NULL,
@@ -16,6 +17,8 @@ pokemon(
 \arguments{
 \item{api_data}{Either data pulled from \code{pokeapi::get_pokemon}, or
 \code{NULL} to select the data of a random Pokémon}
+
+\item{pokemon}{Name of the Pokémon to create}
 
 \item{level}{The level the Pokémon should be}
 
