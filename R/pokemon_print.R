@@ -49,3 +49,16 @@ R7::method(status, team) <- function(x) {
     sep = ""
   )
 }
+
+R7::method(status, team) <- function(x) {
+  cat(
+    "Pokémon Team:\n",
+    x@pokemon_1@name, " (", x@pokemon_1@hp, " / ", x@pokemon_1@current_hp, ") \n",
+    x@pokemon_2@name, " (", x@pokemon_2@hp, " / ", x@pokemon_2@current_hp, ") \n",
+    x@pokemon_3@name, " (", x@pokemon_3@hp, " / ", x@pokemon_3@current_hp, ") \n",
+    x@pokemon_4@name, " (", x@pokemon_4@hp, " / ", x@pokemon_4@current_hp, ") \n",
+    x@pokemon_5@name, " (", x@pokemon_5@hp, " / ", x@pokemon_5@current_hp, ") \n",
+    x@pokemon_6@name, " (", x@pokemon_6@hp, " / ", x@pokemon_6@current_hp, ") \n",
+    sep = ""
+  )
+}

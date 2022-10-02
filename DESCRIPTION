@@ -15,10 +15,11 @@ RoxygenNote: 7.2.1
 Remotes: rconsortium/OOP-WG, ashbaldry/pokeapi
 Config/testthat/edition: 3
 Collate: 
-    'hp.R'
-    'moves.R'
     'pokemon.R'
     'team.R'
+    'battle.R'
+    'hp.R'
+    'moves.R'
     'pokemon_print.R'
     'pokemon_utils.R'
     'stats.R'

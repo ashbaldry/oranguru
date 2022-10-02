@@ -18,8 +18,8 @@ get_pokemon_name <- function(id, language = "en") {
 }
 
 #' @noRd
-get_random_pokemon_id <- function(generation = 8L) {
+get_random_pokemon_id <- function(generation = 8L, n = 1) {
   subset(pokemon_generation, generation_id == generation) |>
     get_column("pokemon_id") |>
-    sample(1)
+    sample(size = n, replace = FALSE)
 }

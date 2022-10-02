@@ -35,6 +35,7 @@ pokemon <- R7::new_class(
     speed = R7::class_integer,
 
     current_hp = R7::class_integer,
+    ailment = R7::class_integer,
     attack_change = R7::class_integer,
     defense_change = R7::class_integer,
     sp_attack_change = R7::class_integer,
@@ -73,6 +74,7 @@ pokemon <- R7::new_class(
       if (is.null(pokemon)) {
         pokemon <- get_random_pokemon_id(generation)
       }
+      print(pokemon)
       api_data <- pokeapi::get_pokemon(pokemon)
     }
 
@@ -114,6 +116,7 @@ pokemon <- R7::new_class(
       speed = other_stats[["speed"]],
 
       current_hp = hp,
+      ailment = 0L,
       attack_change = 0L,
       defense_change = 0L,
       sp_attack_change = 0L,
