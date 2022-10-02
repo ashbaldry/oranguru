@@ -18,6 +18,7 @@ Collate:
     'pokemon.R'
     'team.R'
     'battle.R'
+    'battle_methods.R'
     'hp.R'
     'moves.R'
     'pokemon_print.R'

@@ -20,7 +20,7 @@
 #' @encoding UTF-8
 #' @export
 battle <- R7::new_class(
-  name = "team",
+  name = "battle",
   package = "pokemon",
 
   properties = list(
