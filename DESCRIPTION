@@ -1,5 +1,5 @@
 Package: pokemon
-Title: Create 'Pokémon' 'R7' Objects
+Title: Create 'Pokémon' 'R6' Objects
 Version: 0.1.0
 Authors@R: c(
     person("Ashley", "Baldry", email = "arbaldry91@gmail.com", role = c("aut", "cre"))
@@ -8,19 +8,19 @@ Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 2.10)
-Imports: R7, pokeapi
+Imports: R6, pokeapi
 Suggests: testthat (>= 3.0.0)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
-Remotes: rconsortium/OOP-WG, ashbaldry/pokeapi
+Remotes: ashbaldry/pokeapi
 Config/testthat/edition: 3
 Collate: 
-    'pokemon.R'
-    'team.R'
     'battle.R'
     'battle_methods.R'
     'hp.R'
     'moves.R'
+    'pokemon.R'
+    'team.R'
     'pokemon_print.R'
     'pokemon_utils.R'
     'stats.R'
