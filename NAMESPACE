@@ -3,6 +3,7 @@
 export(Pokemon)
 export(PokemonBattle)
 export(PokemonTeam)
+export(calculate_damage)
 export(calculate_hp)
 export(calculate_hp_range)
 export(calculate_stat)

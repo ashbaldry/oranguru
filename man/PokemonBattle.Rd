@@ -18,6 +18,10 @@ In the initial version, the CPU will use a random move. AI will improve in futur
 \itemize{
 \item \href{#method-battle-new}{\code{PokemonBattle$new()}}
 \item \href{#method-battle-status}{\code{PokemonBattle$status()}}
+\item \href{#method-battle-attack}{\code{PokemonBattle$attack()}}
+\item \href{#method-battle-attack_p2}{\code{PokemonBattle$attack_p2()}}
+\item \href{#method-battle-switch}{\code{PokemonBattle$switch()}}
+\item \href{#method-battle-switch_p2}{\code{PokemonBattle$switch_p2()}}
 \item \href{#method-battle-clone}{\code{PokemonBattle$clone()}}
 }
 }
@@ -27,7 +31,7 @@ In the initial version, the CPU will use a random move. AI will improve in futur
 \subsection{Method \code{new()}}{
 Commence a Pokémon battle
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PokemonBattle$new(team_1, team_2, cpu = TRUE, generation = 8L)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PokemonBattle$new(team_1, team_2, player_2_cpu = TRUE, generation = 8L)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -37,7 +41,7 @@ Commence a Pokémon battle
 
 \item{\code{team_2}}{Player 2's Pokémon team}
 
-\item{\code{cpu}}{Logical, is player 2 a CPU? Default set to \code{TRUE}}
+\item{\code{player_2_cpu}}{Logical, is player 2 a CPU? Default set to \code{TRUE}}
 
 \item{\code{generation}}{If teams are random, then the generation the Pokémon will be selected from.
 Default is Gen 8.}
@@ -52,6 +56,46 @@ Default is Gen 8.}
 Show current status of Pokémon Battle
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PokemonBattle$status()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-battle-attack"></a>}}
+\if{latex}{\out{\hypertarget{method-battle-attack}{}}}
+\subsection{Method \code{attack()}}{
+Select Pokémon attack
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PokemonBattle$attack()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-battle-attack_p2"></a>}}
+\if{latex}{\out{\hypertarget{method-battle-attack_p2}{}}}
+\subsection{Method \code{attack_p2()}}{
+Select Pokémon attack (player 2)
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PokemonBattle$attack_p2()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-battle-switch"></a>}}
+\if{latex}{\out{\hypertarget{method-battle-switch}{}}}
+\subsection{Method \code{switch()}}{
+Select active Pokémon
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PokemonBattle$switch()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-battle-switch_p2"></a>}}
+\if{latex}{\out{\hypertarget{method-battle-switch_p2}{}}}
+\subsection{Method \code{switch_p2()}}{
+Select active Pokémon (player 2)
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PokemonBattle$switch_p2()}\if{html}{\out{</div>}}
 }
 
 }
