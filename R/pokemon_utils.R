@@ -21,5 +21,11 @@ get_pokemon_name <- function(id, language = "en") {
 get_random_pokemon_id <- function(generation = 8L, n = 1) {
   subset(pokemon_generation, generation_id == generation) |>
     get_column("pokemon_id") |>
+    remove_alternate_forms() |>
     sample(size = n, replace = FALSE)
+}
+
+#' @noRd
+remove_alternate_forms <- function(x) {
+  x[x < 10000]
 }
