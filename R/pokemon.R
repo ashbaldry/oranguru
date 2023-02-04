@@ -75,6 +75,7 @@ Pokemon <- R6::R6Class(
       private$move_2 <- moves[2]
       private$move_3 <- moves[3]
       private$move_4 <- moves[4]
+      private$all_moves <- find_valid_moves(api_data$moves, level = level, generation = generation)
 
       private$move_1_pp <- moves_pp[1]
       private$move_1_current_pp <- moves_pp[1]
@@ -132,6 +133,7 @@ Pokemon <- R6::R6Class(
     move_4 = NULL,
     move_4_pp = NULL,
     move_4_current_pp = NULL,
+    all_moves = NULL,
 
     ability = NULL,
     nature = NULL,
