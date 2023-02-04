@@ -42,7 +42,7 @@ find_valid_moves <- function(moves, level = 50L, generation = 1L) {
     moves <- moves$moves
   }
 
-  moves_df <- do.call(rbind, lapply(moves, get_move_info))
+  moves_df <- do.call(rbind, lapply(moves, clean_learned_moves))
   moves_df$generation_id <- GAME_GENERATIONS[moves_df$version]
   # nolint start: object_usage_linter
   moves_df <- subset(moves_df, generation_id == generation, level_learned <= level)
@@ -51,7 +51,7 @@ find_valid_moves <- function(moves, level = 50L, generation = 1L) {
   unique(moves_df$move)
 }
 
-get_move_info <- function(move) {
+clean_learned_moves <- function(move) {
   data.frame(
     move = move$move$name,
     level_learned = vapply(move$version_group_details, \(x) x$level_learned_at, integer(1)),
@@ -60,14 +60,14 @@ get_move_info <- function(move) {
 }
 
 #' @noRd
-get_move_pp <- function(move) {
+get_move_info <- function(move, info) {
   if (is.na(move)) {
     NA_integer_
   } else {
     # nolint start: object_usage_linter
     subset(moves, identifier == move) |>
-    # nolint end
-      get_column("pp") |>
+      # nolint end
+      get_column(info) |>
       as.integer()
   }
 }

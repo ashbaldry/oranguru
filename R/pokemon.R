@@ -57,11 +57,17 @@ Pokemon <- R6::R6Class(
       )
 
       moves <- learn_moves(api_data$moves, level = level, generation = generation)
-      moves_pp <- vapply(moves, get_move_pp, integer(1), USE.NAMES = FALSE)
+      moves_pp <- vapply(moves, get_move_info, info = "pp", integer(1), USE.NAMES = FALSE)
 
       private$name <- name
       private$type <- types
       private$level <- as.integer(level)
+
+      private$base_attack <- base_stats[["attack"]]
+      private$base_defense <- base_stats[["defense"]]
+      private$base_sp_attack <- base_stats[["special-attack"]]
+      private$base_sp_defense <- base_stats[["special-defense"]]
+      private$base_speed <- base_stats[["speed"]]
 
       private$hp <- hp
       private$attack <- other_stats[["attack"]]
@@ -92,10 +98,25 @@ Pokemon <- R6::R6Class(
     },
 
     #' @description
-    #' Show current status of Pokémon
+    #' Show current status of the Pokémon
     #'
     #' @param simple Logical, do you just want the simple status (name + HP) printed?
-    status = function(simple = FALSE) showStatus(private, simple = simple)
+    status = function(simple = FALSE) showStatus(private, simple = simple),
+
+    #' @description
+    #' Get the stat of the Pokémon
+    #'
+    #' @param stat The private field of the Pokémon
+    get_stat = function(stat) {
+      if (stat %nin% names(private)) {
+        stop(stat, " not available for Pokémon")
+      }
+      private[[stat]]
+    },
+
+    #' @description
+    #' Get the moveset of the Pokémon
+    get_moves = function() c(private$move_1, private$move_2, private$move_3, private$move_4)
   ),
 
   private = list(
@@ -104,10 +125,15 @@ Pokemon <- R6::R6Class(
     level = NULL,
 
     hp = NULL,
+    base_attack = NULL,
     attack = NULL,
+    base_defense = NULL,
     defense = NULL,
+    base_sp_attack = NULL,
     sp_attack = NULL,
+    base_sp_defense = NULL,
     sp_defense = NULL,
+    base_speed = NULL,
     speed = NULL,
 
     current_hp = NULL,

@@ -12,6 +12,9 @@ R6 object containing required information about a Pokémon.
 \itemize{
 \item \href{#method-pokemon-new}{\code{Pokemon$new()}}
 \item \href{#method-pokemon-status}{\code{Pokemon$status()}}
+\item \href{#method-pokemon-get_stat}{\code{Pokemon$get_stat()}}
+\item \href{#method-pokemon-get_moves}{\code{Pokemon$get_moves()}}
+\item \href{#method-pokemon-get_crit_chance}{\code{Pokemon$get_crit_chance()}}
 \item \href{#method-pokemon-clone}{\code{Pokemon$clone()}}
 }
 }
@@ -59,7 +62,7 @@ A Pokémon
 \if{html}{\out{<a id="method-pokemon-status"></a>}}
 \if{latex}{\out{\hypertarget{method-pokemon-status}{}}}
 \subsection{Method \code{status()}}{
-Show current status of Pokémon
+Show current status of the Pokémon
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Pokemon$status(simple = FALSE)}\if{html}{\out{</div>}}
 }
@@ -71,6 +74,35 @@ Show current status of Pokémon
 }
 \if{html}{\out{</div>}}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon-get_stat"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon-get_stat}{}}}
+\subsection{Method \code{get_stat()}}{
+Get the stat of the Pokémon
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$get_stat(stat)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon-get_moves"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon-get_moves}{}}}
+\subsection{Method \code{get_moves()}}{
+Get the moveset of the Pokémon
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$get_moves()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon-get_crit_chance"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon-get_crit_chance}{}}}
+\subsection{Method \code{get_crit_chance()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$get_crit_chance()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pokemon-clone"></a>}}

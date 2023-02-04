@@ -23,3 +23,6 @@ check_valid_integer <- function(x, min = -Inf, max = Inf, ref = "") {
 is_valid_integer <- function(x, min = -Inf, max = Inf) {
   is.numeric(x) && x == as.integer(x) && x >= min && x <= max
 }
+
+#' @noRd
+`%nin%` <- Negate(`%in%`)
