@@ -19,7 +19,7 @@ showStatus <- function(x, simple = FALSE) {
 }
 
 showSimpleStatus <- function(x) {
-  cat(x$name, " (", x$hp, " / ", x$current_hp, ") \n")
+  cat(x$name, " (", x$hp, " / ", x$current_hp, ") \n", sep = "")
 }
 
 showFullStatus <- function(x) {
