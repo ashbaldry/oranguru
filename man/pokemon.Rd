@@ -25,7 +25,7 @@ Create a Pokémon
   api_data = NULL,
   pokemon = NULL,
   level = 50L,
-  generation = 8L,
+  generation = 1L,
   nature = NULL,
   language = "en"
 )}\if{html}{\out{</div>}}

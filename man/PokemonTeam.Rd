@@ -29,7 +29,7 @@ Create a new Pokémon team
   pokemon_5,
   pokemon_6,
   random = TRUE,
-  generation = 8L
+  generation = 1L
 )}\if{html}{\out{</div>}}
 }
 

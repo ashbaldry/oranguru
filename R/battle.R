@@ -23,7 +23,7 @@ PokemonBattle <- R6::R6Class(
     #' @param player_2_cpu Logical, is player 2 a CPU? Default set to `TRUE`
     #' @param generation If teams are random, then the generation the Pokémon will be selected from.
     #' Default is Gen 8.
-    initialize = function(team_1, team_2, player_2_cpu = TRUE, generation = 8L) {
+    initialize = function(team_1, team_2, player_2_cpu = TRUE, generation = 1L) {
       if (missing(team_1) && missing(team_2)) {
         private$team_1 <- PokemonTeam$new(generation = generation)
         private$team_2 <- PokemonTeam$new(generation = generation)

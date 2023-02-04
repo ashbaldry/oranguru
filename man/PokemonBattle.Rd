@@ -31,7 +31,7 @@ In the initial version, the CPU will use a random move. AI will improve in futur
 \subsection{Method \code{new()}}{
 Commence a Pokémon battle
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PokemonBattle$new(team_1, team_2, player_2_cpu = TRUE, generation = 8L)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PokemonBattle$new(team_1, team_2, player_2_cpu = TRUE, generation = 1L)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

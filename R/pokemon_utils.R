@@ -1,7 +1,8 @@
 #' Get Pokémon Name
+#'
 #' @noRd
 get_pokemon_name <- function(id, language = "en") {
-  if (id < 10000) {
+  if (id < 10000L) {
     pokemon <- pokeapi::get_pokemon_species(id)
     pokemon_names <- pokemon$names
   } else {
@@ -9,16 +10,16 @@ get_pokemon_name <- function(id, language = "en") {
     pokemon_names <- pokemon$names
   }
 
-  language_name <- vapply(pokemon_names, \(x) x$language$name == language, logical(1))
+  language_name <- vapply(pokemon_names, \(x) x$language$name == language, logical(1L))
   if (!any(language_name)) {
-    language_name <- vapply(pokemon_names, \(x) x$language$name == "en", logical(1))
+    language_name <- vapply(pokemon_names, \(x) x$language$name == "en", logical(1L))
   }
 
   pokemon_names[language_name][[1]]$name
 }
 
 #' @noRd
-get_random_pokemon_id <- function(generation = 8L, n = 1L) {
+get_random_pokemon_id <- function(generation = 1L, n = 1L) {
   # nolint start: object_usage_linter
   subset(pokemon_generation, generation_id == generation, select = "pokemon_id", drop = TRUE) |>
   # nolint end
@@ -28,5 +29,5 @@ get_random_pokemon_id <- function(generation = 8L, n = 1L) {
 
 #' @noRd
 remove_alternate_forms <- function(x) {
-  x[x < 10000]
+  x[x < 10000L]
 }

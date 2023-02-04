@@ -13,10 +13,10 @@ calculate_stat(
   level = 50,
   iv = 0,
   ev = 0,
-  generation = 8
+  generation = 1L
 )
 
-calculate_stat_range(base_stat, stat_name, nature, level = 50, generation = 8)
+calculate_stat_range(base_stat, stat_name, nature, level = 50, generation = 1L)
 }
 \arguments{
 \item{base_stat}{The stat a Pokémon has}

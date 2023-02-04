@@ -19,7 +19,7 @@
 #'
 #' @encoding UTF-8
 #' @export
-calculate_hp <- function(base_hp, level = 50, iv = 0, ev = 0, generation = 8) {
+calculate_hp <- function(base_hp, level = 50, iv = 0, ev = 0, generation = 1L) {
   check_level(level)
   check_iv(iv)
 
@@ -36,7 +36,7 @@ calculate_hp <- function(base_hp, level = 50, iv = 0, ev = 0, generation = 8) {
 #'
 #' @rdname calculate_hp
 #' @export
-calculate_hp_range <- function(base_hp, level = 50, generation = 8) {
+calculate_hp_range <- function(base_hp, level = 50, generation = 1L) {
   if (generation < 3) {
     min_hp <- calculate_hp_v1(base_hp, level, dv = 0)
     max_hp <- calculate_hp_v1(base_hp, level, dv = 15)

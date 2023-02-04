@@ -23,7 +23,7 @@
 #'
 #' @encoding UTF-8
 #' @export
-calculate_stat <- function(base_stat, stat_name, nature, level = 50, iv = 0, ev = 0, generation = 8) {
+calculate_stat <- function(base_stat, stat_name, nature, level = 50, iv = 0, ev = 0, generation = 1L) {
   check_level(level)
   check_iv(iv)
 
@@ -42,7 +42,7 @@ calculate_stat <- function(base_stat, stat_name, nature, level = 50, iv = 0, ev 
 #'
 #' @rdname calculate_stat
 #' @export
-calculate_stat_range <- function(base_stat, stat_name, nature, level = 50, generation = 8) {
+calculate_stat_range <- function(base_stat, stat_name, nature, level = 50, generation = 1L) {
   if (generation < 3) {
     min_hp <- calculate_stat_v1(base_stat, level, dv = 0)
     max_hp <- calculate_stat_v1(base_stat, level, dv = 15)

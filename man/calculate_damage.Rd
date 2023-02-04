@@ -4,7 +4,17 @@
 \alias{calculate_damage}
 \title{Calculate Attack Damage}
 \usage{
-calculate_damage(attack)
+calculate_damage(
+  power,
+  p1_attack,
+  p2_defense,
+  p1_stab,
+  p2_types,
+  ...,
+  level = 50L,
+  critical = FALSE,
+  generation = 1L
+)
 }
 \description{
 Calculate Attack Damage

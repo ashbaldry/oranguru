@@ -6,9 +6,9 @@
 \alias{choose_moves}
 \title{Learn Pokémon Moves}
 \usage{
-learn_moves(moves, level = 50L, generation = 8L, n = 4L)
+learn_moves(moves, level = 50L, generation = 1L, n = 4L)
 
-choose_moves(moves, level = 50L, generation = 8L, n = 4L)
+choose_moves(moves, level = 50L, generation = 1L, n = 4L)
 }
 \arguments{
 \item{moves}{A list of moves extracted from \code{pokeapi::get_pokemon}}

@@ -14,7 +14,7 @@
 #'
 #' @encoding UTF-8
 #' @export
-learn_moves <- function(moves, level = 50L, generation = 8L, n = 4L) {
+learn_moves <- function(moves, level = 50L, generation = 1L, n = 4L) {
   if (!is.numeric(n) || n < 1L || n > 4L || as.integer(n) != n) {
     stop("Maximum number of moves learnt must be between one and four")
   }
@@ -24,7 +24,7 @@ learn_moves <- function(moves, level = 50L, generation = 8L, n = 4L) {
 
 #' @rdname learn_moves
 #' @export
-choose_moves <- function(moves, level = 50L, generation = 8L, n = 4L) {
+choose_moves <- function(moves, level = 50L, generation = 1L, n = 4L) {
   if (!is.numeric(n) || n < 1L || n > 4L || as.integer(n) != n) {
     stop("Maximum number of moves learnt must be between one and four")
   }
@@ -34,7 +34,7 @@ choose_moves <- function(moves, level = 50L, generation = 8L, n = 4L) {
   sample(learnable_moves, min(n, length(learnable_moves)))
 }
 
-find_valid_moves <- function(moves, level = 50L, generation = 8L) {
+find_valid_moves <- function(moves, level = 50L, generation = 1L) {
   check_level(level)
   check_generation(generation)
   # Handling if someone sends the whole result of pokeapi::get_pokemon

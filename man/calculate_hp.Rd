@@ -6,9 +6,9 @@
 \alias{calculate_hp_range}
 \title{Calculating Pokémon Hit Points}
 \usage{
-calculate_hp(base_hp, level = 50, iv = 0, ev = 0, generation = 8)
+calculate_hp(base_hp, level = 50, iv = 0, ev = 0, generation = 1L)
 
-calculate_hp_range(base_hp, level = 50, generation = 8)
+calculate_hp_range(base_hp, level = 50, generation = 1L)
 }
 \arguments{
 \item{base_hp}{The base hit point stat a Pokémon has}

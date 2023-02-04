@@ -24,7 +24,7 @@ Pokemon <- R6::R6Class(
     #' @return
     #' A Pokémon
     initialize = function(api_data = NULL, pokemon = NULL, level = 50L,
-                          generation = 8L, nature = NULL, language = "en") {
+                          generation = 1L, nature = NULL, language = "en") {
       check_level(level)
       check_generation(generation)
 

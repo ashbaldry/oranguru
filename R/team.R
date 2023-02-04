@@ -19,16 +19,16 @@ PokemonTeam <- R6::R6Class(
     #' @return
     #' A Team of 6 Pokémon
     initialize = function(pokemon_1, pokemon_2, pokemon_3, pokemon_4, pokemon_5, pokemon_6,
-                          random = TRUE, generation = 8L) {
+                          random = TRUE, generation = 1L) {
       if (random) {
-        pokemon_ids <- get_random_pokemon_id(generation, n = 6)
+        pokemon_ids <- get_random_pokemon_id(generation, n = 6L)
 
-        private$pokemon_1 <- Pokemon$new(pokemon = pokemon_ids[1], generation = generation)
-        private$pokemon_2 <- Pokemon$new(pokemon = pokemon_ids[2], generation = generation)
-        private$pokemon_3 <- Pokemon$new(pokemon = pokemon_ids[3], generation = generation)
-        private$pokemon_4 <- Pokemon$new(pokemon = pokemon_ids[4], generation = generation)
-        private$pokemon_5 <- Pokemon$new(pokemon = pokemon_ids[5], generation = generation)
-        private$pokemon_6 <- Pokemon$new(pokemon = pokemon_ids[6], generation = generation)
+        private$pokemon_1 <- Pokemon$new(pokemon = pokemon_ids[1L], generation = generation)
+        private$pokemon_2 <- Pokemon$new(pokemon = pokemon_ids[2L], generation = generation)
+        private$pokemon_3 <- Pokemon$new(pokemon = pokemon_ids[3L], generation = generation)
+        private$pokemon_4 <- Pokemon$new(pokemon = pokemon_ids[4L], generation = generation)
+        private$pokemon_5 <- Pokemon$new(pokemon = pokemon_ids[5L], generation = generation)
+        private$pokemon_6 <- Pokemon$new(pokemon = pokemon_ids[6L], generation = generation)
       } else if (missing(pokemon_1) || missing(pokemon_2) || missing(pokemon_3) ||
                  missing(pokemon_4) || missing(pokemon_5) || missing(pokemon_6)) {
         stop("Must have a full set of 6 Pokémon to create a team")
