@@ -52,27 +52,27 @@ test_that("Base Stat calculations are correct", {
 
   attack <- calculate_stat(
     base_stat = 130, stat_name = "attack", nature = "adamant",
-    level = 78, iv = 12, ev = 190
+    level = 78, iv = 12, ev = 190, generation = 8
   )
   expect_identical(attack, 278L)
   defense <- calculate_stat(
     base_stat = 95, stat_name = "defense", nature = "adamant",
-    level = 78, iv = 30, ev = 91
+    level = 78, iv = 30, ev = 91, generation = 8
   )
   expect_identical(defense, 193L)
   sp_attack <- calculate_stat(
     base_stat = 80, stat_name = "special-attack", nature = "adamant",
-    level = 78, iv = 16, ev = 48
+    level = 78, iv = 16, ev = 48, generation = 8
   )
   expect_identical(sp_attack, 135L)
   sp_defense <- calculate_stat(
     base_stat = 85, stat_name = "special-defense", nature = "adamant",
-    level = 78, iv = 23, ev = 84
+    level = 78, iv = 23, ev = 84, generation = 8
   )
   expect_identical(sp_defense, 171L)
   speed <- calculate_stat(
     base_stat = 102, stat_name = "speed", nature = "adamant",
-    level = 78, iv = 5, ev = 23
+    level = 78, iv = 5, ev = 23, generation = 8
   )
   expect_identical(speed, 171L)
 })
