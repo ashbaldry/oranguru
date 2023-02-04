@@ -2,9 +2,21 @@
 % Please edit documentation in R/critical_chance.R
 \name{calculate_critical_chance}
 \alias{calculate_critical_chance}
+\alias{calculate_critical_chance_v1}
 \title{Calculate Critical Hit Chance}
 \usage{
 calculate_critical_chance(move, ..., generation = 1L)
+
+calculate_critical_chance_v1(move, pokemon)
+}
+\arguments{
+\item{move}{The name of the move that is being used}
+
+\item{...}{Parameters that will be sent to calculations dependent on the generation}
+
+\item{generation}{The generation that the battle is based on}
+
+\item{The}{\code{\link{Pokemon}} that has used the attack}
 }
 \description{
 Calculate Critical Hit Chance
