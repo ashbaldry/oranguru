@@ -1,11 +1,9 @@
-# `{pokemon}`
+# `{oranguru}`
 
-The aim of the `{pokemon}` package is to be able to pull in data from PokéAPI ([API](https://pokeapi.co/), [R Package](https://github.com/ashbaldry/pokeapi)) and be able to create a team of Pokémon and fight against random teams, a friend or run damage calculations.
+The aim of the `{oranguru}` package is to use the data from PokéAPI ([API](https://pokeapi.co/), [R Package](https://github.com/ashbaldry/pokeapi)) and be able to create a team of Pokémon and fight against random teams, a friend or run damage calculations.
 
 ## Installation
 
 ```r
-remotes::install_github("ashbaldry/pokemon")
+remotes::install_github("ashbaldry/oranguru")
 ```
-
-**NB** This package uses the developmental [R7](rconsortium/OOP-WG) class.
