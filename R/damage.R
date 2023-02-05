@@ -1,6 +1,4 @@
-#' Calculate Attack Damage
-#'
-#' @export
+#' @noRd
 calculate_damage <- function(power, p1_attack, p2_defense, p1_stab, p2_types, ...,
                              level = 50L, critical = FALSE, generation = 1L) {
   check_level(level)

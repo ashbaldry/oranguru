@@ -8,7 +8,7 @@
 \usage{
 calculate_critical_chance(move, ..., generation = 1L)
 
-calculate_critical_chance_v1(move, speed, high_crit)
+calculate_critical_chance_v1(move, speed, high_crit = 0L)
 
 calculate_critical_chance_v2(move)
 }

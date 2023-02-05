@@ -13,7 +13,7 @@
 #' 1 and 2 to subsequent generations
 #'
 #' @examples
-#' TODO with real pokemon stats
+#' # TODO with real pokemon stats
 #'
 #' @seealso \code{\link{calculate_stat}}
 #'

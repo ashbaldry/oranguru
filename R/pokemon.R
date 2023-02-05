@@ -3,7 +3,9 @@
 #' @description
 #' R6 object containing required information about a Pokémon.
 #'
+#' @importFrom R6 R6Class
 #' @encoding UTF-8
+#'
 #' @export
 Pokemon <- R6::R6Class(
   classname = "pokemon",
@@ -23,6 +25,8 @@ Pokemon <- R6::R6Class(
     #'
     #' @return
     #' A Pokémon
+    #'
+    #' @encoding UTF-8
     initialize = function(api_data = NULL, pokemon = NULL, level = 50L,
                           generation = 1L, nature = NULL, language = "en") {
       check_level(level)
@@ -102,12 +106,16 @@ Pokemon <- R6::R6Class(
     #' Show current status of the Pokémon
     #'
     #' @param simple Logical, do you just want the simple status (name + HP) printed?
-    status = function(simple = FALSE) showStatus(private, simple = simple),
+    #'
+    #' @encoding UTF-8
+    status = function(simple = FALSE) show_status(private, simple = simple),
 
     #' @description
     #' Get the stat of the Pokémon
     #'
     #' @param stat The private field of the Pokémon
+    #'
+    #' @encoding UTF-8
     get_stat = function(stat) {
       if (stat %nin% names(private)) {
         stop(stat, " not available for Pokémon")
@@ -117,12 +125,16 @@ Pokemon <- R6::R6Class(
 
     #' @description
     #' Get the moveset of the Pokémon
+    #'
+    #' @encoding UTF-8
     get_moves = function() c(private$move_1, private$move_2, private$move_3, private$move_4),
 
     #' @description
     #' Get the critical hit chance for a move used by the Pokémon
     #'
     #' @param move Name of the move used by the Pokémon
+    #'
+    #' @encoding UTF-8
     get_crit_chance = function(move) {
       if (move %nin% self$get_moves()) {
         stop(private$name, " does not know ", move, ". Please use one of ", toString(self$get_moves()))

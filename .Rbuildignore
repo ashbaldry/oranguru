@@ -1,3 +1,5 @@
-^pokemon\.Rproj$
+^oranguru\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^\.lintr$
+^data_raw$

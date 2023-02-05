@@ -31,7 +31,7 @@ information such as its level, IVs and EVs, and the generation.
 this is assuming that no EVs have been added to the Pokémon.
 }
 \examples{
-TODO with real pokemon stats
+# TODO with real pokemon stats
 
 }
 \seealso{

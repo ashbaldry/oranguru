@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(pokemon)
+library(oranguru)
 
-test_check("pokemon")
+test_check("oranguru")

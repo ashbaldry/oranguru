@@ -1,5 +1,5 @@
-Package: pokemon
-Title: Create 'Pokémon' 'R6' Objects
+Package: oranguru
+Title: 'Pokémon' 
 Version: 0.1.0
 Authors@R: c(
     person("Ashley", "Baldry", email = "arbaldry91@gmail.com", role = c("aut", "cre"))
@@ -7,7 +7,7 @@ Authors@R: c(
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
-Depends: R (>= 2.10)
+Depends: R (>= 3.5.0)
 Imports: R6, pokeapi
 Suggests: testthat (>= 3.0.0)
 Roxygen: list(markdown = TRUE)

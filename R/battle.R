@@ -5,7 +5,7 @@
 #'
 #' @details
 #' For the sake of generation consistency, both teams must be pre-defined or both teams are random.
-#' To create a random team use \code{\link{team}(generation = 1L)}.
+#' To create a random team use \code{\link{PokemonTeam}$new(generation = 1L)}.
 #'
 #' In the initial version, the CPU will use a random move. AI will improve in future releases.
 #'

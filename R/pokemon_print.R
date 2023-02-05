@@ -8,21 +8,24 @@
 #' - Pokémon base stats and health
 #' - Pokemon move set and PP
 #'
-#' @rdname status
+#' @param x The private fields of a Pokémon
+#' @param simple Logical, should a simplified print be used
+#'
 #' @encoding UTF-8
-showStatus <- function(x, simple = FALSE) {
+#' @rdname status
+show_status <- function(x, simple = FALSE) {
   if (simple) {
-    showSimpleStatus(x)
+    show_simple_status(x)
   } else {
-    showFullStatus(x)
+    show_full_status(x)
   }
 }
 
-showSimpleStatus <- function(x) {
+show_simple_status <- function(x) {
   cat(x$name, " (", x$hp, " / ", x$current_hp, ") \n", sep = "")
 }
 
-showFullStatus <- function(x) {
+show_full_status <- function(x) {
   cat(
     "Pokémon: ", x$name, "\n",
     "Type", if (length(x$type) > 1) "s" else "", ": ", toString(x$type), "\n",
