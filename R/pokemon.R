@@ -62,6 +62,7 @@ Pokemon <- R6::R6Class(
       private$name <- name
       private$type <- types
       private$level <- as.integer(level)
+      private$generation <- generation
 
       private$base_attack <- base_stats[["attack"]]
       private$base_defense <- base_stats[["defense"]]
@@ -116,13 +117,31 @@ Pokemon <- R6::R6Class(
 
     #' @description
     #' Get the moveset of the Pokémon
-    get_moves = function() c(private$move_1, private$move_2, private$move_3, private$move_4)
+    get_moves = function() c(private$move_1, private$move_2, private$move_3, private$move_4),
+
+    #' @description
+    #' Get the critical hit chance for a move used by the Pokémon
+    #'
+    #' @param move Name of the move used by the Pokémon
+    get_crit_chance = function(move) {
+      if (move %nin% self$get_moves()) {
+        stop(private$name, " does not know ", move, ". Please use one of ", toString(self$get_moves()))
+      }
+
+      calculate_critical_chance(
+        move,
+        speed = private$base_speed,
+        high_crit = private$critical_hit_change,
+        generation = private$generation
+      )
+    }
   ),
 
   private = list(
     name = NULL,
     type = NULL,
     level = NULL,
+    generation = NULL,
 
     hp = NULL,
     base_attack = NULL,

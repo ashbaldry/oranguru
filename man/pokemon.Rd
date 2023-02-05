@@ -14,6 +14,7 @@ R6 object containing required information about a Pokémon.
 \item \href{#method-pokemon-status}{\code{Pokemon$status()}}
 \item \href{#method-pokemon-get_stat}{\code{Pokemon$get_stat()}}
 \item \href{#method-pokemon-get_moves}{\code{Pokemon$get_moves()}}
+\item \href{#method-pokemon-get_crit_chance}{\code{Pokemon$get_crit_chance()}}
 \item \href{#method-pokemon-clone}{\code{Pokemon$clone()}}
 }
 }
@@ -100,6 +101,23 @@ Get the moveset of the Pokémon
 \if{html}{\out{<div class="r">}}\preformatted{Pokemon$get_moves()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon-get_crit_chance"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon-get_crit_chance}{}}}
+\subsection{Method \code{get_crit_chance()}}{
+Get the critical hit chance for a move used by the Pokémon
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$get_crit_chance(move)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{move}}{Name of the move used by the Pokémon}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pokemon-clone"></a>}}

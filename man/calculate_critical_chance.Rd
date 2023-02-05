@@ -3,11 +3,14 @@
 \name{calculate_critical_chance}
 \alias{calculate_critical_chance}
 \alias{calculate_critical_chance_v1}
+\alias{calculate_critical_chance_v2}
 \title{Calculate Critical Hit Chance}
 \usage{
 calculate_critical_chance(move, ..., generation = 1L)
 
-calculate_critical_chance_v1(move, pokemon)
+calculate_critical_chance_v1(move, speed, high_crit)
+
+calculate_critical_chance_v2(move)
 }
 \arguments{
 \item{move}{The name of the move that is being used}
@@ -16,10 +19,18 @@ calculate_critical_chance_v1(move, pokemon)
 
 \item{generation}{The generation that the battle is based on}
 
-\item{The}{\code{\link{Pokemon}} that has used the attack}
+\item{speed}{The base speed of the \code{\link{Pokemon}} that has used the attack}
+
+\item{high_crit}{Logical: has the \code{\link{Pokemon}} used a move that has increased
+its critical hit chance?}
 }
 \description{
-Calculate Critical Hit Chance
+This calculates the probability that a critical hit will land.
+}
+\details{
+Generation 1 does include the mechanics within the original games. For example, the
+chance for a critical hit from standard moves \strong{reduces} after a move like swords
+dance has been used.
 }
 \seealso{
 https://bulbapedia.bulbagarden.net/wiki/Critical_hit
