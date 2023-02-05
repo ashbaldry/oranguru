@@ -38,8 +38,20 @@ is_critical_hit <- function(chance) {
 #' A random factor added to an attack, to allow for variability in the damage dealt
 #'
 #' @noRd
-include_random_factor <- function() {
-  runif(1L, 217L, 255L) / 255L
+include_random_factor <- function(damage, generation = 1L, damage_range = FALSE) {
+  if (generation >= 3L) {
+    min_range <- 85L
+    max_range <- 100L
+  } else {
+    min_range <- 217L
+    max_range <- 255L
+  }
+
+  if (damage_range) {
+    (damage * seq(min_range, max_range)) %/% max_range
+  } else if (damage >= 2L) {
+    (damage * runif(1L, min_range, max_range)) %/% max_range
+  }
 }
 
 #' Type Multiplier

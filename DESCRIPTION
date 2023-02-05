@@ -4,7 +4,7 @@ Version: 0.1.0
 Authors@R: c(
     person("Ashley", "Baldry", email = "arbaldry91@gmail.com", role = c("aut", "cre"))
     )
-Description: What the package does (one paragraph).
+Description: 'Pokémon' stats, damage calculator and battle simulator.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 3.5.0)
