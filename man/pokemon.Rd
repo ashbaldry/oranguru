@@ -25,11 +25,11 @@ R6 object containing required information about a Pokémon.
 Create a Pokémon
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Pokemon$new(
-  api_data = NULL,
   pokemon = NULL,
   level = 50L,
   generation = 1L,
   nature = NULL,
+  api_data = NULL,
   language = "en"
 )}\if{html}{\out{</div>}}
 }
@@ -37,9 +37,6 @@ Create a Pokémon
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{api_data}}{Either data pulled from \code{pokeapi::get_pokemon}, or
-\code{NULL} to select the data of a random Pokémon}
-
 \item{\code{pokemon}}{Name of the Pokémon to create}
 
 \item{\code{level}}{The level the Pokémon should be}
@@ -48,6 +45,9 @@ Create a Pokémon
 
 \item{\code{nature}}{Either a specified nature, or \code{NULL} for a random nature.
 \strong{NB} Nature is only required from generation 3 onwards}
+
+\item{\code{api_data}}{Either data pulled from \code{pokeapi::get_pokemon}, or
+\code{NULL} to select the data of a random Pokémon}
 
 \item{\code{language}}{ISO-2 character of the language to pull the name of
 the Pokémon}

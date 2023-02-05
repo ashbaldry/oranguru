@@ -13,13 +13,13 @@ Pokemon <- R6::R6Class(
     #' @description
     #' Create a Pokémon
     #'
-    #' @param api_data Either data pulled from `pokeapi::get_pokemon`, or
-    #' `NULL` to select the data of a random Pokémon
     #' @param pokemon Name of the Pokémon to create
     #' @param level The level the Pokémon should be
     #' @param generation The generation that the Pokémon comes from
     #' @param nature Either a specified nature, or `NULL` for a random nature.
     #' **NB** Nature is only required from generation 3 onwards
+    #' @param api_data Either data pulled from `pokeapi::get_pokemon`, or
+    #' `NULL` to select the data of a random Pokémon
     #' @param language ISO-2 character of the language to pull the name of
     #' the Pokémon
     #'
@@ -27,8 +27,8 @@ Pokemon <- R6::R6Class(
     #' A Pokémon
     #'
     #' @encoding UTF-8
-    initialize = function(api_data = NULL, pokemon = NULL, level = 50L,
-                          generation = 1L, nature = NULL, language = "en") {
+    initialize = function(pokemon = NULL, level = 50L, generation = 1L,
+                          nature = NULL, api_data = NULL, language = "en") {
       check_level(level)
       check_generation(generation)
 
@@ -48,6 +48,7 @@ Pokemon <- R6::R6Class(
       } else {
         nature <- character(0)
       }
+      type_ids <- vapply(api_data$types, \(x) as.integer(basename(x$type$url)), integer(1))
 
       base_stats <- setNames(
         vapply(api_data$stats, \(x) x$base_stat, integer(1)),
@@ -65,6 +66,7 @@ Pokemon <- R6::R6Class(
 
       private$name <- name
       private$type <- types
+      private$type_id <- type_ids
       private$level <- as.integer(level)
       private$generation <- generation
 
@@ -152,6 +154,7 @@ Pokemon <- R6::R6Class(
   private = list(
     name = NULL,
     type = NULL,
+    type_id = NULL,
     level = NULL,
     generation = NULL,
 
