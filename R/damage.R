@@ -8,6 +8,13 @@
 #' @param defender The defending \code{\link{Pokemon}}
 #' @param generation The generation that the battle is happening in
 #'
+#' @return
+#' An integer value of the amount of damage dealt to the defending Pokémon
+#'
+#' @rdname damage
+#' @seealso \url{https://bulbapedia.bulbagarden.net/wiki/Damage}
+#'
+#' @encoding UTF-8
 #' @export
 calculate_damage <- function(move, attacker, defender, generation = 1L) {
   check_damage_args(move, attacker, defender, generation)

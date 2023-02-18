@@ -84,6 +84,9 @@ PokemonBattle <- R6::R6Class(
     player_2_cpu = TRUE,
     player_2_ready = FALSE,
 
+    active_1 = 1L,
+    active_2 = 1L,
+
     resolve_turn = function() {
       if (isFALSE(private$player_1_ready) || isFALSE(private$player_2_ready || private$player_2_cpu)) {
         return()
@@ -92,10 +95,12 @@ PokemonBattle <- R6::R6Class(
         private$team_2$select_move()
       }
 
-
-
       private$player_1_ready <- FALSE
       private$player_2_ready <- FALSE
+    },
+
+    status_check = function() {
+
     }
   )
 )

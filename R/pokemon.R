@@ -151,7 +151,6 @@ Pokemon <- R6::R6Class(
         stop(new_move, " is not a valid move for ", private$name)
       }
 
-
       if (is.null(replace_move)) {
         replace_id <- utils::menu(title = "Which move would you like to replace?", self$get_moves())
       } else if (is.character(replace_move)) {
@@ -163,7 +162,7 @@ Pokemon <- R6::R6Class(
       } else if (replace_move %in% 1:4) {
         replace_id <- replace_move
       } else {
-        stop("Replacement move cannot be found")
+        stop("Replacement move (", replace_move, ") for ", private$name, " cannot be found")
       }
 
       new_pp <- get_move_info(new_move, "pp")

@@ -1,5 +1,4 @@
 #' Get Pokémon Name
-#'
 #' @noRd
 get_pokemon_name <- function(id, language = "en") {
   if (id < 10000L) {

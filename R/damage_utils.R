@@ -28,7 +28,7 @@ include_crit_multipler <- function(critical_chance, generation = 1L) {
 #'
 #' @noRd
 is_critical_hit <- function(chance) {
-  critical <- min(chance, 1L)
+  chance <- min(chance, 1L)
   sample(c(FALSE, TRUE), size = 1L, prob = c(1 - chance, chance))
 }
 
@@ -78,7 +78,9 @@ include_type_multiplier <- function(move_type, pokemon_types, generation = 1L) {
 
   multiplier <- subset(
     move_efficacy,
+    # nolint start: object_usage_linter
     damage_type_id == move_type & target_type_id %in% pokemon_types,
+    # nolint end
     select = "damage_factor",
     drop = TRUE
   )

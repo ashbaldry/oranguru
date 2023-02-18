@@ -6,10 +6,10 @@ Authors@R: c(
     )
 Description: 'Pokémon' stats, damage calculator and battle simulator.
 License: MIT + file LICENSE
-Encoding: UTF-8
 Depends: R (>= 3.5.0)
 Imports: R6, pokeapi
 Suggests: testthat (>= 3.0.0)
+Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Remotes: ashbaldry/pokeapi
