@@ -43,26 +43,26 @@ Pokemon <- R6::R6Class(
 
       name <- get_pokemon_name(id, language = language)
       types <- vapply(api_data$types, \(x) x$type$name, character(1))
-      if (generation > 2) {
+      if (generation > 2L) {
         nature <- find_nature(nature)
       } else {
-        nature <- character(0)
+        nature <- character(0L)
       }
       type_ids <- vapply(api_data$types, \(x) as.integer(basename(x$type$url)), integer(1))
 
       base_stats <- setNames(
-        vapply(api_data$stats, \(x) x$base_stat, integer(1)),
-        vapply(api_data$stats, \(x) x$stat$name, character(1))
+        vapply(api_data$stats, \(x) x$base_stat, integer(1L)),
+        vapply(api_data$stats, \(x) x$stat$name, character(1L))
       )
       hp <- calculate_hp(base_stats[["hp"]], level = level, generation = generation)
       other_stats <- vapply(
-        setNames(nm = names(base_stats)[-1]),
+        setNames(nm = names(base_stats)[-1L]),
         \(x) calculate_stat(base_stats[[x]], x, nature = nature, generation = generation),
-        integer(1)
+        integer(1L)
       )
 
       moves <- learn_moves(api_data$moves, level = level, generation = generation)
-      moves_pp <- vapply(moves, get_move_info, info = "pp", integer(1), USE.NAMES = FALSE)
+      moves_pp <- vapply(moves, get_move_info, info = "pp", integer(1L), USE.NAMES = FALSE)
 
       private$name <- name
       private$type <- types
@@ -84,20 +84,20 @@ Pokemon <- R6::R6Class(
       private$speed <- other_stats[["speed"]]
 
       private$current_hp <- hp
-      private$move_1 <- moves[1]
-      private$move_2 <- moves[2]
-      private$move_3 <- moves[3]
-      private$move_4 <- moves[4]
+      private$move_1 <- moves[1L]
+      private$move_2 <- moves[2L]
+      private$move_3 <- moves[3L]
+      private$move_4 <- moves[4L]
       private$all_moves <- find_valid_moves(api_data$moves, level = level, generation = generation)
 
-      private$move_1_pp <- moves_pp[1]
-      private$move_1_current_pp <- moves_pp[1]
-      private$move_2_pp <- moves_pp[2]
-      private$move_2_current_pp <- moves_pp[2]
-      private$move_3_pp <- moves_pp[3]
-      private$move_3_current_pp <- moves_pp[3]
-      private$move_4_pp <- moves_pp[4]
-      private$move_4_current_pp <- moves_pp[4]
+      private$move_1_pp <- moves_pp[1L]
+      private$move_1_current_pp <- moves_pp[1L]
+      private$move_2_pp <- moves_pp[2L]
+      private$move_2_current_pp <- moves_pp[2L]
+      private$move_3_pp <- moves_pp[3L]
+      private$move_3_current_pp <- moves_pp[3L]
+      private$move_4_pp <- moves_pp[4L]
+      private$move_4_current_pp <- moves_pp[4L]
 
       private$nature <- nature
       private$sprite_front_url <- api_data$sprites$front_default
@@ -130,6 +130,48 @@ Pokemon <- R6::R6Class(
     #'
     #' @encoding UTF-8
     get_moves = function() c(private$move_1, private$move_2, private$move_3, private$move_4),
+
+    #' @description
+    #' Change one of the moves of the Pokémon
+    #'
+    #' @param new_move Name of the new move
+    #' @param replace_move Either the name of the move to replace, or the position of the move
+    #'
+    #' @encoding UTF-8
+    change_move = function(new_move = NULL, replace_move = NULL) {
+      if (is.null(new_move)) {
+        available_moves <- setdiff(private$all_moves, self$get_moves())
+        move_id <- utils::menu(title = "The following moves can be learnt:", available_moves)
+        if (move_id == 0) {
+          cat("No new move selected, returning\n")
+          return(NULL)
+        }
+        new_move <- available_moves[move_id]
+      } else if (!new_move %in% private$all_moves) {
+        stop(new_move, " is not a valid move for ", private$name)
+      }
+
+
+      if (is.null(replace_move)) {
+        replace_id <- utils::menu(title = "Which move would you like to replace?", self$get_moves())
+      } else if (is.character(replace_move)) {
+        if (replace_move %in% self$get_moves()) {
+          replace_id <- match(replace_move, self$get_moves())
+        } else {
+          stop(replace_move, " is not a move known by ", private$name)
+        }
+      } else if (replace_move %in% 1:4) {
+        replace_id <- replace_move
+      } else {
+        stop("Replacement move cannot be found")
+      }
+
+      new_pp <- get_move_info(new_move, "pp")
+      private[[paste0("move_", replace_id)]] <- new_move
+      private[[paste("move", replace_id, "pp", sep = "_")]] <- new_pp
+      private[[paste("move", replace_id, "current_pp", sep = "_")]] <- new_pp
+      invisible(NULL)
+    },
 
     #' @description
     #' Get the critical hit chance for a move used by the Pokémon

@@ -14,6 +14,7 @@ R6 object containing required information about a Pokémon.
 \item \href{#method-pokemon-status}{\code{Pokemon$status()}}
 \item \href{#method-pokemon-get_stat}{\code{Pokemon$get_stat()}}
 \item \href{#method-pokemon-get_moves}{\code{Pokemon$get_moves()}}
+\item \href{#method-pokemon-change_move}{\code{Pokemon$change_move()}}
 \item \href{#method-pokemon-get_crit_chance}{\code{Pokemon$get_crit_chance()}}
 \item \href{#method-pokemon-clone}{\code{Pokemon$clone()}}
 }
@@ -101,6 +102,25 @@ Get the moveset of the Pokémon
 \if{html}{\out{<div class="r">}}\preformatted{Pokemon$get_moves()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon-change_move"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon-change_move}{}}}
+\subsection{Method \code{change_move()}}{
+Change one of the moves of the Pokémon
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$change_move(new_move = NULL, replace_move = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{new_move}}{Name of the new move}
+
+\item{\code{replace_move}}{Either the name of the move to replace, or the position of the move}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pokemon-get_crit_chance"></a>}}
