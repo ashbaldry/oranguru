@@ -3,6 +3,7 @@ moves <- data.table::fread("data_raw/moves.csv", data.table = FALSE)
 moves_meta <- data.table::fread("data_raw/move_meta.csv", data.table = FALSE)
 moves_changelog <- data.table::fread("data_raw/moves_changelog.csv", data.table = FALSE)
 
+types <- data.table::fread("data_raw/type.csv", data.table = FALSE)
 type_efficacy <- data.table::fread("data_raw/type_efficacy.csv", data.table = FALSE)
 type_efficacy_past <- data.table::fread("data_raw/type_efficacy_past.csv", data.table = FALSE)
 
@@ -11,6 +12,7 @@ usethis::use_data(
   moves,
   moves_meta,
   moves_changelog,
+  types,
   type_efficacy,
   type_efficacy_past,
   internal = TRUE,
