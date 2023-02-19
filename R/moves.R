@@ -34,6 +34,7 @@ choose_moves <- function(moves, level = 50L, generation = 1L, n = 4L) {
   sample(learnable_moves, min(n, length(learnable_moves)))
 }
 
+#' @noRd
 find_valid_moves <- function(moves, level = 50L, generation = 1L) {
   check_level(level)
   check_generation(generation)
@@ -51,6 +52,7 @@ find_valid_moves <- function(moves, level = 50L, generation = 1L) {
   unique(moves_df$move)
 }
 
+#' @noRd
 clean_learned_moves <- function(move) {
   data.frame(
     move = move$move$name,
@@ -65,10 +67,20 @@ get_move_info <- function(move, info) {
     NA_integer_
   } else {
     # nolint start: object_usage_linter
-    subset(moves, identifier == move) |>
-      # nolint end
-      get_column(info) |>
-      as.integer()
+    subset(moves, identifier == move, select = info, drop = TRUE)
+    # nolint end
+  }
+}
+
+#' @noRd
+get_move_meta_info <- function(move, info) {
+  if (is.na(move)) {
+    NA_integer_
+  } else {
+    # nolint start: object_usage_linter
+    id <- subset(moves, identifier == move, select = "id", drop = TRUE)
+    subset(moves_meta, move_id == id, select = info, drop = TRUE)
+    # nolint end
   }
 }
 

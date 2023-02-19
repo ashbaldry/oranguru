@@ -16,7 +16,7 @@ calculate_hp_range(base_hp, level = 50, generation = 1L)
 \item{level}{The level of the Pokémon}
 
 \item{iv}{Individual Value. A random number given to a Pokémon
-between 1-15 (Generation 1-2)  or 1-31 (Generation 3+)}
+between 1-15 (Generation 1-2 - also known as \code{dv})  or 1-31 (Generation 3+)}
 
 \item{ev}{Effort Value.}
 

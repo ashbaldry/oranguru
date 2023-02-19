@@ -25,14 +25,43 @@ PokemonBattle <- R6::R6Class(
     #' Default is Gen 8.
     initialize = function(team_1, team_2, player_2_cpu = TRUE, generation = 1L) {
       if (missing(team_1) && missing(team_2)) {
-        private$team_1 <- PokemonTeam$new(generation = generation)
-        private$team_2 <- PokemonTeam$new(generation = generation)
+        private$team_1 <- PokemonTeam$new(random = TRUE, generation = generation)
+        private$team_2 <- PokemonTeam$new(random = TRUE, generation = generation)
+      } else if (missing(team_2) && player_2_cpu) {
+        private$team_1 <- team_1
+        private$team_2 <- PokemonTeam$new(random = TRUE, generation = generation)
       } else if (missing(team_1) || missing(team_2)) {
         stop("Either both teams must be random or both teams are pre-defined")
       } else {
         private$team_1 <- team_1
         private$team_2 <- team_2
       }
+    },
+
+    #' @description
+    #' A helper to start the local console version of a battle
+    start = function() {
+      p1_string <- if (private$player_2_cpu) "" else "(P1)"
+
+      while (private$team_1$able_to_battle() && private$team_2$able_to_battle()) {
+        while (!private$player_1_ready) {
+          p1_option <- menu(c("Attack", "Switch"), title = "What would you like to do?")
+
+          if (p1_option == 1) {
+
+          } else if (p1_option == 2) {
+            p1_swtich <- menu(available_pokemon, title = "Who would you like to switch with?")
+
+          } else {
+            next
+          }
+        }
+
+      }
+
+      winner <- 2 - as.numeric(private$team_1$able_to_battle())
+      loser <- 3 - winner
+      cat("Player", loser, "has no Pokémon available to battle, Player", winner, "wins!")
     },
 
     #' @description
@@ -62,16 +91,29 @@ PokemonBattle <- R6::R6Class(
 
     #' @description
     #' Select active Pokémon
-    switch = function() {
+    #'
+    #' @param new_active Team position of the Pokémon to switch in
+    #' @param curr_active Team position of the Pokémon to switch out. Defaults to current active
+    #'
+    #' @encoding UTF-8
+    switch = function(new_active, curr_active = private$active_1) {
+      private$active_1 <- new_active
       private$player_1_ready <- TRUE
     },
 
     #' @description
     #' Select active Pokémon (player 2)
-    switch_p2 = function() {
+    #'
+    #' @param new_active Team position of the Pokémon to switch in
+    #' @param curr_active Team position of the Pokémon to switch out. Defaults to current active
+    #'
+    #' @encoding UTF-8
+    switch_p2 = function(new_active, curr_active = private$active_2) {
       if (private$player_2_cpu) {
         message("Player 2 is a CPU. Don't try to cheat!")
       }
+
+      private$active_2 <- new_active
       private$player_2_ready <- TRUE
     }
   ),

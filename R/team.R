@@ -19,7 +19,7 @@ PokemonTeam <- R6::R6Class(
     #' @return
     #' A Team of 6 Pokémon
     initialize = function(pokemon_1, pokemon_2, pokemon_3, pokemon_4, pokemon_5, pokemon_6,
-                          random = TRUE, generation = 1L) {
+                          random = FALSE, generation = 1L) {
       if (random) {
         pokemon_ids <- get_random_pokemon_id(generation, n = 6L)
 
@@ -44,19 +44,38 @@ PokemonTeam <- R6::R6Class(
 
     #' @description
     #' Show current status of Pokémon Team
-    status = function() {
+    #'
+    #' @param simple Logical, do you just want the simple status (name + HP) printed?
+    #'
+    #' @encoding UTF-8
+    status = function(simple = TRUE) {
       cat("Pokémon Team:\n")
-      private$pokemon_1$status(simple = TRUE)
-      private$pokemon_2$status(simple = TRUE)
-      private$pokemon_3$status(simple = TRUE)
-      private$pokemon_4$status(simple = TRUE)
-      private$pokemon_5$status(simple = TRUE)
-      private$pokemon_6$status(simple = TRUE)
+      private$pokemon_1$status(simple = simple)
+      private$pokemon_2$status(simple = simple)
+      private$pokemon_3$status(simple = simple)
+      private$pokemon_4$status(simple = simple)
+      private$pokemon_5$status(simple = simple)
+      private$pokemon_6$status(simple = simple)
+    },
+
+    #' @description
+    #' Checks whether any Pokémon are healthy to continue battling
+    #'
+    #' @return
+    #' A logical value that says if at least one Pokémon hasn't fainted
+    #'
+    #' @encoding UTF-8
+    able_to_battle = function() {
+      private$pokemon_1$get_stat("current_hp") > 0 ||
+        private$pokemon_2$get_stat("current_hp") > 0 ||
+        private$pokemon_3$get_stat("current_hp") > 0 ||
+        private$pokemon_4$get_stat("current_hp") > 0 ||
+        private$pokemon_5$get_stat("current_hp") > 0 ||
+        private$pokemon_6$get_stat("current_hp") > 0
     }
   ),
 
   private = list(
-    active = 1L,
     pokemon_1 = NULL,
     pokemon_2 = NULL,
     pokemon_3 = NULL,

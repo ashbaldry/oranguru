@@ -12,6 +12,7 @@ R6 object containing required information about a Pokémon.
 \itemize{
 \item \href{#method-pokemon-new}{\code{Pokemon$new()}}
 \item \href{#method-pokemon-status}{\code{Pokemon$status()}}
+\item \href{#method-pokemon-use_move}{\code{Pokemon$use_move()}}
 \item \href{#method-pokemon-get_stat}{\code{Pokemon$get_stat()}}
 \item \href{#method-pokemon-get_moves}{\code{Pokemon$get_moves()}}
 \item \href{#method-pokemon-change_move}{\code{Pokemon$change_move()}}
@@ -75,6 +76,16 @@ Show current status of the Pokémon
 }
 \if{html}{\out{</div>}}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon-use_move"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon-use_move}{}}}
+\subsection{Method \code{use_move()}}{
+Use an attack of the Pokémon
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$use_move(move, battle)}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pokemon-get_stat"></a>}}

@@ -7,7 +7,7 @@
 #' @param base_hp The base hit point stat a Pokémon has
 #' @param level The level of the Pokémon
 #' @param iv Individual Value. A random number given to a Pokémon
-#' between 1-15 (Generation 1-2)  or 1-31 (Generation 3+)
+#' between 1-15 (Generation 1-2 - also known as `dv`)  or 1-31 (Generation 3+)
 #' @param ev Effort Value.
 #' @param generation Generation to look at. Calculations differ in generations
 #' 1 and 2 to subsequent generations

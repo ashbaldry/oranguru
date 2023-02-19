@@ -113,6 +113,23 @@ Pokemon <- R6::R6Class(
     status = function(simple = FALSE) show_status(private, simple = simple),
 
     #' @description
+    #' Use an attack of the Pokémon
+    #'
+    #' @encoding UTF-8
+    use_move = function(move, battle) {
+      if (!isTRUE(move %in% self$get_moves())) {
+        warning("Selected move (", move, ") is not available for ", private$name)
+      }
+
+      use_attack(move, self, battle, generation = battle$generation)
+
+      move_id <- match(move, self$get_moves())
+      private[[paste("move", move_id, "current_pp", sep = "_")]] <- new_pp
+
+      invisible(NULL)
+    },
+
+    #' @description
     #' Get the stat of the Pokémon
     #'
     #' @param stat The private field of the Pokémon

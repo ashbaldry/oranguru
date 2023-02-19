@@ -1,4 +1,9 @@
 #' Get Pokémon Name
+#'
+#' @param id ID of the Pokémon to get the name of
+#' @param langauge 2 digit language code of the language to get. Reverts to English if
+#' selected country is not available
+#'
 #' @noRd
 get_pokemon_name <- function(id, language = "en") {
   if (id < 10000L) {

@@ -28,7 +28,7 @@ Create a new Pokémon team
   pokemon_4,
   pokemon_5,
   pokemon_6,
-  random = TRUE,
+  random = FALSE,
   generation = 1L
 )}\if{html}{\out{</div>}}
 }
@@ -54,9 +54,16 @@ A Team of 6 Pokémon
 \subsection{Method \code{status()}}{
 Show current status of Pokémon Team
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PokemonTeam$status()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PokemonTeam$status(simple = TRUE)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{simple}}{Logical, do you just want the simple status (name + HP) printed?}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pokemon_team-clone"></a>}}
