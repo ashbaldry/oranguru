@@ -21,17 +21,20 @@ PokemonBattle <- R6::R6Class(
     #' @param team_1 Player 1's Pokémon team
     #' @param team_2 Player 2's Pokémon team
     #' @param player_2_cpu Logical, is player 2 a CPU? Default set to `TRUE`
+    #' @param level If random teams, the level the Pokémon should be
     #' @param generation If teams are random, then the generation the Pokémon will be selected from.
     #' Default is Gen 8.
-    initialize = function(team_1, team_2, player_2_cpu = TRUE, generation = 1L) {
+    initialize = function(team_1, team_2, player_2_cpu = TRUE, level = 50L, generation = 1L) {
       if (missing(team_1) && missing(team_2)) {
-        private$team_1 <- PokemonTeam$new(random = TRUE, generation = generation)
-        private$team_2 <- PokemonTeam$new(random = TRUE, generation = generation)
+        private$team_1 <- PokemonTeam$new(random = TRUE, level = level, generation = generation)
+        private$team_2 <- PokemonTeam$new(random = TRUE, level = level, generation = generation)
       } else if (missing(team_2) && player_2_cpu) {
         private$team_1 <- team_1
-        private$team_2 <- PokemonTeam$new(random = TRUE, generation = generation)
+        # TODO: get maximum level of player team
+        cpu_level <- max(level, level)
+        private$team_2 <- PokemonTeam$new(random = TRUE, level = cpu_level, generation = generation)
       } else if (missing(team_1) || missing(team_2)) {
-        stop("Either both teams must be random or both teams are pre-defined")
+        stop("Both player teams must either be random or pre-defined")
       } else {
         private$team_1 <- team_1
         private$team_2 <- team_2
@@ -41,22 +44,32 @@ PokemonBattle <- R6::R6Class(
     #' @description
     #' A helper to start the local console version of a battle
     start = function() {
-      p1_string <- if (private$player_2_cpu) "" else "(P1)"
+      cat("BATTLE COMMENCE!\n\n")
 
       while (private$team_1$able_to_battle() && private$team_2$able_to_battle()) {
-        while (!private$player_1_ready) {
-          p1_option <- menu(c("Attack", "Switch"), title = "What would you like to do?")
+        private$match_status()
 
-          if (p1_option == 1) {
+        private$p1_choice()
 
-          } else if (p1_option == 2) {
-            p1_swtich <- menu(available_pokemon, title = "Who would you like to switch with?")
+        if (private$player_2_cpu) {
 
-          } else {
-            next
+        } else {
+          while (!private$player_2_ready) {
+            p2_option <- menu(c("Attack", "Switch"), title = "(P2) What would you like to do?")
+
+            if (p2_option == 1) {
+
+            } else if (p2_option == 2) {
+              private$team_2$status()
+              cat("\n")
+              available_pokemon <- private$team_2
+              p2_swtich <- menu(available_pokemon, title = "(P2) Who would you like to switch with?")
+
+            } else {
+              next
+            }
           }
         }
-
       }
 
       winner <- 2 - as.numeric(private$team_1$able_to_battle())
@@ -128,6 +141,43 @@ PokemonBattle <- R6::R6Class(
 
     active_1 = 1L,
     active_2 = 1L,
+
+    match_status = function() {
+
+    },
+
+    p1_choice = function() {
+      while (!private$player_1_ready) {
+        p1_option <- menu(c("Attack", "Switch"), title = "What would you like to do?")
+
+        if (p1_option == 1) {
+          private$p1_attack()
+        } else if (p1_option == 2) {
+          private$p1_switch()
+        }
+      }
+    },
+
+    p1_attack = function() {
+
+    },
+
+    p1_switch = function() {
+      private$team_1$status()
+      cat("\n")
+
+      available_pokemon <- private$team_1$healthy_pokemon()
+      available_pokemon <- available_pokemon[-match(private$active_1, available_pokemon)]
+
+      if (length(available_pokemon) > 0) {
+        new_active <- menu(names(available_pokemon), title = "Who would you like to switch with?")
+        if (new_active > 0) {
+          private$active_1 <- unname(available_pokemon)[new_active]
+        }
+      } else {
+        cat("No available Pokémon to switch with. Returning to home options")
+      }
+    },
 
     resolve_turn = function() {
       if (isFALSE(private$player_1_ready) || isFALSE(private$player_2_ready || private$player_2_cpu)) {
