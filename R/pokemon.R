@@ -117,7 +117,7 @@ Pokemon <- R6::R6Class(
     #'
     #' @encoding UTF-8
     use_move = function(move, battle) {
-      if (!isTRUE(move %in% self$get_moves())) {
+      if (isFALSE(move %in% self$get_moves())) {
         warning("Selected move (", move, ") is not available for ", private$name)
       }
 
