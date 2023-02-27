@@ -10,23 +10,25 @@
 #'
 #' @param x The private fields of a Pokémon
 #' @param simple Logical, should a simplified print be used
+#' @param console Logical, should the status be printed or returned as a string?
 #'
 #' @encoding UTF-8
 #' @rdname status
-show_status <- function(x, simple = FALSE) {
+show_status <- function(x, simple = FALSE, console = TRUE) {
+  func <- if (console) cat else paste
   if (simple) {
-    show_simple_status(x)
+    show_simple_status(x, func = func)
   } else {
-    show_full_status(x)
+    show_full_status(x, func = func)
   }
 }
 
-show_simple_status <- function(x) {
-  cat(x$name, " (", x$hp, " / ", x$current_hp, ") \n", sep = "")
+show_simple_status <- function(x, func = cat) {
+  func(x$name, " (", x$hp, " / ", x$current_hp, ") \n", sep = "")
 }
 
-show_full_status <- function(x) {
-  cat(
+show_full_status <- function(x, func = cat) {
+  func(
     "Pokémon: ", x$name, "\n",
     "Type", if (length(x$type) > 1) "s" else "", ": ", toString(x$type), "\n",
     "\n",

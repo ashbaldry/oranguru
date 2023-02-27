@@ -108,9 +108,12 @@ Pokemon <- R6::R6Class(
     #' Show current status of the Pokémon
     #'
     #' @param simple Logical, do you just want the simple status (name + HP) printed?
+    #' @param console Logical, should the status be printed or returned as a string?
     #'
     #' @encoding UTF-8
-    status = function(simple = FALSE) show_status(private, simple = simple),
+    status = function(simple = FALSE, console = TRUE) {
+      show_status(private, simple = simple, console = console)
+    },
 
     #' @description
     #' Use an attack of the Pokémon

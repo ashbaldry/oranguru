@@ -39,6 +39,8 @@ PokemonBattle <- R6::R6Class(
         private$team_1 <- team_1
         private$team_2 <- team_2
       }
+
+      private$player_2_cpu <- player_2_cpu
     },
 
     #' @description
@@ -101,7 +103,7 @@ PokemonBattle <- R6::R6Class(
       if (private$player_2_cpu) {
         message("Player 2 is a CPU. Don't try to cheat!")
       }
-      private$player_2_ready <- TRUE
+      private$player_ready_2 <- TRUE
     },
 
     #' @description
@@ -113,7 +115,7 @@ PokemonBattle <- R6::R6Class(
     #' @encoding UTF-8
     switch = function(new_active, curr_active = private$active_1) {
       private$active_1 <- new_active
-      private$player_1_ready <- TRUE
+      private$player_ready_1 <- TRUE
     },
 
     #' @description
@@ -137,9 +139,9 @@ PokemonBattle <- R6::R6Class(
     team_1 = NULL,
     team_2 = NULL,
 
-    player_1_ready = FALSE,
+    player_ready_1 = FALSE,
+    player_ready_2 = FALSE,
     player_2_cpu = TRUE,
-    player_2_ready = FALSE,
 
     active_1 = 1L,
     active_2 = 1L,
@@ -154,44 +156,77 @@ PokemonBattle <- R6::R6Class(
     new_active_2 = NULL,
 
     match_status = function() {
-
+      cat(
+        "P1: ", private$team_1$get_pokemon(private$active_1)$status(simple = TRUE, console = FALSE),
+        "P2: ", private$team_2$get_pokemon(private$active_2)$status(simple = TRUE, console = FALSE),
+        "\n",
+        sep = ""
+      )
     },
 
     #' @description
     #' Determine player choice
     player_choice = function(person = 1L) {
-      while (!private$player_1_ready) {
-        p1_option <- menu(c("Attack", "Switch"), title = "What would you like to do?")
+      if (person == 2 && private$player_2_cpu) {
+        message("Player 2 is a CPU. Don't try to cheat!")
+      }
 
-        if (p1_option == 1) {
-          private$p1_attack()
-        } else if (p1_option == 2) {
-          private$p1_switch()
+      option_message <- paste0(
+        if (private$player_2_cpu) NULL else paste0("(P", person, ") "),
+        "What would you like to do?"
+      )
+
+      while (!private[[paste0("player_ready_", person)]]) {
+        selected_option <- menu(c("Attack", "Switch", "Check Stats"), title = option_message)
+
+        if (selected_option == 1) {
+          private$select_attack(person = person)
+        } else if (selected_option == 2) {
+          private$select_switch(person = person)
+        } else if (selected_option == 3) {
+          private[[paste0("team_", person)]]$get_pokemon(private[[paste0("active_", person)]])$status()
+          cat("\n")
         }
       }
     },
 
-    p1_attack = function() {
-      active_pokemon <- private$team_1$get_pokemon(private$active_1)
+    select_attack = function(person = 1L) {
+      active_position <- private[[paste0("active_", person)]]
+      active_pokemon <- private[[paste0("team_", person)]]$get_pokemon(active_position)
       available_moves <- active_pokemon$get_moves()
 
       selected_move <- menu(available_moves, title = "Which move would you like to use?")
       if (selected_move > 0L) {
-        private$move_1 <- available_moves[selected_move]
+        private[[paste0("action_", person)]] <- "attack"
+        private[[paste0("move_", person)]] <- available_moves[selected_move]
+        private[[paste0("player_ready_", person)]] <- TRUE
       }
     },
 
-    p1_switch = function() {
-      private$team_1$status()
+    select_cpu_attack = function() {
+      active_pokemon <- private$team_2$get_pokemon(private$active_2)
+      available_moves <- active_pokemon$get_moves()
+
+      private$action_2 <- "attack"
+      private$move_2 <- sample(available_moves, 1L)
+    },
+
+    select_switch = function(person = 1L) {
+      team_id <- paste0("team_", person)
+      active_position <- private[[paste0("active_", person)]]
+
+      private[[team_id]]$status()
       cat("\n")
 
-      available_pokemon <- private$team_1$healthy_pokemon()
-      available_pokemon <- available_pokemon[-match(private$active_1, available_pokemon)]
+      available_pokemon <- private[[team_id]]$healthy_pokemon()
+      available_pokemon <- available_pokemon[-match(active_position, available_pokemon)]
 
       if (length(available_pokemon) > 0L) {
         new_active <- menu(names(available_pokemon), title = "Who would you like to switch with?")
         if (new_active > 0L) {
-          private$new_active_1 <- unname(available_pokemon)[new_active]
+          private[[paste0("action_", person)]] <- "switch"
+          private[[paste0("new_active_", person)]] <- unname(available_pokemon)[new_active]
+          private[[paste0("player_ready_", person)]] <- TRUE
         }
       } else {
         cat("No available Pokémon to switch with. Returning to home options")
@@ -199,18 +234,49 @@ PokemonBattle <- R6::R6Class(
     },
 
     resolve_turn = function() {
-      if (isFALSE(private$player_1_ready) || isFALSE(private$player_2_ready || private$player_2_cpu)) {
-        return()
+      if (isFALSE(private$player_ready_1) || isFALSE(private$player_ready_2 || private$player_2_cpu)) {
+        return(NULL)
       }
       if (private$player_2_cpu) {
-        private$team_2$select_move()
+        private$select_cpu_attack()
+      }
+
+      p1_pokemon <- private$team_1$get_pokemon(private$active_1)
+      p2_pokemon <- private$team_2$get_pokemon(private$active_2)
+
+      if (private$action_1 == "switch") {
+        cat(
+          "P1 has switched", p1_pokemon$get_stat("name"), "for",
+          private$team_1$get_pokemon(private$new_active_1)$get_stat("name"),
+          "\n"
+        )
+        private$active_1 <- private$new_active_1
+      }
+
+      if (private$action_2 == "switch") {
+        cat(
+          "P2 has switched", p2_pokemon$get_stat("name"), "for",
+          private$team_2$get_pokemon(private$new_active_2)$get_stat("name"),
+          "\n"
+        )
+        private$active_2 <- private$new_active_2
+      }
+
+      if (private$action_1 == "attack") {
+        cat(p1_pokemon$get_stat("name"), "has used", private$move_1, "\n")
+      }
+
+      if (private$action_2 == "attack") {
+        cat(p2_pokemon$get_stat("name"), "has used", private$move_2, "\n")
       }
 
       private$action_1 <- NULL
       private$action_2 <- NULL
 
-      private$player_1_ready <- FALSE
-      private$player_2_ready <- FALSE
+      private$player_ready_1 <- FALSE
+      private$player_ready_2 <- FALSE
+
+      cat("\n")
     },
 
     status_check = function() {
