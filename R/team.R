@@ -69,6 +69,20 @@ PokemonTeam <- R6::R6Class(
     },
 
     #' @description
+    #' Get the selected Pokémon
+    #'
+    #' @param slot The number of the position of the Pokémon
+    #'
+    #' @return
+    #' The selected Pokémon
+    #'
+    #' @encoding UTF-8
+    get_pokemon = function(slot) {
+      stopifnot(slot %in% seq(6L))
+      private[[paste0("pokemon_", slot)]]
+    },
+
+    #' @description
     #' Check for healthy Pokémon within the team
     #'
     #' @return
@@ -105,6 +119,25 @@ PokemonTeam <- R6::R6Class(
         private$pokemon_4$get_stat("current_hp") > 0 ||
         private$pokemon_5$get_stat("current_hp") > 0 ||
         private$pokemon_6$get_stat("current_hp") > 0
+    },
+
+    #' @description
+    #' Get a stat from each Pokémon in team
+    #'
+    #' @param stat The selected stat to extract
+    #'
+    #' @return
+    #' A vector of length 6, getting the stat of each Pokémon
+    get_team_stat = function(stat) {
+      c(
+        private$pokemon_1$get_stat(stat),
+        private$pokemon_2$get_stat(stat),
+        private$pokemon_3$get_stat(stat),
+        private$pokemon_4$get_stat(stat),
+        private$pokemon_5$get_stat(stat),
+        private$pokemon_6$get_stat(stat)
+      )
+
     }
   ),
 

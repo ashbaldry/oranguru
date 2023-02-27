@@ -49,7 +49,7 @@ PokemonBattle <- R6::R6Class(
       while (private$team_1$able_to_battle() && private$team_2$able_to_battle()) {
         private$match_status()
 
-        private$p1_choice()
+        private$player_choice(person = 1L)
 
         if (private$player_2_cpu) {
 
@@ -70,6 +70,8 @@ PokemonBattle <- R6::R6Class(
             }
           }
         }
+
+        private$resolve_turn()
       }
 
       winner <- 2 - as.numeric(private$team_1$able_to_battle())
@@ -142,11 +144,22 @@ PokemonBattle <- R6::R6Class(
     active_1 = 1L,
     active_2 = 1L,
 
+    action_1 = NULL,
+    action_2 = NULL,
+
+    move_1 = NULL,
+    move_2 = NULL,
+
+    new_active_1 = NULL,
+    new_active_2 = NULL,
+
     match_status = function() {
 
     },
 
-    p1_choice = function() {
+    #' @description
+    #' Determine player choice
+    player_choice = function(person = 1L) {
       while (!private$player_1_ready) {
         p1_option <- menu(c("Attack", "Switch"), title = "What would you like to do?")
 
@@ -159,7 +172,13 @@ PokemonBattle <- R6::R6Class(
     },
 
     p1_attack = function() {
+      active_pokemon <- private$team_1$get_pokemon(private$active_1)
+      available_moves <- active_pokemon$get_moves()
 
+      selected_move <- menu(available_moves, title = "Which move would you like to use?")
+      if (selected_move > 0L) {
+        private$move_1 <- available_moves[selected_move]
+      }
     },
 
     p1_switch = function() {
@@ -169,10 +188,10 @@ PokemonBattle <- R6::R6Class(
       available_pokemon <- private$team_1$healthy_pokemon()
       available_pokemon <- available_pokemon[-match(private$active_1, available_pokemon)]
 
-      if (length(available_pokemon) > 0) {
+      if (length(available_pokemon) > 0L) {
         new_active <- menu(names(available_pokemon), title = "Who would you like to switch with?")
-        if (new_active > 0) {
-          private$active_1 <- unname(available_pokemon)[new_active]
+        if (new_active > 0L) {
+          private$new_active_1 <- unname(available_pokemon)[new_active]
         }
       } else {
         cat("No available Pokémon to switch with. Returning to home options")
@@ -186,6 +205,9 @@ PokemonBattle <- R6::R6Class(
       if (private$player_2_cpu) {
         private$team_2$select_move()
       }
+
+      private$action_1 <- NULL
+      private$action_2 <- NULL
 
       private$player_1_ready <- FALSE
       private$player_2_ready <- FALSE
