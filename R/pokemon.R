@@ -118,6 +118,9 @@ Pokemon <- R6::R6Class(
     #' @description
     #' Use an attack of the Pokémon
     #'
+    #' @param move The name of the move that is being used
+    #' @param battle A \code{\link{PokemonBattle}}
+    #'
     #' @encoding UTF-8
     use_move = function(move, battle) {
       if (isFALSE(move %in% self$get_moves())) {

@@ -12,6 +12,10 @@ R6 object containing required information about your Pokémon team.
 \itemize{
 \item \href{#method-pokemon_team-new}{\code{PokemonTeam$new()}}
 \item \href{#method-pokemon_team-status}{\code{PokemonTeam$status()}}
+\item \href{#method-pokemon_team-get_pokemon}{\code{PokemonTeam$get_pokemon()}}
+\item \href{#method-pokemon_team-healthy_pokemon}{\code{PokemonTeam$healthy_pokemon()}}
+\item \href{#method-pokemon_team-able_to_battle}{\code{PokemonTeam$able_to_battle()}}
+\item \href{#method-pokemon_team-get_team_stat}{\code{PokemonTeam$get_team_stat()}}
 \item \href{#method-pokemon_team-clone}{\code{PokemonTeam$clone()}}
 }
 }
@@ -29,6 +33,7 @@ Create a new Pokémon team
   pokemon_5,
   pokemon_6,
   random = FALSE,
+  level = 50L,
   generation = 1L
 )}\if{html}{\out{</div>}}
 }
@@ -39,6 +44,8 @@ Create a new Pokémon team
 \item{\code{pokemon_1, pokemon_2, pokemon_3, pokemon_4, pokemon_5, pokemon_6}}{Pre-created Pokémon}
 
 \item{\code{random}}{Logical, should the team be randomised? Default set to \code{TRUE}}
+
+\item{\code{level}}{If random, the level the Pokémon should be}
 
 \item{\code{generation}}{The generation that the Pokémon comes from}
 }
@@ -63,6 +70,72 @@ Show current status of Pokémon Team
 \item{\code{simple}}{Logical, do you just want the simple status (name + HP) printed?}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon_team-get_pokemon"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon_team-get_pokemon}{}}}
+\subsection{Method \code{get_pokemon()}}{
+Get the selected Pokémon
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PokemonTeam$get_pokemon(slot)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{slot}}{The number of the position of the Pokémon}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+The selected Pokémon
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon_team-healthy_pokemon"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon_team-healthy_pokemon}{}}}
+\subsection{Method \code{healthy_pokemon()}}{
+Check for healthy Pokémon within the team
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PokemonTeam$healthy_pokemon()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A numeric vector of the positions of the Pokémon that have non-zero HP
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon_team-able_to_battle"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon_team-able_to_battle}{}}}
+\subsection{Method \code{able_to_battle()}}{
+Check whether any Pokémon are healthy to continue battling
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PokemonTeam$able_to_battle()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A logical value that says if at least one Pokémon hasn't fainted
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon_team-get_team_stat"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon_team-get_team_stat}{}}}
+\subsection{Method \code{get_team_stat()}}{
+Get a stat from each Pokémon in team
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PokemonTeam$get_team_stat(stat)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{stat}}{The selected stat to extract}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A vector of length 6, getting the stat of each Pokémon
 }
 }
 \if{html}{\out{<hr>}}

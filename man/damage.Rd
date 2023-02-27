@@ -3,9 +3,12 @@
 \encoding{UTF-8}
 \name{calculate_damage}
 \alias{calculate_damage}
+\alias{calculate_damage_range}
 \title{Calculate Damage}
 \usage{
 calculate_damage(move, attacker, defender, generation = 1L)
+
+calculate_damage_range(move, attacker, defender, generation = 1L)
 }
 \arguments{
 \item{move}{Name of the move that the \code{atttacker} is using}
@@ -21,6 +24,10 @@ An integer value of the amount of damage dealt to the defending Pokémon
 }
 \description{
 A damage calculation
+
+\code{calculate_damage_range} will give the expected range that the damage to
+the opposing Pokémon might be. There will be the assumption that no critical
+hit has been landed
 }
 \seealso{
 \url{https://bulbapedia.bulbagarden.net/wiki/Damage}

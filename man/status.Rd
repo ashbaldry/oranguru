@@ -5,12 +5,14 @@
 \alias{show_status}
 \title{Print Current Pokémon Status}
 \usage{
-show_status(x, simple = FALSE)
+show_status(x, simple = FALSE, console = TRUE)
 }
 \arguments{
 \item{x}{The private fields of a Pokémon}
 
 \item{simple}{Logical, should a simplified print be used}
+
+\item{console}{Logical, should the status be printed or returned as a string?}
 }
 \description{
 A way to show the current stats and status of a selected Pokémon.

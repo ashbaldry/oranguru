@@ -66,13 +66,15 @@ A Pokémon
 \subsection{Method \code{status()}}{
 Show current status of the Pokémon
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Pokemon$status(simple = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$status(simple = FALSE, console = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{simple}}{Logical, do you just want the simple status (name + HP) printed?}
+
+\item{\code{console}}{Logical, should the status be printed or returned as a string?}
 }
 \if{html}{\out{</div>}}
 }
@@ -86,6 +88,15 @@ Use an attack of the Pokémon
 \if{html}{\out{<div class="r">}}\preformatted{Pokemon$use_move(move, battle)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{move}}{The name of the move that is being used}
+
+\item{\code{battle}}{A \code{\link{PokemonBattle}}}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pokemon-get_stat"></a>}}

@@ -31,7 +31,7 @@ calculate_damage <- function(move, attacker, defender, generation = 1L) {
 #' the opposing Pokémon might be. There will be the assumption that no critical
 #' hit has been landed
 #'
-#' @rdname calculate_damage
+#' @rdname damage
 calculate_damage_range <- function(move, attacker, defender, generation = 1L) {
   check_damage_args(move, attacker, defender, generation)
 

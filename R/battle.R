@@ -166,6 +166,10 @@ PokemonBattle <- R6::R6Class(
 
     #' @description
     #' Determine player choice
+    #'
+    #' @param person Numeric value of the person making the decision
+    #'
+    #' @noRd
     player_choice = function(person = 1L) {
       if (person == 2 && private$player_2_cpu) {
         message("Player 2 is a CPU. Don't try to cheat!")

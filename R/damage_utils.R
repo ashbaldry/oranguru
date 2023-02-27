@@ -50,7 +50,7 @@ include_random_factor <- function(damage, generation = 1L, damage_range = FALSE)
   if (damage_range) {
     (damage * seq(min_range, max_range)) %/% max_range
   } else if (damage >= 2L) {
-    (damage * runif(1L, min_range, max_range)) %/% max_range
+    (damage * stats::runif(1L, min_range, max_range)) %/% max_range
   }
 }
 
