@@ -3,8 +3,6 @@
 #' @description
 #' Create two teams of Pokémon and play out a match to see who is the world's number one Pokémon master!
 #'
-#' @details
-#' For the sake of generation consistency, both teams must be pre-defined or both teams are random.
 #' To create a random team use \code{\link{PokemonTeam}$new(generation = 1L)}.
 #'
 #' In the initial version, the CPU will use a random move. AI will improve in future releases.
@@ -12,7 +10,7 @@
 #' @encoding UTF-8
 #' @export
 PokemonBattle <- R6::R6Class(
-  classname = "battle",
+  classname = "pokemon_battle",
 
   public = list(
     #' @description
@@ -24,6 +22,11 @@ PokemonBattle <- R6::R6Class(
     #' @param level If random teams, the level the Pokémon should be
     #' @param generation If teams are random, then the generation the Pokémon will be selected from.
     #' Default is Gen 8.
+    #'
+    #' @return
+    #' A state where a Pokemon battle can commence
+    #'
+    #' @encoding UTF-8
     initialize = function(team_1, team_2, player_2_cpu = TRUE, level = 50L, generation = 1L) {
       if (missing(team_1) && missing(team_2)) {
         private$team_1 <- PokemonTeam$new(random = TRUE, level = level, generation = generation)
@@ -164,12 +167,6 @@ PokemonBattle <- R6::R6Class(
       )
     },
 
-    #' @description
-    #' Determine player choice
-    #'
-    #' @param person Numeric value of the person making the decision
-    #'
-    #' @noRd
     player_choice = function(person = 1L) {
       if (person == 2 && private$player_2_cpu) {
         message("Player 2 is a CPU. Don't try to cheat!")
