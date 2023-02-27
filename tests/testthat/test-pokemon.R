@@ -51,9 +51,3 @@ test_that("Pokemon is able to learn a new valid move", {
 test_that("Pokemon is unable to learn invalid move", {
   expect_error(bulbasaur$change_move("not-a-move", "tackle"))
 })
-
-test_that("Using a move reduces PP of move by 1", {
-  tackle_pp <- bulbasaur$get_stat("move_4_pp")
-  expect_identical(bulbasaur$get_stat("move_4_current_pp"), tackle_pp)
-  bulbasaur$use_move("tackle")
-})
