@@ -199,17 +199,17 @@ PokemonBattle <- R6::R6Class(
       selected_move <- menu(available_moves, title = "Which move would you like to use?")
       if (selected_move > 0L) {
         private[[paste0("action_", person)]] <- "attack"
-        private[[paste0("move_", person)]] <- available_moves[selected_move]
+        private[[paste0("move_", person)]] <- active_pokemon$get_stat(paste0("move_", selected_move))
         private[[paste0("player_ready_", person)]] <- TRUE
       }
     },
 
     select_cpu_attack = function() {
       active_pokemon <- private$team_2$get_pokemon(private$active_2)
-      available_moves <- active_pokemon$get_moves()
+      available_moves <- length(active_pokemon$get_moves())
 
       private$action_2 <- "attack"
-      private$move_2 <- sample(available_moves, 1L)
+      private$move_2 <- active_pokemon$get_stat(paste0("move_", sample(available_moves, 1L)))
     },
 
     select_switch = function(person = 1L) {
@@ -242,44 +242,17 @@ PokemonBattle <- R6::R6Class(
         private$select_cpu_attack()
       }
 
-      p1_pokemon <- private$team_1$get_pokemon(private$active_1)
-      p2_pokemon <- private$team_2$get_pokemon(private$active_2)
+      if (private$action_1 == "switch") private$switch_pokemon(1L)
+      if (private$action_2 == "switch") private$switch_pokemon(2L)
 
-      if (private$action_1 == "switch") {
-        cat(
-          "P1 has switched", p1_pokemon$get_stat("name"), "for",
-          private$team_1$get_pokemon(private$new_active_1)$get_stat("name"),
-          "\n"
-        )
-        private$active_1 <- private$new_active_1
-        p1_pokemon <- private$team_1$get_pokemon(private$active_1)
-      }
+      attack_order <- private$determine_attack_order()
+      for (attacker in attack_order) {
+        team_id <- paste0("team_", attacker)
+        active_id <- paste0("active_", attacker)
 
-      if (private$action_2 == "switch") {
-        cat(
-          "P2 has switched", p2_pokemon$get_stat("name"), "for",
-          private$team_2$get_pokemon(private$new_active_2)$get_stat("name"),
-          "\n"
-        )
-        private$active_2 <- private$new_active_2
-        p2_pokemon <- private$team_2$get_pokemon(private$active_2)
-      }
-
-      p2_attacked <- FALSE
-      if (private$action_1 == "attack" && private$action_2 == "attack") {
-        if (p2_pokemon$get_stat("speed") > p2_pokemon$get_stat("speed") ||
-            p2_pokemon$get_stat("speed") == p2_pokemon$get_stat("speed") & runif(1) >= 0.5) {
-          cat(p2_pokemon$get_stat("name"), "has used", private$move_2, "\n")
-          p2_attacked <- TRUE
+        if (private[[team_id]]$get_pokemon(private[[active_id]])$get_stat("current_hp") > 0) {
+          private$attack_pokemon(attacker)
         }
-      }
-
-      if (private$action_1 == "attack" && pokemon_1$get_stat("current_hp") > 0) {
-        cat(p1_pokemon$get_stat("name"), "has used", private$move_1, "\n")
-      }
-
-      if (private$action_2 == "attack"  && p2_attacked$get_stat("current_hp") > 0 && !p2_attacked) {
-        cat(p2_pokemon$get_stat("name"), "has used", private$move_2, "\n")
       }
 
       private$action_1 <- NULL
@@ -289,6 +262,58 @@ PokemonBattle <- R6::R6Class(
       private$player_ready_2 <- FALSE
 
       cat("\n")
+    },
+
+    switch_pokemon = function(person = 1L) {
+      team_id <- paste0("team_", person)
+      active_id <- paste0("active_", person)
+      new_active_id <- paste0("new_active_", person)
+
+      cat(
+        "P1 has switched",
+        private[[team_id]]$get_pokemon(private[[active_id]])$get_stat("name"),
+        "for",
+        private[[team_id]]$get_pokemon(private[[new_active_id]])$get_stat("name"),
+        "\n"
+      )
+
+      private[[active_id]] <- private[[new_active_id]]
+    },
+
+    determine_attack_order = function() {
+      if (private$action_1 == "switch" && private$action_2 == "switch") {
+        NULL
+      } else if (private$action_2 == "switch") {
+        1L
+      } else if (private$action_1 == "switch") {
+        2L
+      } else {
+        m1_priority <- private$move_1$get_stat("priority")
+        m2_priority <- private$move_2$get_stat("priority")
+        if (m1_priority == m2_priority) {
+          p1_pokemon <- private$team_1$get_pokemon(private$active_1)
+          p2_pokemon <- private$team_2$get_pokemon(private$active_2)
+
+          if (p1_pokemon$get_stat("speed") == p2_pokemon$get_stat("speed")) {
+            first <- round(runif(1L) + 1L)
+          } else {
+            first <- which.max(c(p1_pokemon$get_stat("speed"), p2_pokemon$get_stat("speed")))
+          }
+        } else {
+          first <- which.max(c(m1_priority, m2_priority))
+        }
+
+        c(first, 3L - first)
+      }
+    },
+
+    attack_pokemon = function(person = 1L) {
+      team_id <- paste0("team_", person)
+      move_id <- paste0("move_", person)
+      active_id <- private[[paste0("active_", person)]]
+      pokemon <- private[[team_id]]$get_pokemon(active_id)
+
+      cat(pokemon$get_stat("name"), "has used", private[[move_id]]$get_stat("name"), "\n")
     },
 
     status_check = function(pokemon) {
