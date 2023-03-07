@@ -3,9 +3,9 @@
 #' @description
 #' R6 object containing required information about a Pokémon.
 #'
-#' @importFrom R6 R6Class
 #' @encoding UTF-8
 #'
+#' @importFrom R6 R6Class
 #' @export
 Pokemon <- R6::R6Class(
   classname = "pokemon",
@@ -43,26 +43,7 @@ Pokemon <- R6::R6Class(
 
       name <- get_pokemon_name(id, language = language)
       types <- vapply(api_data$types, \(x) x$type$name, character(1))
-      if (generation > 2L) {
-        nature <- find_nature(nature)
-      } else {
-        nature <- character(0L)
-      }
       type_ids <- vapply(api_data$types, \(x) as.integer(basename(x$type$url)), integer(1))
-
-      base_stats <- setNames(
-        vapply(api_data$stats, \(x) x$base_stat, integer(1L)),
-        vapply(api_data$stats, \(x) x$stat$name, character(1L))
-      )
-      hp <- calculate_hp(base_stats[["hp"]], level = level, generation = generation)
-      other_stats <- vapply(
-        setNames(nm = names(base_stats)[-1L]),
-        \(x) calculate_stat(base_stats[[x]], x, nature = nature, generation = generation),
-        integer(1L)
-      )
-
-      moves <- learn_moves(api_data$moves, level = level, generation = generation)
-      moves_pp <- vapply(moves, get_move_info, info = "pp", integer(1L), USE.NAMES = FALSE)
 
       private$name <- name
       private$type <- types
@@ -70,36 +51,47 @@ Pokemon <- R6::R6Class(
       private$level <- as.integer(level)
       private$generation <- generation
 
+      hp <- calculate_hp(base_stats[["hp"]], level = level, generation = generation)
+      private$hp <- hp
+      private$current_hp <- hp
+
+      base_stats <- setNames(
+        vapply(api_data$stats, \(x) x$base_stat, integer(1L)),
+        vapply(api_data$stats, \(x) x$stat$name, character(1L))
+      )
+
       private$base_attack <- base_stats[["attack"]]
       private$base_defense <- base_stats[["defense"]]
       private$base_sp_attack <- base_stats[["special-attack"]]
       private$base_sp_defense <- base_stats[["special-defense"]]
       private$base_speed <- base_stats[["speed"]]
 
-      private$hp <- hp
+      other_stats <- vapply(
+        setNames(nm = names(base_stats)[-1L]),
+        \(x) calculate_stat(base_stats[[x]], x, nature = nature, generation = generation),
+        integer(1L)
+      )
+
       private$attack <- other_stats[["attack"]]
       private$defense <- other_stats[["defense"]]
       private$sp_attack <- other_stats[["special-attack"]]
       private$sp_defense <- other_stats[["special-defense"]]
       private$speed <- other_stats[["speed"]]
 
-      private$current_hp <- hp
-      private$move_1 <- moves[1L]
-      private$move_2 <- moves[2L]
-      private$move_3 <- moves[3L]
-      private$move_4 <- moves[4L]
+      moves <- learn_moves(api_data$moves, level = level, generation = generation)
+      private$move_1 <- Move$new(moves[1L])
+      private$move_2 <- Move$new(moves[2L])
+      private$move_3 <- Move$new(moves[3L])
+      private$move_4 <- Move$new(moves[4L])
       private$all_moves <- find_valid_moves(api_data$moves, level = level, generation = generation)
 
-      private$move_1_pp <- moves_pp[1L]
-      private$move_1_current_pp <- moves_pp[1L]
-      private$move_2_pp <- moves_pp[2L]
-      private$move_2_current_pp <- moves_pp[2L]
-      private$move_3_pp <- moves_pp[3L]
-      private$move_3_current_pp <- moves_pp[3L]
-      private$move_4_pp <- moves_pp[4L]
-      private$move_4_current_pp <- moves_pp[4L]
-
+      if (generation > 2L) {
+        nature <- find_nature(nature)
+      } else {
+        nature <- character(0L)
+      }
       private$nature <- nature
+
       private$sprite_front_url <- api_data$sprites$front_default
       private$sprite_back_url <- api_data$sprites$back_default
     },

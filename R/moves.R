@@ -43,22 +43,29 @@ find_valid_moves <- function(moves, level = 50L, generation = 1L) {
     moves <- moves$moves
   }
 
-  moves_df <- do.call(rbind, lapply(moves, clean_learned_moves))
-  moves_df$generation_id <- GAME_GENERATIONS[moves_df$version]
-  # nolint start: object_usage_linter
-  moves_df <- subset(moves_df, generation_id == generation, level_learned <= level)
-  # nolint end
-
-  unique(moves_df$move)
+  unlist(lapply(moves, check_move_availability, level = level, generation = generation))
 }
 
 #' @noRd
-clean_learned_moves <- function(move) {
-  data.frame(
-    move = move$move$name,
-    level_learned = vapply(move$version_group_details, \(x) x$level_learned_at, integer(1)),
-    version = vapply(move$version_group_details, \(x) x$version_group$name, character(1))
+check_move_availability <- function(move, level = 50L, generation = 1L) {
+  generations <- vapply(
+    move$version_group_details,
+    \(x) GAME_GENERATIONS[[x$version_group$name]],
+    integer(1)
   )
+
+  valid_generation <- generations == generation
+  if (any(valid_generation)) {
+    level_learned <- vapply(
+      move$version_group_details[valid_generation],
+      \(x) x$level_learned_at,
+      integer(1)
+    )
+
+    if (any(level_learned <= level)) move$move$name else NULL
+  } else {
+    NULL
+  }
 }
 
 #' @noRd
@@ -91,10 +98,10 @@ GAME_GENERATIONS <- c(
   "crystal" = 2L,
   "ruby-sapphire" = 3L,
   "emerald" = 3L,
-  "fire-red-leaf-green" = 3L,
+  "firered-leafgreen" = 3L,
   "diamond-pearl" = 4L,
-  "platium" = 4L,
-  "heart-gold-soul-silver" = 4L,
+  "platinum" = 4L,
+  "heartgold-soulsilver" = 4L,
   "black-white" = 5L,
   "black-2-white-2" = 5L,
   "x-y" = 6L,
@@ -102,5 +109,9 @@ GAME_GENERATIONS <- c(
   "sun-moon" = 7L,
   "ultra-sun-ultra-moon" = 7L,
   "sword-shield" = 8L,
-  "brilliant-diamond-shining-pearl" = 8L
+  "brilliant-diamond-shining-pearl" = 8L,
+  "scarlet-violet" = 9L,
+  "colosseum" = 0L,
+  "xd" = 0L,
+  "lets-go-pikachu-lets-go-eevee" = 0L
 )
