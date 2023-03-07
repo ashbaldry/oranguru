@@ -252,6 +252,7 @@ PokemonBattle <- R6::R6Class(
           "\n"
         )
         private$active_1 <- private$new_active_1
+        p1_pokemon <- private$team_1$get_pokemon(private$active_1)
       }
 
       if (private$action_2 == "switch") {
@@ -261,13 +262,23 @@ PokemonBattle <- R6::R6Class(
           "\n"
         )
         private$active_2 <- private$new_active_2
+        p2_pokemon <- private$team_2$get_pokemon(private$active_2)
       }
 
-      if (private$action_1 == "attack") {
+      p2_attacked <- FALSE
+      if (private$action_1 == "attack" && private$action_2 == "attack") {
+        if (p2_pokemon$get_stat("speed") > p2_pokemon$get_stat("speed") ||
+            p2_pokemon$get_stat("speed") == p2_pokemon$get_stat("speed") & runif(1) >= 0.5) {
+          cat(p2_pokemon$get_stat("name"), "has used", private$move_2, "\n")
+          p2_attacked <- TRUE
+        }
+      }
+
+      if (private$action_1 == "attack" && pokemon_1$get_stat("current_hp") > 0) {
         cat(p1_pokemon$get_stat("name"), "has used", private$move_1, "\n")
       }
 
-      if (private$action_2 == "attack") {
+      if (private$action_2 == "attack"  && p2_attacked$get_stat("current_hp") > 0 && !p2_attacked) {
         cat(p2_pokemon$get_stat("name"), "has used", private$move_2, "\n")
       }
 
@@ -280,8 +291,7 @@ PokemonBattle <- R6::R6Class(
       cat("\n")
     },
 
-    status_check = function() {
-
+    status_check = function(pokemon) {
     }
   )
 )
