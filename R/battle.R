@@ -49,30 +49,27 @@ PokemonBattle <- R6::R6Class(
     #' @description
     #' A helper to start the local console version of a battle
     start = function() {
-      cat("BATTLE COMMENCE!\n\n")
+      if (private$started) {
+        cat("BATTLE COMMENCE!\n\n")
+        private$started <- FALSE
+      } else {
+        cat("BATTLE RESUMED\n\n")
+      }
 
       while (private$team_1$able_to_battle() && private$team_2$able_to_battle()) {
         private$match_status()
 
-        private$player_choice(person = 1L)
+        p1_decision_made <- private$player_choice(person = 1L)
+        if (isFALSE(p1_decision_made)) {
+          cat("Pausing match\n")
+          return(invisible(NULL))
+        }
 
-        if (private$player_2_cpu) {
-
-        } else {
-          while (!private$player_2_ready) {
-            p2_option <- menu(c("Attack", "Switch"), title = "(P2) What would you like to do?")
-
-            if (p2_option == 1) {
-
-            } else if (p2_option == 2) {
-              private$team_2$status()
-              cat("\n")
-              available_pokemon <- private$team_2
-              p2_swtich <- menu(available_pokemon, title = "(P2) Who would you like to switch with?")
-
-            } else {
-              next
-            }
+        if (!private$player_2_cpu) {
+          p2_decision_made <- private$player_choice(person = 2L)
+          if (isFALSE(p2_decision_made)) {
+            cat("Pausing match\n")
+            return(invisible(NULL))
           }
         }
 
@@ -142,6 +139,7 @@ PokemonBattle <- R6::R6Class(
     team_1 = NULL,
     team_2 = NULL,
 
+    started = TRUE,
     player_ready_1 = FALSE,
     player_ready_2 = FALSE,
     player_2_cpu = TRUE,
@@ -187,6 +185,8 @@ PokemonBattle <- R6::R6Class(
         } else if (selected_option == 3) {
           private[[paste0("team_", person)]]$get_pokemon(private[[paste0("active_", person)]])$status()
           cat("\n")
+        } else if (selected_option == 0) {
+          return(FALSE)
         }
       }
     },

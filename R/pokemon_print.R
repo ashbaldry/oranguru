@@ -28,23 +28,48 @@ show_simple_status <- function(x, func = cat) {
 }
 
 show_full_status <- function(x, func = cat) {
+  known_moves <- c(
+    x$move_1$get_stat("name"),
+    if (is.null(x$move_2)) NULL else x$move_2$get_stat("name"),
+    if (is.null(x$move_3)) NULL else x$move_3$get_stat("name"),
+    if (is.null(x$move_4)) NULL else x$move_4$get_stat("name")
+  )
+
+  move_max_nchar <- max(c(9, nchar(known_moves)))
+  move_spaces <- pmax((2 + move_max_nchar - nchar(known_moves)) / 2, 1)
+  moves_padded <- sprintf("%-*s%s%*s|", move_spaces, "", known_moves, ceiling(move_spaces), "")
+
+  known_pp <- c(
+    x$move_1$get_stat("pp"),
+    if (is.null(x$move_2)) NULL else x$move_2$get_stat("pp"),
+    if (is.null(x$move_3)) NULL else x$move_3$get_stat("pp"),
+    if (is.null(x$move_4)) NULL else x$move_4$get_stat("pp")
+  )
+
+  known_curr_pp <- c(
+    x$move_1$get_stat("curr_pp"),
+    if (is.null(x$move_2)) NULL else x$move_2$get_stat("curr_pp"),
+    if (is.null(x$move_3)) NULL else x$move_3$get_stat("curr_pp"),
+    if (is.null(x$move_4)) NULL else x$move_4$get_stat("curr_pp")
+  )
+
+  pp_spaces <- (move_max_nchar - 5) / 2
+  pp_padded <- sprintf("%-*s%2d / %2d%*s|", pp_spaces, "", known_pp, known_curr_pp, ceiling(pp_spaces), "")
+
   func(
     "Pokémon: ", x$name, "\n",
     "Type", if (length(x$type) > 1) "s" else "", ": ", toString(x$type), "\n",
     "\n",
-    "Stats\n",
-    "HP: ", x$current_hp, " / ", x$hp, "\n",
-    "Attack: ", x$attack, "\n",
-    "Defense: ", x$defense, "\n",
-    "Sp. Attack: ", x$sp_attack, "\n",
-    "Sp. Defense: ", x$sp_defense, "\n",
-    "Speed: ", x$speed, "\n",
+    "|     HP    | Attack | Defense | Sp. Atk | Sp. Def |  Speed  |\n",
+    "| ", sprintf("%3d", x$current_hp), " / ", sprintf("%-3d", x$hp), " ",
+    "|  ", sprintf("%3d", x$attack), "   ",
+    "|   ", sprintf("%3d", x$defense), "   ",
+    "|   ", sprintf("%3d", x$sp_attack), "   ",
+    "|   ", sprintf("%3d", x$sp_defense), "   ",
+    "|   ", sprintf("%3d", x$speed), "   |\n",
     "\n",
-    "Moves (Curent/Max PP) \n",
-    x$move_1, " (", x$move_1_pp, " / ", x$move_1_current_pp, ")\n",
-    if (!is.na(x$move_2)) paste0(x$move_2, " (", x$move_2_pp, " / ", x$move_2_current_pp, ")\n"),
-    if (!is.na(x$move_3)) paste0(x$move_3, " (", x$move_3_pp, " / ", x$move_3_current_pp, ")\n"),
-    if (!is.na(x$move_4)) paste0(x$move_4, " (", x$move_4_pp, " / ", x$move_4_current_pp, ")\n"),
+    "|", paste0(moves_padded, collapse = ""), "\n",
+    "|", paste0(pp_padded, collapse = ""), "\n",
     sep = ""
   )
 }

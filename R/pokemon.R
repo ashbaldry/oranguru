@@ -51,14 +51,14 @@ Pokemon <- R6::R6Class(
       private$level <- as.integer(level)
       private$generation <- generation
 
-      hp <- calculate_hp(base_stats[["hp"]], level = level, generation = generation)
-      private$hp <- hp
-      private$current_hp <- hp
-
       base_stats <- setNames(
         vapply(api_data$stats, \(x) x$base_stat, integer(1L)),
         vapply(api_data$stats, \(x) x$stat$name, character(1L))
       )
+
+      hp <- calculate_hp(base_stats[["hp"]], level = level, generation = generation)
+      private$hp <- hp
+      private$current_hp <- hp
 
       private$base_attack <- base_stats[["attack"]]
       private$base_defense <- base_stats[["defense"]]
@@ -144,7 +144,12 @@ Pokemon <- R6::R6Class(
     #' Get the moveset of the Pokémon
     #'
     #' @encoding UTF-8
-    get_moves = function() c(private$move_1, private$move_2, private$move_3, private$move_4),
+    get_moves = function() c(
+      private$move_1$get_stat("name"),
+      if (is.null(private$move_2)) NULL else private$move_2$get_stat("name"),
+      if (is.null(private$move_3)) NULL else private$move_3$get_stat("name"),
+      if (is.null(private$move_4)) NULL else private$move_4$get_stat("name")
+    ),
 
     #' @description
     #' Change one of the moves of the Pokémon
