@@ -80,9 +80,9 @@ Pokemon <- R6::R6Class(
 
       moves <- learn_moves(api_data$moves, level = level, generation = generation)
       private$move_1 <- Move$new(moves[1L])
-      private$move_2 <- Move$new(moves[2L])
-      private$move_3 <- Move$new(moves[3L])
-      private$move_4 <- Move$new(moves[4L])
+      if (length(moves) >= 2L) private$move_2 <- Move$new(moves[2L])
+      if (length(moves) >= 3L) private$move_3 <- Move$new(moves[3L])
+      if (length(moves) >= 4L) private$move_4 <- Move$new(moves[4L])
       private$all_moves <- find_valid_moves(api_data$moves, level = level, generation = generation)
 
       if (generation > 2L) {
