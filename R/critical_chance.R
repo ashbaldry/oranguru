@@ -30,12 +30,7 @@ calculate_critical_chance <- function(move, ..., generation = 1L) {
 #'
 #' @rdname calculate_critical_chance
 calculate_critical_chance_v1 <- function(move, speed, high_crit = 0L) {
-  is_high_crit <- subset(
-    moves_meta,
-    move_id == get_move_info(move, "id"),
-    select = "crit_rate",
-    drop = TRUE
-  )
+  is_high_crit <- move$get_stat("crit_rate")
 
   if (is_high_crit) {
     if (high_crit > 0L) {

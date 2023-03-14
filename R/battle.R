@@ -212,7 +212,7 @@ PokemonBattle <- R6::R6Class(
       private$move_2 <- active_pokemon$get_stat(paste0("move_", sample(available_moves, 1L)))
     },
 
-    select_switch = function(person = 1L) {
+    select_switch = function(person = 1L, fainted = FALSE) {
       team_id <- paste0("team_", person)
       active_position <- private[[paste0("active_", person)]]
 
@@ -220,16 +220,31 @@ PokemonBattle <- R6::R6Class(
       cat("\n")
 
       available_pokemon <- private[[team_id]]$healthy_pokemon()
-      available_pokemon <- available_pokemon[-match(active_position, available_pokemon)]
+      if (active_position %in% available_pokemon) {
+        available_pokemon <- available_pokemon[-match(active_position, available_pokemon)]
+      }
 
       if (length(available_pokemon) > 0L) {
-        new_active <- menu(names(available_pokemon), title = "Who would you like to switch with?")
-        if (new_active > 0L) {
-          private[[paste0("action_", person)]] <- "switch"
-          private[[paste0("new_active_", person)]] <- unname(available_pokemon)[new_active]
-          private[[paste0("player_ready_", person)]] <- TRUE
+        if (fainted) {
+          new_active <- 0L
+
+          while (new_active == 0L) {
+            new_active <- menu(names(available_pokemon), title = "Who would you like to switch with?")
+            if (new_active > 0L) {
+              private[[paste0("active_", person)]] <- unname(available_pokemon)[new_active]
+            } else {
+              cat("Your Pokémon has fainted, you must choose another Pokémon to switch with\n\n")
+            }
+          }
+        } else {
+          new_active <- menu(names(available_pokemon), title = "Who would you like to switch with?")
+          if (new_active > 0L) {
+            private[[paste0("action_", person)]] <- "switch"
+            private[[paste0("new_active_", person)]] <- unname(available_pokemon)[new_active]
+            private[[paste0("player_ready_", person)]] <- TRUE
+          }
         }
-      } else {
+      } else if (!fainted) {
         cat("No available Pokémon to switch with. Returning to home options")
       }
     },
@@ -254,6 +269,9 @@ PokemonBattle <- R6::R6Class(
           private$attack_pokemon(attacker)
         }
       }
+
+      private$status_check(private$team_1$get_pokemon(private$active_1), person = 1L)
+      private$status_check(private$team_2$get_pokemon(private$active_2), person = 2L)
 
       private$action_1 <- NULL
       private$action_2 <- NULL
@@ -309,14 +327,25 @@ PokemonBattle <- R6::R6Class(
 
     attack_pokemon = function(person = 1L) {
       team_id <- paste0("team_", person)
-      move_id <- paste0("move_", person)
       active_id <- private[[paste0("active_", person)]]
       pokemon <- private[[team_id]]$get_pokemon(active_id)
 
-      cat(pokemon$get_stat("name"), "has used", private[[move_id]]$get_stat("name"), "\n")
+      move_id <- paste0("move_", person)
+      move_name <- private[[move_id]]$get_stat("name")
+
+      opp_id <- paste0("team_", 3L - person)
+      opp_active_id <- private[[paste0("active_", 3L - person)]]
+      def_pokemon <- private[[opp_id]]$get_pokemon(opp_active_id)
+
+      cat(pokemon$get_stat("name"), "has used", move_name, "\n")
+      pokemon$use_move(move_name, def_pokemon, self)
     },
 
-    status_check = function(pokemon) {
+    status_check = function(pokemon, person = 1L) {
+      if (pokemon$get_stat("current_hp") <= 0L) {
+        cat(pokemon$get_stat("name"), "has fainted, please choose another Pokémon\n\n")
+        private$select_switch(person = person, fainted = TRUE)
+      }
     }
   )
 )

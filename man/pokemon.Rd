@@ -17,6 +17,7 @@ R6 object containing required information about a Pokémon.
 \item \href{#method-pokemon-get_moves}{\code{Pokemon$get_moves()}}
 \item \href{#method-pokemon-change_move}{\code{Pokemon$change_move()}}
 \item \href{#method-pokemon-get_crit_chance}{\code{Pokemon$get_crit_chance()}}
+\item \href{#method-pokemon-take_damage}{\code{Pokemon$take_damage()}}
 \item \href{#method-pokemon-clone}{\code{Pokemon$clone()}}
 }
 }
@@ -85,13 +86,15 @@ Show current status of the Pokémon
 \subsection{Method \code{use_move()}}{
 Use an attack of the Pokémon
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Pokemon$use_move(move, battle)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$use_move(move, def_pokemon, battle)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{move}}{The name of the move that is being used}
+
+\item{\code{def_pokemon}}{The defending \code{Pokemon}}
 
 \item{\code{battle}}{A \code{\link{PokemonBattle}}}
 }
@@ -157,6 +160,23 @@ Get the critical hit chance for a move used by the Pokémon
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{move}}{Name of the move used by the Pokémon}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon-take_damage"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon-take_damage}{}}}
+\subsection{Method \code{take_damage()}}{
+Take damage from attack
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$take_damage(damage_dealt)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{damage_dealt}}{The amount of damage dealt by the opposing Pokémon's attack}
 }
 \if{html}{\out{</div>}}
 }

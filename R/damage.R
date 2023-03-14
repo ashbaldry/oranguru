@@ -62,9 +62,9 @@ calculate_damage_range <- function(move, attacker, defender, generation = 1L) {
 
 check_damage_args <- function(move, attacker, defender, generation = 1L) {
   check_generation(generation)
-  if (move %nin% attacker$get_moves()) {
+  if (move$get_stat("name") %nin% attacker$get_moves()) {
     stop(
-      attacker$get_stat("name"), " does not know ", move, ". ",
+      attacker$get_stat("name"), " does not know ", move$get_stat("name"), ". ",
       "Please use one of ", toString(attacker$get_moves())
     )
   }

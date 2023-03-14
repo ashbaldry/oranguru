@@ -111,18 +111,21 @@ Pokemon <- R6::R6Class(
     #' Use an attack of the Pokémon
     #'
     #' @param move The name of the move that is being used
+    #' @param def_pokemon The defending `Pokemon`
     #' @param battle A \code{\link{PokemonBattle}}
     #'
     #' @encoding UTF-8
-    use_move = function(move, battle) {
+    use_move = function(move, def_pokemon, battle) {
       if (isFALSE(move %in% self$get_moves())) {
         warning("Selected move (", move, ") is not available for ", private$name)
       }
 
-      use_attack(move, self, battle, generation = battle$generation)
-
       move_id <- match(move, self$get_moves())
-      private[[paste("move", move_id, "current_pp", sep = "_")]] <- new_pp
+      move_r6 <- private[[paste("move", move_id, sep = "_")]]
+
+      if (move_r6$use_move()) {
+        use_attack(move_r6, self, def_pokemon, battle, generation = private$generation)
+      }
 
       invisible(NULL)
     },
@@ -146,9 +149,9 @@ Pokemon <- R6::R6Class(
     #' @encoding UTF-8
     get_moves = function() c(
       private$move_1$get_stat("name"),
-      if (is.null(private$move_2)) NULL else private$move_2$get_stat("name"),
-      if (is.null(private$move_3)) NULL else private$move_3$get_stat("name"),
-      if (is.null(private$move_4)) NULL else private$move_4$get_stat("name")
+      if (inherits(private$move_2, "move")) private$move_2$get_stat("name"),
+      if (inherits(private$move_3, "move")) private$move_3$get_stat("name"),
+      if (inherits(private$move_4, "move")) private$move_4$get_stat("name")
     ),
 
     #' @description
@@ -199,8 +202,9 @@ Pokemon <- R6::R6Class(
     #'
     #' @encoding UTF-8
     get_crit_chance = function(move) {
-      if (move %nin% self$get_moves()) {
-        stop(private$name, " does not know ", move, ". Please use one of ", toString(self$get_moves()))
+      move_name <- move$get_stat("name")
+      if (move_name %nin% self$get_moves()) {
+        stop(private$name, " does not know ", move_name, ". Please use one of ", toString(self$get_moves()))
       }
 
       calculate_critical_chance(
@@ -209,6 +213,17 @@ Pokemon <- R6::R6Class(
         high_crit = private$critical_hit_change,
         generation = private$generation
       )
+    },
+
+    #' @description
+    #' Take damage from attack
+    #'
+    #' @param damage_dealt The amount of damage dealt by the opposing Pokémon's attack
+    #'
+    #' @encoding UTF-8
+    take_damage = function(damage_dealt) {
+      private$current_hp <- max(private$current_hp - damage_dealt, 0L)
+      invisible(NULL)
     }
   ),
 
@@ -221,14 +236,15 @@ Pokemon <- R6::R6Class(
 
     hp = NULL,
     base_attack = NULL,
-    attack = NULL,
     base_defense = NULL,
-    defense = NULL,
     base_sp_attack = NULL,
-    sp_attack = NULL,
     base_sp_defense = NULL,
-    sp_defense = NULL,
     base_speed = NULL,
+
+    attack = NULL,
+    defense = NULL,
+    sp_attack = NULL,
+    sp_defense = NULL,
     speed = NULL,
 
     current_hp = NULL,
@@ -243,17 +259,9 @@ Pokemon <- R6::R6Class(
     critical_hit_change = 0L,
 
     move_1 = NULL,
-    move_1_pp = NULL,
-    move_1_current_pp = NULL,
     move_2 = NULL,
-    move_2_pp = NULL,
-    move_2_current_pp = NULL,
     move_3 = NULL,
-    move_3_pp = NULL,
-    move_3_current_pp = NULL,
     move_4 = NULL,
-    move_4_pp = NULL,
-    move_4_current_pp = NULL,
     all_moves = NULL,
 
     ability = NULL,

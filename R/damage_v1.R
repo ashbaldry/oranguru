@@ -7,15 +7,15 @@
 #' @seealso https://bulbapedia.bulbagarden.net/wiki/Damage
 #' @noRd
 calculate_damage_v1 <- function(move, attacker, defender, damage_range = FALSE, crit_range = FALSE) {
-  move_type <- subset(moves, identifier == move, select = "type_id", drop = TRUE)
-  move_power <- subset(moves, identifier == move, select = "power", drop = TRUE)
+  move_type <- move$get_stat("type_id")
+  move_power <- move$get_stat("power")
 
   level <- attacker$get_stat("level")
   p1_types <- attacker$get_stat("type_id")
   p2_types <- defender$get_stat("type_id")
 
   # 1: no damage, 2: attack/defense, 3: special attack/defense
-  if (get_move_info(move, "damage_class_id") == 2) {
+  if (move$get_stat("damage_class_id") == 2) {
     p1_attack <- attacker$get_stat("attack")
     p2_defense <- defender$get_stat("defense")
   } else {
@@ -34,5 +34,5 @@ calculate_damage_v1 <- function(move, attacker, defender, damage_range = FALSE, 
     include_type_multiplier(move_type, p2_types, generation = 1L)
   damage <- include_random_factor(damage, generation = 1L, damage_range = damage_range)
 
-  floor(damage)
+  if (is.finite(damage)) floor(damage) else 0L
 }

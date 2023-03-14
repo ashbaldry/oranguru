@@ -24,7 +24,7 @@ show_status <- function(x, simple = FALSE, console = TRUE) {
 }
 
 show_simple_status <- function(x, func = cat) {
-  func(x$name, " (", x$hp, " / ", x$current_hp, ") \n", sep = "")
+  func(x$name, " (", x$current_hp, " / ", x$hp, ") \n", sep = "")
 }
 
 show_full_status <- function(x, func = cat) {
@@ -54,7 +54,7 @@ show_full_status <- function(x, func = cat) {
   )
 
   pp_spaces <- (move_max_nchar - 5) / 2
-  pp_padded <- sprintf("%-*s%2d / %2d%*s|", pp_spaces, "", known_pp, known_curr_pp, ceiling(pp_spaces), "")
+  pp_padded <- sprintf("%-*s%2d / %2d%*s|", pp_spaces, "", known_curr_pp, known_pp, ceiling(pp_spaces), "")
 
   func(
     "Pokémon: ", x$name, "\n",

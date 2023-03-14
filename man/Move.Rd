@@ -12,6 +12,7 @@ R6 object containing required information about a Pokémon move.
 \itemize{
 \item \href{#method-move-new}{\code{Move$new()}}
 \item \href{#method-move-get_stat}{\code{Move$get_stat()}}
+\item \href{#method-move-use_move}{\code{Move$use_move()}}
 \item \href{#method-move-clone}{\code{Move$clone()}}
 }
 }
@@ -50,6 +51,19 @@ Get the stat of the move
 \item{\code{stat}}{The private field of the move}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-move-use_move"></a>}}
+\if{latex}{\out{\hypertarget{method-move-use_move}{}}}
+\subsection{Method \code{use_move()}}{
+Use the Move
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Move$use_move()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Logical as to whether or not the move has been used or not
 }
 }
 \if{html}{\out{<hr>}}

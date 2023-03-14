@@ -90,19 +90,15 @@ PokemonTeam <- R6::R6Class(
     #'
     #' @encoding UTF-8
     healthy_pokemon = function() {
-      stats::setNames(
-        which(
-          c(
-            private$pokemon_1$get_stat("current_hp") > 0,
-            private$pokemon_2$get_stat("current_hp") > 0,
-            private$pokemon_3$get_stat("current_hp") > 0,
-            private$pokemon_4$get_stat("current_hp") > 0,
-            private$pokemon_5$get_stat("current_hp") > 0,
-            private$pokemon_6$get_stat("current_hp") > 0
-          )
-        ),
-        private$team_names
-      )
+      idx <- which(c(
+        private$pokemon_1$get_stat("current_hp") > 0,
+        private$pokemon_2$get_stat("current_hp") > 0,
+        private$pokemon_3$get_stat("current_hp") > 0,
+        private$pokemon_4$get_stat("current_hp") > 0,
+        private$pokemon_5$get_stat("current_hp") > 0,
+        private$pokemon_6$get_stat("current_hp") > 0
+      ))
+      stats::setNames(idx, private$team_names[idx])
     },
 
     #' @description
