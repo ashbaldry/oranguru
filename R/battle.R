@@ -343,8 +343,14 @@ PokemonBattle <- R6::R6Class(
 
     status_check = function(pokemon, person = 1L) {
       if (pokemon$get_stat("current_hp") <= 0L) {
-        cat(pokemon$get_stat("name"), "has fainted, please choose another Pokémon\n\n")
-        private$select_switch(person = person, fainted = TRUE)
+        if (person == 2L && private$player_2_cpu) {
+          cat(pokemon$get_stat("name"), "has fainted, CPU switching Pokémon\n")
+          available_pokemon <- private$team_2$healthy_pokemon()
+          private$active_2 <- available_pokemon[[1L]]
+        } else {
+          cat(pokemon$get_stat("name"), "has fainted, please choose another Pokémon\n\n")
+          private$select_switch(person = person, fainted = TRUE)
+        }
       }
     }
   )
