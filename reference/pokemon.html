@@ -61,6 +61,7 @@
 <li><p><a href="#method-pokemon-change_move"><code>Pokemon$change_move()</code></a></p></li>
 <li><p><a href="#method-pokemon-get_crit_chance"><code>Pokemon$get_crit_chance()</code></a></p></li>
 <li><p><a href="#method-pokemon-take_damage"><code>Pokemon$take_damage()</code></a></p></li>
+<li><p><a href="#method-pokemon-apply_ailment"><code>Pokemon$apply_ailment()</code></a></p></li>
 <li><p><a href="#method-pokemon-clone"><code>Pokemon$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-pokemon-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
@@ -232,15 +233,35 @@ the Pokémon</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-pokemon-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
-<p>The objects of this class are cloneable with this method.</p><div class="section">
+</div><p></p><hr><a id="method-pokemon-apply_ailment"></a><div class="section">
+<h3 id="method-apply-ailment-">Method <code>apply_ailment()</code><a class="anchor" aria-label="anchor" href="#method-apply-ailment-"></a></h3>
+<p>Apply an ailment to the Pokémon</p><div class="section">
 <h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">apply_ailment</span><span class="op">(</span><span class="va">ailment</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>ailment</code></dt>
+<dd><p>Numeric ID of the ailment</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
+<p>A logical value determining whether or not the ailment has been applied</p>
+</div>
+
+</div><p></p><hr><a id="method-pokemon-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
