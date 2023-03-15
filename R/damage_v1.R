@@ -27,6 +27,9 @@ calculate_damage_v1 <- function(move, attacker, defender, damage_range = FALSE, 
     crit <- include_crit_multipler(as.numeric(crit_range), generation = 1L)
   } else {
     crit <- include_crit_multipler(attacker$get_crit_chance(move), generation = 1L)
+    if (crit > 1) {
+      defender$crit_applied()
+    }
   }
 
   damage <- ((2 * level * crit / 5 + 2) * move_power * p1_attack / p2_defense / 50 + 2) *

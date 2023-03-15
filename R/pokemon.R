@@ -213,14 +213,42 @@ Pokemon <- R6::R6Class(
     },
 
     #' @description
+    #' Helper function to know that a critical hit has been applied to an attack.
+    crit_applied = function() {
+      private$crit_taken <- TRUE
+    },
+
+    #' @description
     #' Take damage from attack
     #'
     #' @param damage_dealt The amount of damage dealt by the opposing Pokémon's attack
     #'
     #' @encoding UTF-8
     take_damage = function(damage_dealt) {
+      if (damage_dealt > 0) {
+        cat(private$name, "took", min(private$current_hp, damage_dealt), "damage\n")
+      }
+      if (private$crit_taken) {
+        cat("Critical Hit!\n")
+        private$crit_taken <- FALSE
+      }
       private$current_hp <- max(private$current_hp - damage_dealt, 0L)
       invisible(NULL)
+    },
+
+    #' @description
+    #' Apply an ailment to the Pokémon
+    #'
+    #' @param ailment Numeric ID of the ailment
+    #'
+    #' @return
+    #' A logical value determining whether or not the ailment has been applied
+    #'
+    #' @encoding UTF-8
+    apply_ailment = function(ailment) {
+      ailment_allowed <- check_ailment(private$ailment, ailment)
+      if (ailment_allowed) private$ailment <- c(private$ailment, ailment)
+      invisible(ailment_allowed)
     }
   ),
 
@@ -245,7 +273,7 @@ Pokemon <- R6::R6Class(
     speed = NULL,
 
     current_hp = NULL,
-    ailment = 0L,
+    ailment = numeric(0L),
     attack_change = 0L,
     defense_change = 0L,
     sp_attack_change = 0L,
@@ -254,6 +282,7 @@ Pokemon <- R6::R6Class(
     accuracy_change = 0L,
     evasion_change = 0L,
     critical_hit_change = 0L,
+    crit_taken = FALSE,
 
     move_1 = NULL,
     move_2 = NULL,

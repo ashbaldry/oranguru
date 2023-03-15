@@ -20,21 +20,32 @@ Move <- R6::R6Class(
     initialize = function(move_name) {
       private$name <- move_name
 
-      pp <- get_move_info(move_name, "pp")
-      private$pp <- pp
-      private$curr_pp <- pp
+      move_info <- subset(moves, identifier == move_name)
+      move_meta <- subset(moves_meta, move_id == move_info$id)
 
-      private$type_id <- get_move_info(move_name, "type_id")
-      private$power <- get_move_info(move_name, "power")
-      private$accuracy <- get_move_info(move_name, "accuracy")
-      private$priority <- get_move_info(move_name, "priority")
-      private$target_id <- get_move_info(move_name, "target_id")
-      private$damage_class_id <- get_move_info(move_name, "damage_class_id")
-      private$effect_id <- get_move_info(move_name, "effect_id")
-      private$effect_chance <- get_move_info(move_name, "effect_chance")
+      private$pp <- move_info$pp
+      private$curr_pp <- move_info$pp
+      private$type_id <- move_info$type_id
+      private$power <- move_info$power
+      private$accuracy <- move_info$accuracy
+      private$priority <- move_info$priority
+      private$target_id <- move_info$target_id
+      private$damage_class_id <- move_info$damage_class_id
+      private$effect_id <- move_info$effect_id
+      private$effect_chance <- move_info$effect_chance
 
-      private$meta_category_id <- get_move_meta_info(move_name, "meta_category_id")
-      private$crit_rate <- get_move_meta_info(move_name, "crit_rate")
+      private$meta_category_id <- move_meta$meta_category_id
+      private$meta_ailment_id <- move_meta$meta_ailment_id
+      private$min_hits <- move_meta$min_hits
+      private$max_hits <- move_meta$max_hits
+      private$min_turns <- move_meta$min_turns
+      private$max_turns <- move_meta$max_turns
+      private$drain <- move_meta$drain
+      private$healing <- move_meta$healing
+      private$crit_rate <- move_meta$crit_rate
+      private$ailment_chance <- move_meta$ailment_chance
+      private$flinch_chance <- move_meta$flinch_chance
+      private$stat_chance <- move_meta$stat_chance
     },
 
     #' @description
@@ -81,6 +92,16 @@ Move <- R6::R6Class(
     effect_chance = NULL,
 
     meta_category_id = NULL,
-    crit_rate = NULL
+    meta_ailment_id = NULL,
+    min_hits = NULL,
+    max_hits = NULL,
+    min_turns = NULL,
+    max_turns = NULL,
+    drain = NULL,
+    healing = NULL,
+    crit_rate = NULL,
+    ailment_chance = NULL,
+    flinch_chance = NULL,
+    stat_chance = NULL
   )
 )

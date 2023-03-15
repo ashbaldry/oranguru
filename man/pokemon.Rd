@@ -18,6 +18,7 @@ R6 object containing required information about a Pokémon.
 \item \href{#method-pokemon-change_move}{\code{Pokemon$change_move()}}
 \item \href{#method-pokemon-get_crit_chance}{\code{Pokemon$get_crit_chance()}}
 \item \href{#method-pokemon-take_damage}{\code{Pokemon$take_damage()}}
+\item \href{#method-pokemon-apply_ailment}{\code{Pokemon$apply_ailment()}}
 \item \href{#method-pokemon-clone}{\code{Pokemon$clone()}}
 }
 }
@@ -179,6 +180,26 @@ Take damage from attack
 \item{\code{damage_dealt}}{The amount of damage dealt by the opposing Pokémon's attack}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon-apply_ailment"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon-apply_ailment}{}}}
+\subsection{Method \code{apply_ailment()}}{
+Apply an ailment to the Pokémon
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$apply_ailment(ailment)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{ailment}}{Numeric ID of the ailment}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A logical value determining whether or not the ailment has been applied
 }
 }
 \if{html}{\out{<hr>}}
