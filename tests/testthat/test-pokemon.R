@@ -27,7 +27,7 @@ test_that("Possible to get private Pokemon stats", {
 })
 
 test_that("Critical hit chance extractable from Pokemon attack", {
-  crit_chance <- bulbasaur$get_crit_chance("double-edge")
+  crit_chance <- bulbasaur$get_crit_chance(Move$new("double-edge"))
   expect_type(crit_chance, "double")
   expect_gte(crit_chance, 0L)
   expect_lte(crit_chance, 1L)
@@ -39,13 +39,11 @@ test_that("Pokemon is able to learn a new valid move", {
   bulbasaur$change_move("body-slam", "tackle")
   on.exit({
     bulbasaur$change_move("tackle", 4L)
-    expect_identical(bulbasaur$get_stat("move_4_pp"), 35L)
-    expect_identical(bulbasaur$get_stat("move_4_current_pp"), 35L)
   })
 
-  expect_identical(bulbasaur$get_stat("move_4"), "body-slam")
-  expect_identical(bulbasaur$get_stat("move_4_pp"), 15L)
-  expect_identical(bulbasaur$get_stat("move_4_current_pp"), 15L)
+  expect_s3_class(bulbasaur$get_stat("move_4"), "move")
+  expect_identical(bulbasaur$get_stat("move_4")$get_stat("name"), "body-slam")
+  expect_identical(bulbasaur$get_stat("move_4")$get_stat("pp"), 15L)
 })
 
 test_that("Pokemon is unable to learn invalid move", {

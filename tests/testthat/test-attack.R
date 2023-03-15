@@ -1,7 +1,7 @@
-test_that("use_attack is only available for generation 1", {
+test_that("use_attack prints the outcome of the attack", {
   # Bulbasaur moves: "double-edge" "razor-leaf"  "solar-beam"  "tackle"
   set.seed(2312L)
-  move <- "tackle"
+  move <- Move$new("tackle")
 
   team <- PokemonTeam$new(
     pokemon_1 = Pokemon$new(api_data = readRDS("data/bulbasaur.rds")),
@@ -15,8 +15,13 @@ test_that("use_attack is only available for generation 1", {
   )
 
   battle <- PokemonBattle$new(team_1 = team, team_2 = team, level = 50L, generation = 1L)
-  expect_type(use_attack(move, team$get_pokemon(1L), team$get_pokemon(1L), battle, generation = 1L), "double")
+  expect_output(
+    use_attack(move, team$get_pokemon(1L), team$get_pokemon(1L), battle, generation = 1L),
+    "tackle did 18 damage"
+  )
+})
 
+test_that("use_attack is only available for generation 1", {
   generation <- 2L
   team <- PokemonTeam$new(
     pokemon_1 = Pokemon$new(api_data = readRDS("data/bulbasaur.rds")),

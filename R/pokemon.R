@@ -188,10 +188,7 @@ Pokemon <- R6::R6Class(
         stop("Replacement move (", replace_move, ") for ", private$name, " cannot be found")
       }
 
-      new_pp <- get_move_info(new_move, "pp")
-      private[[paste0("move_", replace_id)]] <- new_move
-      private[[paste("move", replace_id, "pp", sep = "_")]] <- new_pp
-      private[[paste("move", replace_id, "current_pp", sep = "_")]] <- new_pp
+      private[[paste0("move_", replace_id)]] <- Move$new(new_move)
       invisible(NULL)
     },
 
