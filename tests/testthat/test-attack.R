@@ -17,7 +17,7 @@ test_that("use_attack prints the outcome of the attack", {
   battle <- PokemonBattle$new(team_1 = team, team_2 = team, level = 50L, generation = 1L)
   expect_output(
     use_attack(move, team$get_pokemon(1L), team$get_pokemon(1L), battle, generation = 1L),
-    "tackle did 18 damage"
+    "Bulbasaur took 18 damage"
   )
 })
 
