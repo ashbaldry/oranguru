@@ -2,7 +2,7 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2023-03-16T20:34Z
+last_built: 2023-03-16T21:25Z
 urls:
   reference: https://ashbaldry.github.io/oranguru/reference
   article: https://ashbaldry.github.io/oranguru/articles

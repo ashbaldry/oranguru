@@ -58,10 +58,13 @@
 <li><p><a href="#method-pokemon-use_move"><code>Pokemon$use_move()</code></a></p></li>
 <li><p><a href="#method-pokemon-get_stat"><code>Pokemon$get_stat()</code></a></p></li>
 <li><p><a href="#method-pokemon-get_moves"><code>Pokemon$get_moves()</code></a></p></li>
+<li><p><a href="#method-pokemon-get_moves_pp"><code>Pokemon$get_moves_pp()</code></a></p></li>
 <li><p><a href="#method-pokemon-change_move"><code>Pokemon$change_move()</code></a></p></li>
 <li><p><a href="#method-pokemon-get_crit_chance"><code>Pokemon$get_crit_chance()</code></a></p></li>
+<li><p><a href="#method-pokemon-crit_applied"><code>Pokemon$crit_applied()</code></a></p></li>
 <li><p><a href="#method-pokemon-take_damage"><code>Pokemon$take_damage()</code></a></p></li>
 <li><p><a href="#method-pokemon-apply_ailment"><code>Pokemon$apply_ailment()</code></a></p></li>
+<li><p><a href="#method-pokemon-change_stat"><code>Pokemon$change_stat()</code></a></p></li>
 <li><p><a href="#method-pokemon-clone"><code>Pokemon$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-pokemon-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
@@ -181,10 +184,18 @@ the Pokémon</p></dd>
 </div>
 
 
+</div><p></p><hr><a id="method-pokemon-get_moves_pp"></a><div class="section">
+<h3 id="method-get-moves-pp-">Method <code>get_moves_pp()</code><a class="anchor" aria-label="anchor" href="#method-get-moves-pp-"></a></h3>
+<p>Get the detailed move information of the Pokémon</p><div class="section">
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">get_moves_pp</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
 </div><p></p><hr><a id="method-pokemon-change_move"></a><div class="section">
 <h3 id="method-change-move-">Method <code>change_move()</code><a class="anchor" aria-label="anchor" href="#method-change-move-"></a></h3>
 <p>Change one of the moves of the Pokémon</p><div class="section">
-<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">change_move</span><span class="op">(</span>new_move <span class="op">=</span> <span class="cn">NULL</span>, replace_move <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -204,7 +215,7 @@ the Pokémon</p></dd>
 </div><p></p><hr><a id="method-pokemon-get_crit_chance"></a><div class="section">
 <h3 id="method-get-crit-chance-">Method <code>get_crit_chance()</code><a class="anchor" aria-label="anchor" href="#method-get-crit-chance-"></a></h3>
 <p>Get the critical hit chance for a move used by the Pokémon</p><div class="section">
-<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">get_crit_chance</span><span class="op">(</span><span class="va">move</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -217,10 +228,18 @@ the Pokémon</p></dd>
 </dl><p></p></div>
 </div>
 
+</div><p></p><hr><a id="method-pokemon-crit_applied"></a><div class="section">
+<h3 id="method-crit-applied-">Method <code>crit_applied()</code><a class="anchor" aria-label="anchor" href="#method-crit-applied-"></a></h3>
+<p>Helper function to know that a critical hit has been applied to an attack.</p><div class="section">
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">crit_applied</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
 </div><p></p><hr><a id="method-pokemon-take_damage"></a><div class="section">
 <h3 id="method-take-damage-">Method <code>take_damage()</code><a class="anchor" aria-label="anchor" href="#method-take-damage-"></a></h3>
 <p>Take damage from attack</p><div class="section">
-<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">take_damage</span><span class="op">(</span><span class="va">damage_dealt</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -236,7 +255,7 @@ the Pokémon</p></dd>
 </div><p></p><hr><a id="method-pokemon-apply_ailment"></a><div class="section">
 <h3 id="method-apply-ailment-">Method <code>apply_ailment()</code><a class="anchor" aria-label="anchor" href="#method-apply-ailment-"></a></h3>
 <p>Apply an ailment to the Pokémon</p><div class="section">
-<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">apply_ailment</span><span class="op">(</span><span class="va">ailment</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -253,15 +272,40 @@ the Pokémon</p></dd>
 <p>A logical value determining whether or not the ailment has been applied</p>
 </div>
 
-</div><p></p><hr><a id="method-pokemon-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
-<p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div><p></p><hr><a id="method-pokemon-change_stat"></a><div class="section">
+<h3 id="method-change-stat-">Method <code>change_stat()</code><a class="anchor" aria-label="anchor" href="#method-change-stat-"></a></h3>
+<p>Change the stat e.g. attack of a Pokémon</p><div class="section">
+<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">change_stat</span><span class="op">(</span>stat <span class="op">=</span> <span class="va">PK_STATS</span>, change <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>stat</code></dt>
+<dd><p>The name of the stat to change</p></dd>
+
+
+<dt><code>change</code></dt>
+<dd><p>Points of change of the stat</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h4>
+<p>Stats cannot change by more than +/-6 points</p>
+</div>
+
+
+</div><p></p><hr><a id="method-pokemon-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
