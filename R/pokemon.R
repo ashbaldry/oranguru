@@ -278,10 +278,18 @@ Pokemon <- R6::R6Class(
     #' @encoding UTF-8
     change_stat = function(stat = PK_STATS, change = 1L) {
       stat <- match.arg(stat)
+      stat_name <- sub("sp_", "special ", stat)
       field <- paste0(stat, "_change")
+
+      direction <- if (sign(change) == 1L) "increase" else "decrease"
+      greatly <- if (abs(change) == 2L) "greatly " else ""
+
       if (abs(private[[field]]) >= 6L && sign(change) == sign(private[[field]])) {
-        direction <- if (sign(change) == 1L) "increase" else "decrease"
-        cat("Unable to", direction, sub("sp_", "special ", stat), "any further\n")
+        cat("Unable to", direction, stat_name, "any further\n")
+        invisible(NULL)
+      } else {
+        private[[field]] <- max(-6L, min(6L, private[[field]] + change))
+        cat(private$name, "'s ", stat_name, " has ", direction, "d ", greatly, "\n", sep = "")
       }
     }
   ),

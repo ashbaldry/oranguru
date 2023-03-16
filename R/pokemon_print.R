@@ -24,7 +24,14 @@ show_status <- function(x, simple = FALSE, console = TRUE) {
 }
 
 show_simple_status <- function(x, func = cat) {
-  func(x$name, " (", x$current_hp, " / ", x$hp, ") \n", sep = "")
+  pkmn_status <- intersect(x$ailment, seq(5L))
+  if (length(pkmn_status) == 1L) {
+    ailment <- paste0(" ", names(AILMENT_STATUS)[match(pkmn_status, AILMENT_STATUS)])
+  } else {
+    ailment <- ""
+  }
+
+  func(x$name, ailment, " (", x$current_hp, " / ", x$hp, ") \n", sep = "")
 }
 
 show_full_status <- function(x, func = cat) {

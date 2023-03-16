@@ -11,6 +11,14 @@ check_ailment <- function(ailments, new_ailment) {
   }
 }
 
+AILMENT_STATUS <- c(
+  "PRZ" = 1L,
+  "SLP" = 2L,
+  "FRZ" = 3L,
+  "BRN" = 4L,
+  "PSN" = 5L
+)
+
 AILMENT_NON_VOLITILE <- c(
   "paralysis" = 1L,
   "sleep" = 2L,
