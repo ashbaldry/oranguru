@@ -196,7 +196,7 @@ PokemonBattle <- R6::R6Class(
       active_pokemon <- private[[paste0("team_", person)]]$get_pokemon(active_position)
       available_moves <- active_pokemon$get_moves()
 
-      selected_move <- menu(available_moves, title = "Which move would you like to use?")
+      selected_move <- menu(active_pokemon$get_moves_pp(), title = "Which move would you like to use?")
       if (selected_move > 0L) {
         private[[paste0("action_", person)]] <- "attack"
         private[[paste0("move_", person)]] <- active_pokemon$get_stat(paste0("move_", selected_move))

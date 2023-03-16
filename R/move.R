@@ -49,6 +49,14 @@ Move <- R6::R6Class(
     },
 
     #' @description
+    #' Get current PP of the move
+    #'
+    #' @encoding UTF-8
+    get_pp_status = function() {
+      paste0(private$name, " (", private$curr_pp, " / ", private$pp, ")")
+    },
+
+    #' @description
     #' Get the stat of the move
     #'
     #' @param stat The private field of the move

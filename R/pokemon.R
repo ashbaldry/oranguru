@@ -147,12 +147,27 @@ Pokemon <- R6::R6Class(
     #' Get the moveset of the Pokémon
     #'
     #' @encoding UTF-8
-    get_moves = function() c(
-      private$move_1$get_stat("name"),
-      if (inherits(private$move_2, "move")) private$move_2$get_stat("name"),
-      if (inherits(private$move_3, "move")) private$move_3$get_stat("name"),
-      if (inherits(private$move_4, "move")) private$move_4$get_stat("name")
-    ),
+    get_moves = function() {
+      c(
+        private$move_1$get_stat("name"),
+        if (inherits(private$move_2, "move")) private$move_2$get_stat("name"),
+        if (inherits(private$move_3, "move")) private$move_3$get_stat("name"),
+        if (inherits(private$move_4, "move")) private$move_4$get_stat("name")
+      )
+    },
+
+    #' @description
+    #' Get the detailed move information of the Pokémon
+    #'
+    #' @encoding UTF-8
+    get_moves_pp = function() {
+      c(
+        private$move_1$get_pp_status(),
+        if (inherits(private$move_2, "move")) private$move_2$get_pp_status(),
+        if (inherits(private$move_3, "move")) private$move_3$get_pp_status(),
+        if (inherits(private$move_4, "move")) private$move_4$get_pp_status()
+      )
+    },
 
     #' @description
     #' Change one of the moves of the Pokémon
@@ -225,13 +240,14 @@ Pokemon <- R6::R6Class(
     #'
     #' @encoding UTF-8
     take_damage = function(damage_dealt) {
-      if (damage_dealt > 0) {
+      if (damage_dealt > 0L) {
         cat(private$name, "took", min(private$current_hp, damage_dealt), "damage\n")
+        if (private$crit_taken) {
+          cat("Critical Hit!\n")
+        }
       }
-      if (private$crit_taken) {
-        cat("Critical Hit!\n")
-        private$crit_taken <- FALSE
-      }
+
+      private$crit_taken <- FALSE
       private$current_hp <- max(private$current_hp - damage_dealt, 0L)
       invisible(NULL)
     },
@@ -249,6 +265,24 @@ Pokemon <- R6::R6Class(
       ailment_allowed <- check_ailment(private$ailment, ailment)
       if (ailment_allowed) private$ailment <- c(private$ailment, ailment)
       invisible(ailment_allowed)
+    },
+
+    #' @description
+    #' Change the stat e.g. attack of a Pokémon
+    #'
+    #' @details
+    #' Stats cannot change by more than +/-6 points
+    #'
+    #' @param stat The name of the stat to change
+    #'
+    #' @encoding UTF-8
+    change_stat = function(stat = PK_STATS, change = 1L) {
+      stat <- match.arg(stat)
+      field <- paste0(stat, "_change")
+      if (abs(private[[field]]) >= 6L && sign(change) == sign(private[[field]])) {
+        direction <- if (sign(change) == 1L) "increase" else "decrease"
+        cat("Unable to", direction, sub("sp_", "special ", stat), "any further\n")
+      }
     }
   ),
 
