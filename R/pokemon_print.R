@@ -6,7 +6,7 @@
 #' Includes:
 #'
 #' - Pokémon base stats and health
-#' - Pokemon move set and PP
+#' - Pokémon move set and PP
 #'
 #' @param x The private fields of a Pokémon
 #' @param simple Logical, should a simplified print be used

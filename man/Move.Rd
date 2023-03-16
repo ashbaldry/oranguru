@@ -11,6 +11,7 @@ R6 object containing required information about a Pokémon move.
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-move-new}{\code{Move$new()}}
+\item \href{#method-move-get_pp_status}{\code{Move$get_pp_status()}}
 \item \href{#method-move-get_stat}{\code{Move$get_stat()}}
 \item \href{#method-move-use_move}{\code{Move$use_move()}}
 \item \href{#method-move-clone}{\code{Move$clone()}}
@@ -35,6 +36,16 @@ Create a Move
 \subsection{Returns}{
 A Move
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-move-get_pp_status"></a>}}
+\if{latex}{\out{\hypertarget{method-move-get_pp_status}{}}}
+\subsection{Method \code{get_pp_status()}}{
+Get current PP of the move
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Move$get_pp_status()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-move-get_stat"></a>}}

@@ -16,11 +16,15 @@ calculate_damage_v1 <- function(move, attacker, defender, damage_range = FALSE, 
 
   # 1: no damage, 2: attack/defense, 3: special attack/defense
   if (move$get_stat("damage_class_id") == 2) {
-    p1_attack <- attacker$get_stat("attack")
-    p2_defense <- defender$get_stat("defense")
+    p1_attack <- attacker$get_stat("attack") *
+      calculate_stat_multiplier("attack", attacker$get_stat("attack_change"), generation = 1L)
+    p2_defense <- defender$get_stat("defense") *
+      calculate_stat_multiplier("defense", defender$get_stat("defense_change"), generation = 1L)
   } else {
-    p1_attack <- attacker$get_stat("sp_attack")
-    p2_defense <- defender$get_stat("sp_defense")
+    p1_attack <- attacker$get_stat("sp_attack") *
+      calculate_stat_multiplier("sp_attack", attacker$get_stat("sp_attack_change"), generation = 1L)
+    p2_defense <- defender$get_stat("sp_defense") *
+      calculate_stat_multiplier("sp_defense", defender$get_stat("sp_defense_change"), generation = 1L)
   }
 
   if (damage_range) {
@@ -31,6 +35,8 @@ calculate_damage_v1 <- function(move, attacker, defender, damage_range = FALSE, 
       defender$crit_applied()
     }
   }
+
+  browser()
 
   damage <- ((2 * level * crit / 5 + 2) * move_power * p1_attack / p2_defense / 50 + 2) *
     include_stab_multiplier(move_type, p1_types) *

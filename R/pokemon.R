@@ -274,6 +274,7 @@ Pokemon <- R6::R6Class(
     #' Stats cannot change by more than +/-6 points
     #'
     #' @param stat The name of the stat to change
+    #' @param change Points of change of the stat
     #'
     #' @encoding UTF-8
     change_stat = function(stat = PK_STATS, change = 1L) {

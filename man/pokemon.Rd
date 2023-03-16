@@ -15,10 +15,13 @@ R6 object containing required information about a Pokémon.
 \item \href{#method-pokemon-use_move}{\code{Pokemon$use_move()}}
 \item \href{#method-pokemon-get_stat}{\code{Pokemon$get_stat()}}
 \item \href{#method-pokemon-get_moves}{\code{Pokemon$get_moves()}}
+\item \href{#method-pokemon-get_moves_pp}{\code{Pokemon$get_moves_pp()}}
 \item \href{#method-pokemon-change_move}{\code{Pokemon$change_move()}}
 \item \href{#method-pokemon-get_crit_chance}{\code{Pokemon$get_crit_chance()}}
+\item \href{#method-pokemon-crit_applied}{\code{Pokemon$crit_applied()}}
 \item \href{#method-pokemon-take_damage}{\code{Pokemon$take_damage()}}
 \item \href{#method-pokemon-apply_ailment}{\code{Pokemon$apply_ailment()}}
+\item \href{#method-pokemon-change_stat}{\code{Pokemon$change_stat()}}
 \item \href{#method-pokemon-clone}{\code{Pokemon$clone()}}
 }
 }
@@ -130,6 +133,16 @@ Get the moveset of the Pokémon
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon-get_moves_pp"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon-get_moves_pp}{}}}
+\subsection{Method \code{get_moves_pp()}}{
+Get the detailed move information of the Pokémon
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$get_moves_pp()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pokemon-change_move"></a>}}
 \if{latex}{\out{\hypertarget{method-pokemon-change_move}{}}}
 \subsection{Method \code{change_move()}}{
@@ -164,6 +177,16 @@ Get the critical hit chance for a move used by the Pokémon
 }
 \if{html}{\out{</div>}}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon-crit_applied"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon-crit_applied}{}}}
+\subsection{Method \code{crit_applied()}}{
+Helper function to know that a critical hit has been applied to an attack.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$crit_applied()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pokemon-take_damage"></a>}}
@@ -201,6 +224,29 @@ Apply an ailment to the Pokémon
 \subsection{Returns}{
 A logical value determining whether or not the ailment has been applied
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon-change_stat"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon-change_stat}{}}}
+\subsection{Method \code{change_stat()}}{
+Change the stat e.g. attack of a Pokémon
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$change_stat(stat = PK_STATS, change = 1L)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{stat}}{The name of the stat to change}
+
+\item{\code{change}}{Points of change of the stat}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Details}{
+Stats cannot change by more than +/-6 points
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pokemon-clone"></a>}}

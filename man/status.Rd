@@ -20,6 +20,6 @@ A way to show the current stats and status of a selected Pokémon.
 Includes:
 \itemize{
 \item Pokémon base stats and health
-\item Pokemon move set and PP
+\item Pokémon move set and PP
 }
 }

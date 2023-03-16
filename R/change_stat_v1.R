@@ -9,7 +9,7 @@ change_stat_v1 <- function(move, attacker, defender) {
 
   # Decrease stat by 1
   if (effect %in% c(19L, 20L, 21L, 22L, 23L)) {
-    attacker$change_stat(stat = PK_STATS[effect - 18L], change = -1L)
+    defender$change_stat(stat = PK_STATS[effect - 18L], change = -1L)
   }
 
   # Increase stat by 2
@@ -19,7 +19,7 @@ change_stat_v1 <- function(move, attacker, defender) {
 
   # Decrease stat by 2
   if (effect %in% c(59L, 60L, 61L, 62L, 63L)) {
-    attacker$change_stat(stat = PK_STATS[effect - 58L], change = -2L)
+    defender$change_stat(stat = PK_STATS[effect - 58L], change = -2L)
   }
 
   invisible(NULL)
