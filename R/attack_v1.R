@@ -17,8 +17,7 @@ use_attack_v1 <- function(move, attacker, defender, battle) {
   } else if (move$get_stat("meta_category_id") == 2L) {
     change_stat_v1(move, attacker, defender)
   } else if (move$get_stat("meta_category_id") == 3L) {
-    damage_dealt <- calculate_damage(move, attacker, defender, generation = 1L)
-    defender$take_damage(damage_dealt)
+    heal_pokemon_v1(move, attacker, defender)
   } else if (move$get_stat("meta_category_id") == 4L) {
     damage_dealt <- calculate_damage(move, attacker, defender, generation = 1L)
     defender$take_damage(damage_dealt)

@@ -263,7 +263,19 @@ Pokemon <- R6::R6Class(
     #' @encoding UTF-8
     apply_ailment = function(ailment) {
       ailment_allowed <- check_ailment(private$ailment, ailment)
-      if (ailment_allowed) private$ailment <- c(private$ailment, ailment)
+
+      if (ailment_allowed) {
+        cat(private$name, "has been", AILMENT_CHANGES[ailment], "\n")
+        private$ailment <- c(private$ailment, ailment)
+      } else {
+        current_ailment <- private$ailment[private$ailment <= 5L]
+        cat(
+          private$name, " is already ", AILMENT_CHANGES[current_ailment], ", ",
+          "they cannot be ", AILMENT_CHANGES[ailment], "\n",
+          sep = ""
+        )
+      }
+
       invisible(ailment_allowed)
     },
 
@@ -291,6 +303,42 @@ Pokemon <- R6::R6Class(
       } else {
         private[[field]] <- max(-6L, min(6L, private[[field]] + change))
         cat(private$name, "'s ", stat_name, " has ", direction, "d ", greatly, "\n", sep = "")
+      }
+    },
+
+    #' @description
+    #' Heal the Pokémon
+    #'
+    #' @details
+    #' Pokémon healing can never go above full health, and cannot recover from being fainted
+    #'
+    #' @param perc The percentage of the maximum HP to heal
+    #' @param n The percentage points to heal
+    #'
+    #' @encoding UTF-8
+    heal = function(perc, n) {
+      if (private$current_hp == 0L) {
+        cat(private$name, "is fainted, cannot recover health")
+        return(invisible(FALSE))
+      }
+
+      if (missing(perc)) {
+        health_recovered <- min(n, private$hp - private$current_hp)
+      } else {
+        health_recovered <- min(private$hp * perc / 100, private$hp - private$current_hp)
+      }
+
+      if (private$generation >= 5L) {
+        health_recovered <- ceiling(health_recovered)
+      } else {
+        health_recovered <- floor(health_recovered)
+      }
+
+      if (health_recovered > 0L) {
+        cat(private$name, "has recovered", health_recovered, "HP\n")
+        private$current_hp <- private$current_hp + health_recovered
+      } else {
+        cat(private$name, "is currently at full health!\n")
       }
     }
   ),

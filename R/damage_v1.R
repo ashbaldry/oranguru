@@ -36,8 +36,6 @@ calculate_damage_v1 <- function(move, attacker, defender, damage_range = FALSE, 
     }
   }
 
-  browser()
-
   damage <- ((2 * level * crit / 5 + 2) * move_power * p1_attack / p2_defense / 50 + 2) *
     include_stab_multiplier(move_type, p1_types) *
     include_type_multiplier(move_type, p2_types, generation = 1L)
