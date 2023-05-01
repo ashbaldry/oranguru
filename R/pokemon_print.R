@@ -63,9 +63,18 @@ show_full_status <- function(x, func = cat) {
   pp_spaces <- (move_max_nchar - 5) / 2
   pp_padded <- sprintf("%-*s%2d / %2d%*s|", pp_spaces, "", known_curr_pp, known_pp, ceiling(pp_spaces), "")
 
+  if (x$current_hp == 0L) {
+    ailment <- "FNT"
+  } else if (length(x$ailment) > 0L && any(x$ailment <= 5L)) {
+    ailment <- names(AILMENT_STATUS)[x$ailment[x$ailment <= 5L]]
+  } else {
+    ailment <- "N/A"
+  }
+
   func(
     "Pokémon: ", x$name, "\n",
     "Type", if (length(x$type) > 1) "s" else "", ": ", toString(x$type), "\n",
+    "Status: ", ailment, "\n",
     "\n",
     "|     HP    | Attack | Defense | Sp. Atk | Sp. Def |  Speed  |\n",
     "| ", sprintf("%3d", x$current_hp), " / ", sprintf("%-3d", x$hp), " ",

@@ -5,7 +5,13 @@ cause_ailment_v1 <- function(move, attacker, defender) {
   if (defender$apply_ailment(ailment)) {
     cat(defender$get_stat("name"), "has been", AILMENT_CHANGES[ailment], "\n")
   } else {
-    cat(defender$get_stat("name"), "cannot be", AILMENT_CHANGES[ailment], "\n")
+    current_ailment <- defender$get_stat("ailment")
+    current_ailment <- current_ailment[current_ailment <= 5L]
+    cat(
+      defender$get_stat("name"), " is already ", AILMENT_CHANGES[current_ailment], ", ",
+      "they cannot be ", AILMENT_CHANGES[ailment], "\n",
+      sep = ""
+    )
   }
 
   invisible(NULL)

@@ -49,10 +49,10 @@ AILMENT_CHANGES <- c(
   "yawned",
   "heal blocked",
   "have their immunity removed",
-  "leech seeded",
+  "ingrained",
   "embargoed",
   "have perish song applied",
-  "ingrained",
+  "leech seeded",
   "silenced",
   "tar shotted"
 )
