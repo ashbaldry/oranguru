@@ -69,14 +69,7 @@ Move <- R6::R6Class(
     #'
     #' @return
     #' Logical as to whether or not the move has been used or not
-    can_use_move = function() {
-      if (private$curr_pp == 0L) {
-        FALSE
-      } else {
-        private$curr_pp <- private$curr_pp - 1L
-        TRUE
-      }
-    },
+    can_use_move = function() private$curr_pp > 0L,
 
     #' @description
     #' Checks the ability to use the move
