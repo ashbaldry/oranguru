@@ -36,9 +36,12 @@ calculate_damage_v1 <- function(move, attacker, defender, damage_range = FALSE, 
     }
   }
 
+  type_multiplier <- include_type_multiplier(move_type, p2_types, generation = 1L)
+  defender$type_multiplier_applied(type_multiplier)
+
   damage <- ((2 * level * crit / 5 + 2) * move_power * p1_attack / p2_defense / 50 + 2) *
     include_stab_multiplier(move_type, p1_types) *
-    include_type_multiplier(move_type, p2_types, generation = 1L)
+    type_multiplier
   damage <- include_random_factor(damage, generation = 1L, damage_range = damage_range)
 
   if (is.finite(damage)) floor(damage) else 0L

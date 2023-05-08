@@ -35,7 +35,8 @@ Commence a Pokémon battle
   team_2,
   player_2_cpu = TRUE,
   level = 50L,
-  generation = 1L
+  generation = 1L,
+  init_battle = interactive()
 )}\if{html}{\out{</div>}}
 }
 
@@ -52,6 +53,8 @@ Commence a Pokémon battle
 
 \item{\code{generation}}{If teams are random, then the generation the Pokémon will be selected from.
 Default is Gen 8.}
+
+\item{\code{init_battle}}{Logical, should the battle start on initialisation? Will start if interactive.}
 }
 \if{html}{\out{</div>}}
 }

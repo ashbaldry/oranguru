@@ -22,10 +22,12 @@ PokemonBattle <- R6::R6Class(
     #' @param level If random teams, the level the Pokémon should be
     #' @param generation If teams are random, then the generation the Pokémon will be selected from.
     #' Default is Gen 8.
+    #' @param init_battle Logical, should the battle start on initialisation? Will start if interactive.
     #'
     #' @return
     #' A state where a Pokémon battle can commence
-    initialize = function(team_1, team_2, player_2_cpu = TRUE, level = 50L, generation = 1L) {
+    initialize = function(team_1, team_2, player_2_cpu = TRUE,
+                          level = 50L, generation = 1L, init_battle = interactive()) {
       if (missing(team_1) && missing(team_2)) {
         private$team_1 <- PokemonTeam$new(random = TRUE, level = level, generation = generation)
         private$team_2 <- PokemonTeam$new(random = TRUE, level = level, generation = generation)
@@ -42,6 +44,7 @@ PokemonBattle <- R6::R6Class(
       }
 
       private$player_2_cpu <- player_2_cpu
+      if (init_battle) self$start() else invisible(NULL)
     },
 
     #' @description
@@ -76,7 +79,7 @@ PokemonBattle <- R6::R6Class(
 
       winner <- 2 - as.numeric(private$team_1$able_to_battle())
       loser <- 3 - winner
-      cat("Player", loser, "has no Pok\u00e9mon available to battle, Player", winner, "wins!")
+      cat("Player", loser, "has no Pok\u00e9mon available to battle, Player", winner, "wins!\n")
     },
 
     #' @description

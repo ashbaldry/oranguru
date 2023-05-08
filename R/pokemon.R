@@ -223,17 +223,35 @@ Pokemon <- R6::R6Class(
     },
 
     #' @description
+    #' Helper function to know about the type multiplier of an attack.
+    #'
+    #' @param multiplier A numeric value of the type multiplier applied to the attack
+    type_multiplier_applied = function(multiplier) {
+      if (multiplier == 0) {
+        private$effectiveness <- "The move does not affect the defending Pok\u00e9mon\n"
+      } else if (multiplier < 1) {
+        private$effectiveness <- "It's not very effective\n"
+      } else if (multiplier > 1) {
+        private$effectiveness <- "It's super effective!\n"
+      }
+    },
+
+    #' @description
     #' Take damage from attack
     #'
     #' @param damage_dealt The amount of damage dealt by the opposing Pokémon's attack
     take_damage = function(damage_dealt) {
       if (damage_dealt > 0L) {
         cat(private$name, "took", min(private$current_hp, damage_dealt), "damage\n")
-        if (private$crit_taken) {
-          cat("Critical Hit!\n")
-        }
+      }
+      if (private$effectiveness != "") {
+        cat(private$effectiveness)
+      }
+      if (damage_dealt > 0L && private$crit_taken) {
+        cat("Critical Hit!\n")
       }
 
+      private$effectiveness <- ""
       private$crit_taken <- FALSE
       private$current_hp <- max(private$current_hp - damage_dealt, 0L)
       invisible(NULL)
@@ -354,6 +372,8 @@ Pokemon <- R6::R6Class(
     accuracy_change = 0L,
     evasion_change = 0L,
     critical_hit_change = 0L,
+
+    effectiveness = "",
     crit_taken = FALSE,
 
     move_1 = NULL,

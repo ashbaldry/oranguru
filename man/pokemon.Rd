@@ -19,6 +19,7 @@ R6 object containing required information about a Pokémon.
 \item \href{#method-pokemon-change_move}{\code{Pokemon$change_move()}}
 \item \href{#method-pokemon-get_crit_chance}{\code{Pokemon$get_crit_chance()}}
 \item \href{#method-pokemon-crit_applied}{\code{Pokemon$crit_applied()}}
+\item \href{#method-pokemon-type_multiplier_applied}{\code{Pokemon$type_multiplier_applied()}}
 \item \href{#method-pokemon-take_damage}{\code{Pokemon$take_damage()}}
 \item \href{#method-pokemon-apply_ailment}{\code{Pokemon$apply_ailment()}}
 \item \href{#method-pokemon-change_stat}{\code{Pokemon$change_stat()}}
@@ -188,6 +189,23 @@ Helper function to know that a critical hit has been applied to an attack.
 \if{html}{\out{<div class="r">}}\preformatted{Pokemon$crit_applied()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon-type_multiplier_applied"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon-type_multiplier_applied}{}}}
+\subsection{Method \code{type_multiplier_applied()}}{
+Helper function to know about the type multiplier of an attack.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$type_multiplier_applied(multiplier)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{multiplier}}{A numeric value of the type multiplier applied to the attack}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pokemon-take_damage"></a>}}
