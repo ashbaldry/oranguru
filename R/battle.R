@@ -24,9 +24,7 @@ PokemonBattle <- R6::R6Class(
     #' Default is Gen 8.
     #'
     #' @return
-    #' A state where a Pokemon battle can commence
-    #'
-    #' @encoding UTF-8
+    #' A state where a Pokémon battle can commence
     initialize = function(team_1, team_2, player_2_cpu = TRUE, level = 50L, generation = 1L) {
       if (missing(team_1) && missing(team_2)) {
         private$team_1 <- PokemonTeam$new(random = TRUE, level = level, generation = generation)
@@ -78,7 +76,7 @@ PokemonBattle <- R6::R6Class(
 
       winner <- 2 - as.numeric(private$team_1$able_to_battle())
       loser <- 3 - winner
-      cat("Player", loser, "has no Pokémon available to battle, Player", winner, "wins!")
+      cat("Player", loser, "has no Pok\u00e9mon available to battle, Player", winner, "wins!")
     },
 
     #' @description
@@ -111,8 +109,6 @@ PokemonBattle <- R6::R6Class(
     #'
     #' @param new_active Team position of the Pokémon to switch in
     #' @param curr_active Team position of the Pokémon to switch out. Defaults to current active
-    #'
-    #' @encoding UTF-8
     switch = function(new_active, curr_active = private$active_1) {
       private$active_1 <- new_active
       private$player_ready_1 <- TRUE
@@ -123,8 +119,6 @@ PokemonBattle <- R6::R6Class(
     #'
     #' @param new_active Team position of the Pokémon to switch in
     #' @param curr_active Team position of the Pokémon to switch out. Defaults to current active
-    #'
-    #' @encoding UTF-8
     switch_p2 = function(new_active, curr_active = private$active_2) {
       if (private$player_2_cpu) {
         message("Player 2 is a CPU. Don't try to cheat!")
@@ -233,7 +227,7 @@ PokemonBattle <- R6::R6Class(
             if (new_active > 0L) {
               private[[paste0("active_", person)]] <- unname(available_pokemon)[new_active]
             } else {
-              cat("Your Pokémon has fainted, you must choose another Pokémon to switch with\n\n")
+              cat("Your Pok\u00e9mon has fainted, you must choose another Pok\u00e9mon to switch with\n\n")
             }
           }
         } else {
@@ -245,7 +239,7 @@ PokemonBattle <- R6::R6Class(
           }
         }
       } else if (!fainted) {
-        cat("No available Pokémon to switch with. Returning to home options")
+        cat("No available Pok\u00e9mon to switch with. Returning to home options")
       }
     },
 
@@ -346,13 +340,13 @@ PokemonBattle <- R6::R6Class(
         if (person == 2L && private$player_2_cpu) {
           available_pokemon <- private$team_2$healthy_pokemon()
           if (length(available_pokemon) > 0L) {
-            cat(pokemon$get_stat("name"), "has fainted, CPU switching Pokémon\n")
+            cat(pokemon$get_stat("name"), "has fainted, CPU switching Pok\u00e9mon\n")
             private$active_2 <- available_pokemon[[1L]]
           } else {
             cat(pokemon$get_stat("name"), "has fainted\n")
           }
         } else {
-          cat(pokemon$get_stat("name"), "has fainted, please choose another Pokémon\n\n")
+          cat(pokemon$get_stat("name"), "has fainted, please choose another Pok\u00e9mon\n\n")
           private$select_switch(person = person, fainted = TRUE)
         }
       }

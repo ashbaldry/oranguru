@@ -13,6 +13,7 @@ R6 object containing required information about a Pokémon move.
 \item \href{#method-move-new}{\code{Move$new()}}
 \item \href{#method-move-get_pp_status}{\code{Move$get_pp_status()}}
 \item \href{#method-move-get_stat}{\code{Move$get_stat()}}
+\item \href{#method-move-can_use_move}{\code{Move$can_use_move()}}
 \item \href{#method-move-use_move}{\code{Move$use_move()}}
 \item \href{#method-move-clone}{\code{Move$clone()}}
 }
@@ -23,13 +24,15 @@ R6 object containing required information about a Pokémon move.
 \subsection{Method \code{new()}}{
 Create a Move
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Move$new(move_name)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Move$new(move_name, generation = 1L)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{move_name}}{The hyphen cased name of the move e.g. \code{"razor-leaf"}}
+
+\item{\code{generation}}{The generation that the Pokémon comes from}
 }
 \if{html}{\out{</div>}}
 }
@@ -65,14 +68,40 @@ Get the stat of the move
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-move-can_use_move"></a>}}
+\if{latex}{\out{\hypertarget{method-move-can_use_move}{}}}
+\subsection{Method \code{can_use_move()}}{
+Checks the ability to use the move
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Move$can_use_move()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Logical as to whether or not the move has been used or not
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-move-use_move"></a>}}
 \if{latex}{\out{\hypertarget{method-move-use_move}{}}}
 \subsection{Method \code{use_move()}}{
-Use the Move
+Checks the ability to use the move
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Move$use_move()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Move$use_move(attacker, defender, battle, generation)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{attacker}}{The attacking \code{\link{Pokemon}}}
+
+\item{\code{defender}}{The defending \code{\link{Pokemon}}}
+
+\item{\code{battle}}{The \code{\link{PokemonBattle}} in place. Used to know}
+
+\item{\code{generation}}{The generation that the battle is happening in}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
 Logical as to whether or not the move has been used or not
 }

@@ -32,7 +32,7 @@ PokemonTeam <- R6::R6Class(
         private$pokemon_6 <- Pokemon$new(pokemon = pokemon_ids[6L], level = level, generation = generation)
       } else if (missing(pokemon_1) || missing(pokemon_2) || missing(pokemon_3) ||
                  missing(pokemon_4) || missing(pokemon_5) || missing(pokemon_6)) {
-        stop("Must have a full set of 6 Pokémon to create a team")
+        stop("Must have a full set of 6 Pok\u00e9mon to create a team")
       } else {
         private$pokemon_1 <- pokemon_1
         private$pokemon_2 <- pokemon_2
@@ -56,10 +56,8 @@ PokemonTeam <- R6::R6Class(
     #' Show current status of Pokémon Team
     #'
     #' @param simple Logical, do you just want the simple status (name + HP) printed?
-    #'
-    #' @encoding UTF-8
     status = function(simple = TRUE) {
-      cat("Pokémon Team:\n")
+      cat("Pok\u00e9mon Team:\n")
       private$pokemon_1$status(simple = simple)
       private$pokemon_2$status(simple = simple)
       private$pokemon_3$status(simple = simple)
@@ -75,8 +73,6 @@ PokemonTeam <- R6::R6Class(
     #'
     #' @return
     #' The selected Pokémon
-    #'
-    #' @encoding UTF-8
     get_pokemon = function(slot) {
       stopifnot(slot %in% seq(6L))
       private[[paste0("pokemon_", slot)]]
@@ -87,8 +83,6 @@ PokemonTeam <- R6::R6Class(
     #'
     #' @return
     #' A numeric vector of the positions of the Pokémon that have non-zero HP
-    #'
-    #' @encoding UTF-8
     healthy_pokemon = function() {
       idx <- which(c(
         private$pokemon_1$get_stat("current_hp") > 0,
@@ -106,8 +100,6 @@ PokemonTeam <- R6::R6Class(
     #'
     #' @return
     #' A logical value that says if at least one Pokémon hasn't fainted
-    #'
-    #' @encoding UTF-8
     able_to_battle = function() {
       private$pokemon_1$get_stat("current_hp") > 0 ||
         private$pokemon_2$get_stat("current_hp") > 0 ||

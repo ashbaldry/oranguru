@@ -22,6 +22,7 @@ R6 object containing required information about a Pokémon.
 \item \href{#method-pokemon-take_damage}{\code{Pokemon$take_damage()}}
 \item \href{#method-pokemon-apply_ailment}{\code{Pokemon$apply_ailment()}}
 \item \href{#method-pokemon-change_stat}{\code{Pokemon$change_stat()}}
+\item \href{#method-pokemon-heal}{\code{Pokemon$heal()}}
 \item \href{#method-pokemon-clone}{\code{Pokemon$clone()}}
 }
 }
@@ -62,7 +63,7 @@ the Pokémon}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A Pokémon
+A \code{Pokemon}
 }
 }
 \if{html}{\out{<hr>}}
@@ -245,6 +246,29 @@ Change the stat e.g. attack of a Pokémon
 }
 \subsection{Details}{
 Stats cannot change by more than +/-6 points
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon-heal"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon-heal}{}}}
+\subsection{Method \code{heal()}}{
+Heal the Pokémon
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Pokemon$heal(perc, n)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{perc}}{The percentage of the maximum HP to heal}
+
+\item{\code{n}}{The percentage points to heal}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Details}{
+Pokémon healing can never go above full health, and cannot recover from being fainted
 }
 
 }

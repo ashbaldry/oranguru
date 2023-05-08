@@ -56,7 +56,7 @@ Default is Gen 8.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A state where a Pokemon battle can commence
+A state where a Pokémon battle can commence
 }
 }
 \if{html}{\out{<hr>}}

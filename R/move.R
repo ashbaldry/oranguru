@@ -12,12 +12,11 @@ Move <- R6::R6Class(
     #' Create a Move
     #'
     #' @param move_name The hyphen cased name of the move e.g. `"razor-leaf"`
+    #' @param generation The generation that the Pokémon comes from
     #'
     #' @return
     #' A Move
-    #'
-    #' @encoding UTF-8
-    initialize = function(move_name) {
+    initialize = function(move_name, generation = 1L) {
       private$name <- move_name
 
       move_info <- subset(moves, identifier == move_name)
@@ -50,8 +49,6 @@ Move <- R6::R6Class(
 
     #' @description
     #' Get current PP of the move
-    #'
-    #' @encoding UTF-8
     get_pp_status = function() {
       paste0(private$name, " (", private$curr_pp, " / ", private$pp, ")")
     },
@@ -60,8 +57,6 @@ Move <- R6::R6Class(
     #' Get the stat of the move
     #'
     #' @param stat The private field of the move
-    #'
-    #' @encoding UTF-8
     get_stat = function(stat) {
       if (stat %nin% names(private)) {
         stop(stat, " not available for Move object")
@@ -70,17 +65,33 @@ Move <- R6::R6Class(
     },
 
     #' @description
-    #' Use the Move
+    #' Checks the ability to use the move
     #'
     #' @return
     #' Logical as to whether or not the move has been used or not
-    use_move = function() {
+    can_use_move = function() {
       if (private$curr_pp == 0L) {
         FALSE
       } else {
         private$curr_pp <- private$curr_pp - 1L
         TRUE
       }
+    },
+
+    #' @description
+    #' Checks the ability to use the move
+    #'
+    #' @param attacker The attacking \code{\link{Pokemon}}
+    #' @param defender The defending \code{\link{Pokemon}}
+    #' @param battle The \code{\link{PokemonBattle}} in place. Used to know
+    #' @param generation The generation that the battle is happening in
+    #'
+    #' @return
+    #' Logical as to whether or not the move has been used or not
+    use_move = function(attacker, defender, battle, generation) {
+      private$curr_pp <- private$curr_pp - 1L
+      use_attack(self, attacker, defender, battle, generation)
+      invisible(NULL)
     }
   ),
   private = list(

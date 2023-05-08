@@ -5,8 +5,10 @@
 #'
 #' Includes:
 #'
-#' - Pokémon base stats and health
-#' - Pokémon move set and PP
+#' \itemize{
+#' \item{Pokémon base stats and health}
+#' \item{Pokémon move set and PP}
+#' }
 #'
 #' @param x The private fields of a Pokémon
 #' @param simple Logical, should a simplified print be used
@@ -72,7 +74,7 @@ show_full_status <- function(x, func = cat) {
   }
 
   func(
-    "Pokémon: ", x$name, "\n",
+    "Pok\u00e9mon: ", x$name, "\n",
     "Type", if (length(x$type) > 1) "s" else "", ": ", toString(x$type), "\n",
     "Status: ", ailment, "\n",
     "\n",

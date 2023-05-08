@@ -18,8 +18,9 @@ show_status(x, simple = FALSE, console = TRUE)
 A way to show the current stats and status of a selected Pokémon.
 
 Includes:
+
 \itemize{
-\item Pokémon base stats and health
-\item Pokémon move set and PP
+\item{Pokémon base stats and health}
+\item{Pokémon move set and PP}
 }
 }

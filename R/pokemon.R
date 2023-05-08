@@ -24,9 +24,7 @@ Pokemon <- R6::R6Class(
     #' the Pokémon
     #'
     #' @return
-    #' A Pokémon
-    #'
-    #' @encoding UTF-8
+    #' A `Pokemon`
     initialize = function(pokemon = NULL, level = 50L, generation = 1L,
                           nature = NULL, api_data = NULL, language = "en") {
       check_level(level)
@@ -101,8 +99,6 @@ Pokemon <- R6::R6Class(
     #'
     #' @param simple Logical, do you just want the simple status (name + HP) printed?
     #' @param console Logical, should the status be printed or returned as a string?
-    #'
-    #' @encoding UTF-8
     status = function(simple = FALSE, console = TRUE) {
       show_status(private, simple = simple, console = console)
     },
@@ -113,8 +109,6 @@ Pokemon <- R6::R6Class(
     #' @param move The name of the move that is being used
     #' @param def_pokemon The defending `Pokemon`
     #' @param battle A \code{\link{PokemonBattle}}
-    #'
-    #' @encoding UTF-8
     use_move = function(move, def_pokemon, battle) {
       if (isFALSE(move %in% self$get_moves())) {
         warning("Selected move (", move, ") is not available for ", private$name)
@@ -123,8 +117,13 @@ Pokemon <- R6::R6Class(
       move_id <- match(move, self$get_moves())
       move_r6 <- private[[paste("move", move_id, sep = "_")]]
 
-      if (move_r6$use_move()) {
-        use_attack(move_r6, self, def_pokemon, battle, generation = private$generation)
+      if (move_r6$can_use_move()) {
+        move_r6$use_move(
+          attacker = self,
+          defender = def_pokemon,
+          battle = battle,
+          generation = private$generation
+        )
       }
 
       invisible(NULL)
@@ -134,19 +133,15 @@ Pokemon <- R6::R6Class(
     #' Get the stat of the Pokémon
     #'
     #' @param stat The private field of the Pokémon
-    #'
-    #' @encoding UTF-8
     get_stat = function(stat) {
       if (stat %nin% names(private)) {
-        stop(stat, " not available for Pokémon")
+        stop(stat, " not available for Pok\u00e9mon")
       }
       private[[stat]]
     },
 
     #' @description
     #' Get the moveset of the Pokémon
-    #'
-    #' @encoding UTF-8
     get_moves = function() {
       c(
         private$move_1$get_stat("name"),
@@ -158,8 +153,6 @@ Pokemon <- R6::R6Class(
 
     #' @description
     #' Get the detailed move information of the Pokémon
-    #'
-    #' @encoding UTF-8
     get_moves_pp = function() {
       c(
         private$move_1$get_pp_status(),
@@ -174,8 +167,6 @@ Pokemon <- R6::R6Class(
     #'
     #' @param new_move Name of the new move
     #' @param replace_move Either the name of the move to replace, or the position of the move
-    #'
-    #' @encoding UTF-8
     change_move = function(new_move = NULL, replace_move = NULL) {
       if (is.null(new_move)) {
         available_moves <- setdiff(private$all_moves, self$get_moves())
@@ -211,8 +202,6 @@ Pokemon <- R6::R6Class(
     #' Get the critical hit chance for a move used by the Pokémon
     #'
     #' @param move Name of the move used by the Pokémon
-    #'
-    #' @encoding UTF-8
     get_crit_chance = function(move) {
       move_name <- move$get_stat("name")
       if (move_name %nin% self$get_moves()) {
@@ -237,8 +226,6 @@ Pokemon <- R6::R6Class(
     #' Take damage from attack
     #'
     #' @param damage_dealt The amount of damage dealt by the opposing Pokémon's attack
-    #'
-    #' @encoding UTF-8
     take_damage = function(damage_dealt) {
       if (damage_dealt > 0L) {
         cat(private$name, "took", min(private$current_hp, damage_dealt), "damage\n")
@@ -259,8 +246,6 @@ Pokemon <- R6::R6Class(
     #'
     #' @return
     #' A logical value determining whether or not the ailment has been applied
-    #'
-    #' @encoding UTF-8
     apply_ailment = function(ailment) {
       ailment_allowed <- check_ailment(private$ailment, ailment)
 
@@ -287,8 +272,6 @@ Pokemon <- R6::R6Class(
     #'
     #' @param stat The name of the stat to change
     #' @param change Points of change of the stat
-    #'
-    #' @encoding UTF-8
     change_stat = function(stat = PK_STATS, change = 1L) {
       stat <- match.arg(stat)
       stat_name <- sub("sp_", "special ", stat)
@@ -314,8 +297,6 @@ Pokemon <- R6::R6Class(
     #'
     #' @param perc The percentage of the maximum HP to heal
     #' @param n The percentage points to heal
-    #'
-    #' @encoding UTF-8
     heal = function(perc, n) {
       if (private$current_hp == 0L) {
         cat(private$name, "is fainted, cannot recover health")
