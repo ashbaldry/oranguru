@@ -62,6 +62,7 @@
 <li><p><a href="#method-pokemon-change_move"><code>Pokemon$change_move()</code></a></p></li>
 <li><p><a href="#method-pokemon-get_crit_chance"><code>Pokemon$get_crit_chance()</code></a></p></li>
 <li><p><a href="#method-pokemon-crit_applied"><code>Pokemon$crit_applied()</code></a></p></li>
+<li><p><a href="#method-pokemon-type_multiplier_applied"><code>Pokemon$type_multiplier_applied()</code></a></p></li>
 <li><p><a href="#method-pokemon-take_damage"><code>Pokemon$take_damage()</code></a></p></li>
 <li><p><a href="#method-pokemon-apply_ailment"><code>Pokemon$apply_ailment()</code></a></p></li>
 <li><p><a href="#method-pokemon-change_stat"><code>Pokemon$change_stat()</code></a></p></li>
@@ -237,15 +238,31 @@ the Pokémon</p></dd>
 </div>
 
 
-</div><p></p><hr><a id="method-pokemon-take_damage"></a><div class="section">
-<h3 id="method-take-damage-">Method <code>take_damage()</code><a class="anchor" aria-label="anchor" href="#method-take-damage-"></a></h3>
-<p>Take damage from attack</p><div class="section">
+</div><p></p><hr><a id="method-pokemon-type_multiplier_applied"></a><div class="section">
+<h3 id="method-type-multiplier-applied-">Method <code>type_multiplier_applied()</code><a class="anchor" aria-label="anchor" href="#method-type-multiplier-applied-"></a></h3>
+<p>Helper function to know about the type multiplier of an attack.</p><div class="section">
 <h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">take_damage</span><span class="op">(</span><span class="va">damage_dealt</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">type_multiplier_applied</span><span class="op">(</span><span class="va">multiplier</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>multiplier</code></dt>
+<dd><p>A numeric value of the type multiplier applied to the attack</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-pokemon-take_damage"></a><div class="section">
+<h3 id="method-take-damage-">Method <code>take_damage()</code><a class="anchor" aria-label="anchor" href="#method-take-damage-"></a></h3>
+<p>Take damage from attack</p><div class="section">
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">take_damage</span><span class="op">(</span><span class="va">damage_dealt</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>damage_dealt</code></dt>
 <dd><p>The amount of damage dealt by the opposing Pokémon's attack</p></dd>
 
@@ -256,12 +273,12 @@ the Pokémon</p></dd>
 </div><p></p><hr><a id="method-pokemon-apply_ailment"></a><div class="section">
 <h3 id="method-apply-ailment-">Method <code>apply_ailment()</code><a class="anchor" aria-label="anchor" href="#method-apply-ailment-"></a></h3>
 <p>Apply an ailment to the Pokémon</p><div class="section">
-<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
+<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">apply_ailment</span><span class="op">(</span><span class="va">ailment</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>ailment</code></dt>
 <dd><p>Numeric ID of the ailment</p></dd>
 
@@ -276,12 +293,12 @@ the Pokémon</p></dd>
 </div><p></p><hr><a id="method-pokemon-change_stat"></a><div class="section">
 <h3 id="method-change-stat-">Method <code>change_stat()</code><a class="anchor" aria-label="anchor" href="#method-change-stat-"></a></h3>
 <p>Change the stat e.g. attack of a Pokémon</p><div class="section">
-<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
+<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">change_stat</span><span class="op">(</span>stat <span class="op">=</span> <span class="va">PK_STATS</span>, change <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
+<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>stat</code></dt>
 <dd><p>The name of the stat to change</p></dd>
 
@@ -301,12 +318,12 @@ the Pokémon</p></dd>
 </div><p></p><hr><a id="method-pokemon-heal"></a><div class="section">
 <h3 id="method-heal-">Method <code>heal()</code><a class="anchor" aria-label="anchor" href="#method-heal-"></a></h3>
 <p>Heal the Pokémon</p><div class="section">
-<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
+<h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">heal</span><span class="op">(</span><span class="va">perc</span>, <span class="va">n</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
+<h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>perc</code></dt>
 <dd><p>The percentage of the maximum HP to heal</p></dd>
 
@@ -326,12 +343,12 @@ the Pokémon</p></dd>
 </div><p></p><hr><a id="method-pokemon-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
+<h4 id="usage-14">Usage<a class="anchor" aria-label="anchor" href="#usage-14"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Pokemon</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
+<h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

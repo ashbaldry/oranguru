@@ -76,7 +76,8 @@ In the initial version, the CPU will use a random move. AI will improve in futur
 <span>  <span class="va">team_2</span>,</span>
 <span>  player_2_cpu <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">50L</span>,</span>
-<span>  generation <span class="op">=</span> <span class="fl">1L</span></span>
+<span>  generation <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>  init_battle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -101,6 +102,10 @@ In the initial version, the CPU will use a random move. AI will improve in futur
 <dt><code>generation</code></dt>
 <dd><p>If teams are random, then the generation the Pokémon will be selected from.
 Default is Gen 8.</p></dd>
+
+
+<dt><code>init_battle</code></dt>
+<dd><p>Logical, should the battle start on initialisation? Will start if interactive.</p></dd>
 
 
 </dl><p></p></div>
