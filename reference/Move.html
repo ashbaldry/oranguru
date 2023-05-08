@@ -56,19 +56,24 @@
 <ul><li><p><a href="#method-move-new"><code>Move$new()</code></a></p></li>
 <li><p><a href="#method-move-get_pp_status"><code>Move$get_pp_status()</code></a></p></li>
 <li><p><a href="#method-move-get_stat"><code>Move$get_stat()</code></a></p></li>
+<li><p><a href="#method-move-can_use_move"><code>Move$can_use_move()</code></a></p></li>
 <li><p><a href="#method-move-use_move"><code>Move$use_move()</code></a></p></li>
 <li><p><a href="#method-move-clone"><code>Move$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-move-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Create a Move</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/Move.html">Move</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">move_name</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/Move.html">Move</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">move_name</span>, generation <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>move_name</code></dt>
 <dd><p>The hyphen cased name of the move e.g. <code>"razor-leaf"</code></p></dd>
+
+
+<dt><code>generation</code></dt>
+<dd><p>The generation that the Pokémon comes from</p></dd>
 
 
 </dl><p></p></div>
@@ -102,11 +107,11 @@
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-move-use_move"></a><div class="section">
-<h3 id="method-use-move-">Method <code>use_move()</code><a class="anchor" aria-label="anchor" href="#method-use-move-"></a></h3>
-<p>Use the Move</p><div class="section">
+</div><p></p><hr><a id="method-move-can_use_move"></a><div class="section">
+<h3 id="method-can-use-move-">Method <code>can_use_move()</code><a class="anchor" aria-label="anchor" href="#method-can-use-move-"></a></h3>
+<p>Checks the ability to use the move</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Move</span><span class="op">$</span><span class="fu">use_move</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Move</span><span class="op">$</span><span class="fu">can_use_move</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -114,15 +119,47 @@
 <p>Logical as to whether or not the move has been used or not</p>
 </div>
 
-</div><p></p><hr><a id="method-move-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
-<p>The objects of this class are cloneable with this method.</p><div class="section">
+</div><p></p><hr><a id="method-move-use_move"></a><div class="section">
+<h3 id="method-use-move-">Method <code>use_move()</code><a class="anchor" aria-label="anchor" href="#method-use-move-"></a></h3>
+<p>Checks the ability to use the move</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Move</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Move</span><span class="op">$</span><span class="fu">use_move</span><span class="op">(</span><span class="va">attacker</span>, <span class="va">defender</span>, <span class="va">battle</span>, <span class="va">generation</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>attacker</code></dt>
+<dd><p>The attacking <code><a href="pokemon.html">Pokemon</a></code></p></dd>
+
+
+<dt><code>defender</code></dt>
+<dd><p>The defending <code><a href="pokemon.html">Pokemon</a></code></p></dd>
+
+
+<dt><code>battle</code></dt>
+<dd><p>The <code><a href="PokemonBattle.html">PokemonBattle</a></code> in place. Used to know</p></dd>
+
+
+<dt><code>generation</code></dt>
+<dd><p>The generation that the battle is happening in</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
+<p>Logical as to whether or not the move has been used or not</p>
+</div>
+
+</div><p></p><hr><a id="method-move-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Move</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
