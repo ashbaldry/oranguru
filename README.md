@@ -1,6 +1,7 @@
 # `{oranguru}`
 
 <!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/ashbaldry/oranguru/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ashbaldry/oranguru/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -14,4 +15,4 @@ remotes::install_github("ashbaldry/oranguru")
 
 ## Pokémon Battle
 
-To start a Pokémon match in the R console, run `PokemonBattle$new()$start()`. This will auto-generate two teams of 6 Pokémon, and begin a menu option to either attack or switch out your Pokémon with one of your others.
+To start a Pokémon match in the R console, run `PokemonBattle$new()`. This will auto-generate two teams of 6 Pokémon, and begin a menu option to either attack or switch out your Pokémon with one of your others.
