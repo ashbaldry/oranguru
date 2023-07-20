@@ -180,7 +180,7 @@ PokemonBattle <- R6::R6Class(
         } else if (selected_option == 2) {
           private$select_switch(person = person)
         } else if (selected_option == 3) {
-          private[[paste0("team_", person)]]$get_pokemon(private[[paste0("active_", person)]])$status()
+          private$select_stats(person = person)
           cat("\n")
         } else if (selected_option == 0) {
           return(FALSE)
@@ -244,6 +244,14 @@ PokemonBattle <- R6::R6Class(
       } else if (!fainted) {
         cat("No available Pok\u00e9mon to switch with. Returning to home options")
       }
+    },
+
+    select_stats = function(person = 1L) {
+      team_id <- paste0("team_", person)
+      pokemon_team <- private[[team_id]]$all_pokemon()
+
+      idx <- menu(pokemon_team, title = "Which Pok\u00e9mon's stats would you like to see?")
+      private[[team_id]]$get_pokemon(idx)$status()
     },
 
     resolve_turn = function() {

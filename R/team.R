@@ -79,6 +79,15 @@ PokemonTeam <- R6::R6Class(
     },
 
     #' @description
+    #' Get the names of all Pokémon in the team
+    #'
+    #' @return
+    #' A character vector of the Pokémon in the team
+    all_pokemon = function() {
+      private$team_names
+    },
+
+    #' @description
     #' Check for healthy Pokémon within the team
     #'
     #' @return

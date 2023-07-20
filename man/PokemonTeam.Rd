@@ -13,6 +13,7 @@ R6 object containing required information about your Pokémon team.
 \item \href{#method-pokemon_team-new}{\code{PokemonTeam$new()}}
 \item \href{#method-pokemon_team-status}{\code{PokemonTeam$status()}}
 \item \href{#method-pokemon_team-get_pokemon}{\code{PokemonTeam$get_pokemon()}}
+\item \href{#method-pokemon_team-all_pokemon}{\code{PokemonTeam$all_pokemon()}}
 \item \href{#method-pokemon_team-healthy_pokemon}{\code{PokemonTeam$healthy_pokemon()}}
 \item \href{#method-pokemon_team-able_to_battle}{\code{PokemonTeam$able_to_battle()}}
 \item \href{#method-pokemon_team-get_team_stat}{\code{PokemonTeam$get_team_stat()}}
@@ -90,6 +91,19 @@ Get the selected Pokémon
 }
 \subsection{Returns}{
 The selected Pokémon
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pokemon_team-all_pokemon"></a>}}
+\if{latex}{\out{\hypertarget{method-pokemon_team-all_pokemon}{}}}
+\subsection{Method \code{all_pokemon()}}{
+Get the names of all Pokémon in the team
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PokemonTeam$all_pokemon()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A character vector of the Pokémon in the team
 }
 }
 \if{html}{\out{<hr>}}
